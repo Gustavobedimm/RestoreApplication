@@ -132,11 +132,10 @@ public final class Principal extends javax.swing.JFrame {
         jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Extrato do Produto");
+        setTitle("Extrato do Produto v2.0");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1344, 850));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Extrato (TESTEXTRATO)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextFieldSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo"));
@@ -458,7 +457,7 @@ public final class Principal extends javax.swing.JFrame {
         jTextFieldEmbalagem.setBorder(javax.swing.BorderFactory.createTitledBorder("Embalagem"));
 
         jTextFieldQtdeEmbalagem.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldQtdeEmbalagem.setBorder(javax.swing.BorderFactory.createTitledBorder("Qtde Embalagem"));
+        jTextFieldQtdeEmbalagem.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade por embalagem"));
 
         jTextFieldDescricao.setEditable(false);
         jTextFieldDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição"));
@@ -527,9 +526,11 @@ public final class Principal extends javax.swing.JFrame {
         jCheckBox02.setText("02 - Compra");
 
         jCheckBox07.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBox07.setSelected(true);
         jCheckBox07.setText("07 - Devolução de Venda");
 
         jCheckBox09.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jCheckBox09.setSelected(true);
         jCheckBox09.setText("09 - Devolução de Compra");
 
         jCheckBox05.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -605,8 +606,10 @@ public final class Principal extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 255));
         jLabel4.setText("■■");
 
+        jLabel5.setForeground(new java.awt.Color(139, 69, 19));
         jLabel5.setText("■■");
 
+        jLabel6.setForeground(new java.awt.Color(30, 144, 255));
         jLabel6.setText("■■");
 
         jLabel9.setForeground(new java.awt.Color(42, 157, 143));
@@ -1646,6 +1649,9 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 Color verdeAgua = new Color(42, 157, 143);
                 Color transfAlmox = new Color(60, 9, 108);
                 Color transfFiliais = new Color(117, 13, 55);
+                Color devolucaoVenda = new Color(139,69,19);
+                Color devolucaoCompra = new Color(30,144,255);
+                
                 Color pcp = new Color(56, 176, 0);
                 String valor = objeto.toString();
                 String valor2 = objeto1.toString();
@@ -1677,7 +1683,9 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 }
                 }
                 if(jCheckBox07.isSelected()){
-                    
+                    if (valor2.equals("07")) {
+                    foreground = devolucaoVenda;
+                    }
                 }
                 if(jCheckBox08.isSelected()){
                     if (valor2.equals("08")) {
@@ -1685,7 +1693,9 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 }
                 }
                 if(jCheckBox09.isSelected()){
-                    
+                   if (valor2.equals("09")) {
+                    foreground = devolucaoCompra;
+                } 
                 }
                 if(jCheckBox10.isSelected()){
                     if (valor2.equals("10")) {
