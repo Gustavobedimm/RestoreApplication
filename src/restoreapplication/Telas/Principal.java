@@ -122,6 +122,7 @@ public final class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jCheckBoxMenuItem5 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
@@ -330,7 +331,7 @@ public final class Principal extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configurações do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jCheckBoxControlaLote.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
-        jCheckBoxControlaLote.setText("Constrola Lote de Validade ");
+        jCheckBoxControlaLote.setText("Controla Lote de Validade ");
         jCheckBoxControlaLote.setFocusable(false);
         jCheckBoxControlaLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -940,6 +941,21 @@ public final class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/identify.png"))); // NOI18N
+        jMenuItem5.setText("MANUTENÇÃO DE PEDIDOS DE COMPRA");
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem5MouseClicked(evt);
+            }
+        });
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Configurações");
@@ -1239,6 +1255,15 @@ public final class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBox11ActionPerformed
 
+    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5MouseClicked
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ManutencaoPedCompra telaManu = new ManutencaoPedCompra();
+        telaManu.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1328,6 +1353,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
