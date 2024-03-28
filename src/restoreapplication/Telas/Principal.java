@@ -112,6 +112,9 @@ public final class Principal extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableSaldo = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -167,7 +170,7 @@ public final class Principal extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, true, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -176,6 +179,7 @@ public final class Principal extends javax.swing.JFrame {
         });
         jTableNfe.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTableNfe.setMinimumSize(new java.awt.Dimension(0, 0));
+        jTableNfe.getTableHeader().setReorderingAllowed(false);
         jTableNfe.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableNfeMouseClicked(evt);
@@ -208,32 +212,28 @@ public final class Principal extends javax.swing.JFrame {
             jTableNfe.getColumnModel().getColumn(0).setMinWidth(50);
             jTableNfe.getColumnModel().getColumn(0).setPreferredWidth(50);
             jTableNfe.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTableNfe.getColumnModel().getColumn(1).setMinWidth(50);
+            jTableNfe.getColumnModel().getColumn(1).setResizable(false);
             jTableNfe.getColumnModel().getColumn(1).setPreferredWidth(50);
-            jTableNfe.getColumnModel().getColumn(1).setMaxWidth(50);
-            jTableNfe.getColumnModel().getColumn(2).setMinWidth(60);
+            jTableNfe.getColumnModel().getColumn(2).setResizable(false);
             jTableNfe.getColumnModel().getColumn(2).setPreferredWidth(60);
-            jTableNfe.getColumnModel().getColumn(2).setMaxWidth(60);
-            jTableNfe.getColumnModel().getColumn(3).setMinWidth(110);
+            jTableNfe.getColumnModel().getColumn(3).setResizable(false);
             jTableNfe.getColumnModel().getColumn(3).setPreferredWidth(110);
-            jTableNfe.getColumnModel().getColumn(3).setMaxWidth(110);
-            jTableNfe.getColumnModel().getColumn(4).setMinWidth(110);
+            jTableNfe.getColumnModel().getColumn(4).setResizable(false);
             jTableNfe.getColumnModel().getColumn(4).setPreferredWidth(110);
-            jTableNfe.getColumnModel().getColumn(4).setMaxWidth(110);
-            jTableNfe.getColumnModel().getColumn(5).setMinWidth(110);
+            jTableNfe.getColumnModel().getColumn(5).setResizable(false);
             jTableNfe.getColumnModel().getColumn(5).setPreferredWidth(110);
-            jTableNfe.getColumnModel().getColumn(5).setMaxWidth(110);
-            jTableNfe.getColumnModel().getColumn(6).setMinWidth(150);
+            jTableNfe.getColumnModel().getColumn(6).setResizable(false);
             jTableNfe.getColumnModel().getColumn(6).setPreferredWidth(150);
-            jTableNfe.getColumnModel().getColumn(6).setMaxWidth(150);
-            jTableNfe.getColumnModel().getColumn(7).setMinWidth(100);
+            jTableNfe.getColumnModel().getColumn(7).setResizable(false);
             jTableNfe.getColumnModel().getColumn(7).setPreferredWidth(100);
-            jTableNfe.getColumnModel().getColumn(7).setMaxWidth(100);
-            jTableNfe.getColumnModel().getColumn(8).setMinWidth(40);
+            jTableNfe.getColumnModel().getColumn(8).setResizable(false);
             jTableNfe.getColumnModel().getColumn(8).setPreferredWidth(40);
-            jTableNfe.getColumnModel().getColumn(8).setMaxWidth(40);
             jTableNfe.getColumnModel().getColumn(9).setResizable(false);
             jTableNfe.getColumnModel().getColumn(9).setPreferredWidth(150);
+            jTableNfe.getColumnModel().getColumn(10).setResizable(false);
+            jTableNfe.getColumnModel().getColumn(11).setResizable(false);
+            jTableNfe.getColumnModel().getColumn(12).setResizable(false);
+            jTableNfe.getColumnModel().getColumn(13).setResizable(false);
         }
 
         jTextFieldErros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -326,7 +326,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configurações do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -397,6 +397,8 @@ public final class Principal extends javax.swing.JFrame {
         jCheckBoxControlaLote.getAccessibleContext().setAccessibleDescription("");
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empresa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+        jPanel6.setToolTipText("Empresa ");
+        jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jComboBoxEmpresa.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -756,7 +758,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
@@ -795,6 +797,31 @@ public final class Principal extends javax.swing.JFrame {
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(150, 150));
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(300, 100));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"ERRO : SALDO CALCULADO NO EXTRATO NÃO BATE COM O ESTOQUE DO PRODUTO"},
+                {"ERRO :  SALDO ESPERADO NÃO BATE COM O SALDO DO EXTRATO DO PRODUTO"},
+                {"ERRO : ESTOQUE RESERVADO NÃO BATE COM O ESTOQUE RESERVADO CALCULADO"}
+            },
+            new String [] {
+                "MENSAGEM"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("ERROS", jPanel5);
 
         jTableSaldo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1018,7 +1045,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1359,17 +1386,20 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableEstoques;
     private javax.swing.JTable jTableEstoquesProduto;
     private javax.swing.JTable jTableLoteValidade;

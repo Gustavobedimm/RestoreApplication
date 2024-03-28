@@ -3,6 +3,7 @@ package restoreapplication.Telas;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.PedidoCompraDAO;
 import restoreapplication.Model.Bloqueio;
@@ -10,6 +11,7 @@ import restoreapplication.Model.NfePedidos;
 import restoreapplication.Model.PedCompraProd;
 
 public class ManutencaoPedCompra extends javax.swing.JFrame {
+
     public ManutencaoPedCompra() {
         initComponents();
     }
@@ -33,6 +35,7 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manutenção de pedidos de compra");
@@ -94,11 +97,20 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("ERROS NOS PEDIDOS DE COMPRA : ");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("CORREÇÕES NOS PEDIDOS DE COMPRA : ");
 
         jCheckBox1.setText("Corrigir erros ");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ERROS CORRIGIDOS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,6 +132,8 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -133,7 +147,9 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,6 +171,15 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         iniciaProcesso();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if (jCheckBox1.isSelected()) {
+            JOptionPane.showMessageDialog(rootPane, "Ao marcar essa opção as correções serão feitas autimaticamente!");
+            jButton1.setText("Iniciar correção");
+        } else {
+            jButton1.setText("Iniciar verificação");
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +222,7 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -204,10 +230,12 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 public void iniciaProcesso() {
-    jButton1.setEnabled(false);
+        jButton1.setEnabled(false);
         Thread thread = new Thread() {
             @Override
             public void run() {
+                jCheckBox1.setEnabled(false);
+                jTextArea1.setText("");
                 PedidoCompraDAO pedidoCompraDAO = new PedidoCompraDAO();
                 ArrayList<PedCompraProd> listaPedCompraProd = new ArrayList<>();
                 jLabel2.setText("Buscando informações...");
@@ -225,140 +253,196 @@ public void iniciaProcesso() {
                 jProgressBar1.setMaximum(tamanho);
                 int i = 0;
                 jLabel2.setText("Verificando e corrigindo pedidos de compras...");
+                int erros = 0;
                 for (PedCompraProd prod : listaPedCompraProd) {
                     String mensagemERRO = "";
                     boolean erro = false;
-                    double recebidaPedido = 0.000;
-                    recebidaPedido = Double.parseDouble(prod.getQtderecebida());
-                    double pedidaPedido = 0.000;
-                    pedidaPedido = Double.parseDouble(prod.getQtdepedida());
+                    double recebida = 0.000;
                     double restante = 0.000;
+                    double pedida = 0.000;
+                    double cancelada = 0.000;
+                    pedida = Double.parseDouble(prod.getQtdepedida());
+                    recebida = Double.parseDouble(prod.getQtderecebida());
                     restante = Double.parseDouble(prod.getQtderestante());
                     //ARRUMANDO A QUANTIDADE CANCELADA
-                    double cancelada = 0.000;
-                    if(prod.getQtdecancelada() == null){
-                        try {
-                            if(jCheckBox1.isSelected()){
-                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebidaPedido, restante, 0.000);
-                            }
-                        } catch (ClassNotFoundException ex) {
-                            Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        mensagemERRO = mensagemERRO + " +ERRO: Quantidade cancelada esta NULL";
+                    if (prod.getQtdecancelada() == null) {
                         cancelada = 0.000;
-                    }else{
+                    } else {
                         cancelada = Double.parseDouble(prod.getQtdecancelada());
                     }
+
                     //AJUSTANDO QUANTIDADE RECEBIDA
-                    if(recebidaPedido > pedidaPedido ){
+                    if (recebida > pedida) {
                         mensagemERRO = mensagemERRO + " +ERRO: Quantidade recebida maior que quantidade pedida";
+                        recebida = pedida;
                         try {
-                            if(jCheckBox1.isSelected()){
-                             pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), pedidaPedido, restante, cancelada);   
+                            if (jCheckBox1.isSelected()) {
+                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebida, restante, cancelada);
                             }
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        jTextArea1.append("************************************************************************************************"+"\n");
-                        jTextArea1.append("ERRO: Quantidade recebida maior que quantidade pedida."+"\n");
-                        jTextArea1.append("EMPRESA:"+prod.getEmpresa()+" PEDIDO:"+prod.getPedido()+" PRODUTO:"+prod.getProduto()+" "+"\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: "+prod.getQtdepedida()+" QTDERECEBIDA: "+prod.getQtderecebida()+" QTDERESTANTE: "+prod.getQtderestante()+" QTDECANCELADA: "+cancelada+"\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: "+prod.getQtdepedida()+" QTDERECEBIDA: "+prod.getQtdepedida()+" QTDERESTANTE: "+prod.getQtderestante()+" QTDECANCELADA: "+cancelada+"\n");
+
+                        jTextArea1.append("************************************************************************************************" + "\n");
+                        jTextArea1.append("ERRO: Quantidade recebida maior que quantidade pedida." + "\n");
+                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
+                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
+                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
                         erro = true;
+                        erros++;
+
                     }
                     //AJUSTANDO QUANTIDADE RECEBIDA
-                    if(cancelada > pedidaPedido){
+                    if (cancelada > pedida) {
+                        restante = 0.000;
+                        cancelada = pedida;
                         try {
-                            if(jCheckBox1.isSelected()){
-                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebidaPedido, 0.000, pedidaPedido);
+                            if (jCheckBox1.isSelected()) {
+                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebida, restante, cancelada);
                             }
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        jTextArea1.append("************************************************************************************************"+"\n");
-                        jTextArea1.append("ERRO: Quantidade cancelada maior que quantidade pedida."+"\n");
-                        jTextArea1.append("EMPRESA:"+prod.getEmpresa()+" PEDIDO:"+prod.getPedido()+" PRODUTO:"+prod.getProduto()+" "+"\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: "+prod.getQtdepedida()+" QTDERECEBIDA: "+prod.getQtderecebida()+" QTDERESTANTE: "+prod.getQtderestante()+" QTDECANCELADA: "+cancelada+"\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: "+prod.getQtdepedida()+" QTDERECEBIDA: "+prod.getQtderecebida()+" QTDERESTANTE: 0.000"+" QTDECANCELADA: "+pedidaPedido+"\n");
+
+                        jTextArea1.append("************************************************************************************************" + "\n");
+                        jTextArea1.append("ERRO: Quantidade cancelada maior que quantidade pedida." + "\n");
+                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
+                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
+                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
                         mensagemERRO = mensagemERRO + " +ERRO: Cancelada maior que pedida";
                         erro = true;
+                        erros++;
                     }
                     //AJUSTANDO QUANTIDADE RESTANTE
-                    if(cancelada == pedidaPedido && restante > 0){
+                    if (cancelada == pedida && restante > 0) {
+                        restante = 0.000;
                         try {
-                            if(jCheckBox1.isSelected()){
-                              pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebidaPedido, 0.000, cancelada);  
+                            if (jCheckBox1.isSelected()) {
+                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebida, restante, cancelada);
                             }
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        jTextArea1.append("************************************************************************************************"+"\n");
-                        jTextArea1.append("ERRO: Não pode ter quantidade restante se o pedido foi cancelado."+"\n");
-                        jTextArea1.append("EMPRESA:"+prod.getEmpresa()+" PEDIDO:"+prod.getPedido()+" PRODUTO:"+prod.getProduto()+" "+"\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: "+prod.getQtdepedida()+" QTDERECEBIDA: "+prod.getQtderecebida()+" QTDERESTANTE: "+prod.getQtderestante()+" QTDECANCELADA: "+cancelada+"\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: "+prod.getQtdepedida()+" QTDERECEBIDA: "+prod.getQtderecebida()+" QTDERESTANTE: 0.000"+" QTDECANCELADA: "+cancelada+"\n");
+
+                        jTextArea1.append("************************************************************************************************" + "\n");
+                        jTextArea1.append("ERRO: Não pode ter quantidade restante se o pedido foi cancelado." + "\n");
+                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
+                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
+                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
                         mensagemERRO = mensagemERRO + " +ERRO: O pedido foi cancelado porem ainda possui valores pendentes.";
                         erro = true;
+                        erros++;
                     }
-                    
+                    //AJUSTANDO A QUANTIDADE RESTANTE
                     double soma = 0.0;
-                    soma = recebidaPedido + restante + cancelada;
-                    if(soma > pedidaPedido ){
-                        mensagemERRO = mensagemERRO + " +ERRO: A soma ultrapassa a quantidade pedida";
+                    soma = recebida + restante + cancelada;
+                    if (soma > pedida && recebida == 0.00 && cancelada < pedida) {
+                        restante = pedida - cancelada;
+                        try {
+                            if (jCheckBox1.isSelected()) {
+                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebida, restante, cancelada);
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         erro = true;
+                        erros++;
+                        mensagemERRO = mensagemERRO + " +ERRO: A soma ultrapassa a quantidade pedida";
+                        jTextArea1.append("************************************************************************************************" + "\n");
+                        jTextArea1.append("ERRO: A soma ultrapassa a quantidade pedida." + "\n");
+                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
+                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
+                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE:" + restante + " QTDECANCELADA: " + cancelada + "\n");
                     }
-                    
-                    if(erro){
-                        modelBlock.addRow(new Object[]{prod.getEmpresa(),  prod.getProduto(),prod.getPedido(), prod.getQtdepedida(),prod.getQtderecebida(),prod.getQtderestante(),prod.getQtdecancelada(),"Não disp.",mensagemERRO});
+                    //AJUSTANDO QUANTIDADE RECEBIDA QUANDO É NEGATIVA
+                    if (recebida < 0.000) {
+                        recebida = 0.000;
+                        try {
+                            if (jCheckBox1.isSelected()) {
+                                pedidoCompraDAO.updatePedido(prod.getEmpresa(), prod.getPedido(), prod.getProduto(), recebida, restante, cancelada);
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                        jTextArea1.append("************************************************************************************************" + "\n");
+                        jTextArea1.append("ERRO: A quantidade recebida não pode ser negativa." + "\n");
+                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
+                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
+                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
+                        mensagemERRO = mensagemERRO + " +ERRO: A quantidade recebida não pode ser negativa.";
+                        erro = true;
+                        erros++;
                     }
-                    
+
+                    if (erro) {
+                        modelBlock.addRow(new Object[]{prod.getEmpresa(), prod.getProduto(), prod.getPedido(), prod.getQtdepedida(), prod.getQtderecebida(), prod.getQtderestante(), prod.getQtdecancelada(), "Não disp.", mensagemERRO});
+                    }
+
                     i++;
                     jProgressBar1.setValue(i);
                 }
-                jLabel2.setText("Ajustando ESTPEDIDO da TESTPRODUTO.");
-                ArrayList<PedCompraProd> listaAUX = new ArrayList<>();
-                try {
-                    listaAUX = pedidoCompraDAO.selecionaProdutos();
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                for(PedCompraProd aux: listaAUX){
-                    Double valor = Double.valueOf(aux.getQtderestante());
+                if (erros > 0) {
+                    jLabel2.setText("Ajustando ESTPEDIDO da TESTPRODUTO.");
+                    jTextArea1.append("************************************************************************************************" + "\n");
+                    jTextArea1.append("AJUSTANDO ESTPEDIDO DA TESTPRODUTO." + "\n");
+                    jTextArea1.append("************************************************************************************************" + "\n");
+                    ArrayList<PedCompraProd> listaAUX = new ArrayList<>();
                     try {
-                        if(jCheckBox1.isSelected()){
-                            pedidoCompraDAO.updateProduto(aux.getEmpresa(), aux.getProduto(), valor);
-                        }
+                        listaAUX = pedidoCompraDAO.selecionaProdutos();
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    jTextArea1.append("EMPRESA:"+aux.getEmpresa()+" PRODUTO:"+aux.getProduto()+" ESTOQUE ANTIGO:"+aux.getAux()+" ESTOQUE NOVO:"+aux.getQtderestante()+" "+"\n");
-                    jTextArea1.setCaretPosition(jTextArea1.getText().length());
+                    int tamanhoAux = listaAUX.size();
+                    jProgressBar1.setMaximum(tamanhoAux);
+                    jProgressBar1.setValue(0);
+                    int ii = 0;
+                    for (PedCompraProd aux : listaAUX) {
+                        ii++;
+                        Double valor = Double.valueOf(aux.getQtderestante());
+                        try {
+                            if (jCheckBox1.isSelected()) {
+                                pedidoCompraDAO.updateProduto(aux.getEmpresa(), aux.getProduto(), valor);
+                            }
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        jTextArea1.append("EMPRESA:" + aux.getEmpresa() + " PRODUTO:" + aux.getProduto() + " ESTOQUE ANTIGO:" + aux.getAux() + " ESTOQUE NOVO:" + aux.getQtderestante() + " " + "\n");
+                        jTextArea1.setCaretPosition(jTextArea1.getText().length());
+                        jProgressBar1.setValue(ii);
+                    }
+                } else {
+                    jTextArea1.append("************************************************************************************************" + "\n");
+                    jTextArea1.append("Não foram encontrados erros nos pedidos de compra." + "\n");
+                    jTextArea1.append("************************************************************************************************" + "\n");
                 }
+                jButton1.setText("Iniciar verificação");
                 jLabel2.setText("Processo concluido.");
+                jCheckBox1.setSelected(false);
+                jButton1.setEnabled(true);
+                jCheckBox1.setEnabled(true);
+                jLabel4.setText(erros + " ERROS CORRIGIDOS!");
             }
         };
         thread.start();
     }
+
+    public Double consultaNota(String empresa, String pedido, String produto) {
+        double recebidaNF = 0.0;
+        PedidoCompraDAO pedidoCompraDAO = new PedidoCompraDAO();
+        try {
+            ArrayList<NfePedidos> listaNF = new ArrayList<>();
+            listaNF = pedidoCompraDAO.consultaRegistroNF(empresa, pedido, produto);
+            for (NfePedidos nf : listaNF) {
+                if (nf.getQtderecebida() == null) {
+                    recebidaNF = recebidaNF;
+                } else {
+                    recebidaNF = recebidaNF + Double.parseDouble(nf.getQtderecebida());
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return recebidaNF;
+    }
 }
-
-
-//verifica as notas fiscais para cruzar as informações das quantidades recebidas
-                    //try {
-                    //    ArrayList<NfePedidos> listaNF = new ArrayList<>();
-                    //    listaNF = pedidoCompraDAO.consultaRegistroNF(prod.getEmpresa(), prod.getPedido(), prod.getProduto());
-                    //    double recebidaNF = 0.0;
-                    //    for(NfePedidos nf: listaNF){
-                    //        if(nf.getQtderecebida() == null){
-                    //            recebidaNF = recebidaNF;
-                    //        }else{
-                    //            recebidaNF = recebidaNF + Double.parseDouble(nf.getQtderecebida());  
-                    //        }
-                    //    }
-                    //    if(!prod.getQtdepedida().equals(prod.getQtderecebida())){
-                    //        if (pedidaPedido <= recebidaNF) {
-                    //            modelBlock.addRow(new Object[]{prod.getEmpresa(),  prod.getProduto(),prod.getPedido(), prod.getQtdepedida(),prod.getQtderecebida(),prod.getQtderestante(),prod.getQtdecancelada(),recebidaNF});
-                    //        }
-                    //    }
-                    //} catch (ClassNotFoundException ex) {
-                    //    Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
-                    //}
