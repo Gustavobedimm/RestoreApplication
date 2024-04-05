@@ -10,11 +10,11 @@ import restoreapplication.Model.TransfAlmox;
 
 public class AlmoxDAO {
     Conn conexao = new Conn();
-     public ArrayList consultaAlmox() throws ClassNotFoundException {
+     public ArrayList consultaAlmox(String empresa) throws ClassNotFoundException {
        conexao.Conectar();
         ArrayList<Almox> listaAlmox = new ArrayList<>();
         try {
-            String query = "select * from TESTALMOX ta order by ta.empresa";
+            String query = "select * from TESTALMOX ta where ta.empresa = "+empresa+" order by ta.empresa";
             PreparedStatement pst;
             ResultSet rs;
             pst = conexao.con.prepareStatement(query);

@@ -18,17 +18,8 @@ public class Conn {
     public Connection con;
     
     public void Conectar() {
-        //ler json na pasta raiz
-         String json = "";
-        try {
-            json = String.join(" ",
-                    Files.readAllLines(
-                            Paths.get("./config.json"),
-                            StandardCharsets.UTF_8)
-            );
-        } catch (IOException ex) {
-            Logger.getLogger(Conn.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String json = "";
+        json = pegaCaminho();
         //-------------------
         Config config = new Gson().fromJson(json, Config.class);
         String databaseURL = "jdbc:firebirdsql:127.0.0.1:"+config.getPath();
@@ -53,6 +44,19 @@ public class Conn {
         } catch (SQLException e) {
             return false;
         }
+    }
+    public String pegaCaminho(){
+        String json = "";
+        try {
+            json = String.join(" ",
+                    Files.readAllLines(
+                            Paths.get("./config.json"),
+                            StandardCharsets.UTF_8)
+            );
+        } catch (IOException ex) {
+            Logger.getLogger(Conn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return json;
     }
      
 }

@@ -244,7 +244,6 @@ public void iniciaProcesso() {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jLabel2.setText("Limpando Tabela...");
                 DefaultTableModel modelBlock = (DefaultTableModel) jTable1.getModel();
                 while (jTable1.getRowCount() > 0) {
                     modelBlock.removeRow(0);
@@ -273,7 +272,6 @@ public void iniciaProcesso() {
 
                     //AJUSTANDO QUANTIDADE RECEBIDA
                     if (recebida > pedida) {
-                        mensagemERRO = mensagemERRO + " +ERRO: Quantidade recebida maior que quantidade pedida";
                         recebida = pedida;
                         try {
                             if (jCheckBox1.isSelected()) {
@@ -282,12 +280,8 @@ public void iniciaProcesso() {
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        jTextArea1.append("************************************************************************************************" + "\n");
-                        jTextArea1.append("ERRO: Quantidade recebida maior que quantidade pedida." + "\n");
-                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
+                        mostraCorrecao(prod, recebida, restante, cancelada, "ERRO: Quantidade recebida maior que quantidade pedida.");
+                        mensagemERRO = mensagemERRO + " +ERRO: Quantidade recebida maior que quantidade pedida";
                         erro = true;
                         erros++;
 
@@ -303,12 +297,7 @@ public void iniciaProcesso() {
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        jTextArea1.append("************************************************************************************************" + "\n");
-                        jTextArea1.append("ERRO: Quantidade cancelada maior que quantidade pedida." + "\n");
-                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
+                        mostraCorrecao(prod, recebida, restante, cancelada, "ERRO: Quantidade cancelada maior que quantidade pedida.");
                         mensagemERRO = mensagemERRO + " +ERRO: Cancelada maior que pedida";
                         erro = true;
                         erros++;
@@ -323,12 +312,7 @@ public void iniciaProcesso() {
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        jTextArea1.append("************************************************************************************************" + "\n");
-                        jTextArea1.append("ERRO: Não pode ter quantidade restante se o pedido foi cancelado." + "\n");
-                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
+                        mostraCorrecao(prod, recebida, restante, cancelada, "ERRO: Não pode ter quantidade restante se o pedido foi cancelado.");
                         mensagemERRO = mensagemERRO + " +ERRO: O pedido foi cancelado porem ainda possui valores pendentes.";
                         erro = true;
                         erros++;
@@ -347,12 +331,8 @@ public void iniciaProcesso() {
                         }
                         erro = true;
                         erros++;
+                        mostraCorrecao(prod, recebida, restante, cancelada, "ERRO: A soma ultrapassa a quantidade pedida.");
                         mensagemERRO = mensagemERRO + " +ERRO: A soma ultrapassa a quantidade pedida";
-                        jTextArea1.append("************************************************************************************************" + "\n");
-                        jTextArea1.append("ERRO: A soma ultrapassa a quantidade pedida." + "\n");
-                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE:" + restante + " QTDECANCELADA: " + cancelada + "\n");
                     }
                     //AJUSTANDO QUANTIDADE RECEBIDA QUANDO É NEGATIVA
                     if (recebida < 0.000) {
@@ -364,12 +344,7 @@ public void iniciaProcesso() {
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                        jTextArea1.append("************************************************************************************************" + "\n");
-                        jTextArea1.append("ERRO: A quantidade recebida não pode ser negativa." + "\n");
-                        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
-                        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
-                        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
+                        mostraCorrecao(prod, recebida, restante, cancelada, "ERRO: A quantidade recebida não pode ser negativa.");
                         mensagemERRO = mensagemERRO + " +ERRO: A quantidade recebida não pode ser negativa.";
                         erro = true;
                         erros++;
@@ -444,5 +419,13 @@ public void iniciaProcesso() {
             Logger.getLogger(ManutencaoPedCompra.class.getName()).log(Level.SEVERE, null, ex);
         }
         return recebidaNF;
+    }
+    public void mostraCorrecao(PedCompraProd prod,Double recebida, Double restante, Double cancelada,String mensagem){
+        jTextArea1.append("************************************************************************************************" + "\n");
+        jTextArea1.append(mensagem + "\n");
+        jTextArea1.append("EMPRESA:" + prod.getEmpresa() + " PEDIDO:" + prod.getPedido() + " PRODUTO:" + prod.getProduto() + " " + "\n");
+        jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
+        jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
+        
     }
 }
