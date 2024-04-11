@@ -29,7 +29,6 @@ import restoreapplication.Model.LoteValidade;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.math.BigDecimal;
-import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import restoreapplication.Conexao.Conn;
 import restoreapplication.Model.Config;
