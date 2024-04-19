@@ -125,7 +125,7 @@ public ArrayList buscaCodigos(String empresa ) throws ClassNotFoundException {
         
         ArrayList<Produto> listaCodigos = new ArrayList();
         try {
-            String query = "select tp.produto,tp.empresa from testproduto tp where tp.empresa = "+empresa ;
+            String query = "select tp.produto,tp.empresa from testproduto tp where tp.empresa = '"+empresa+"' and tp.ATIVO = 'S' order by tp.PRODUTO" ;
             PreparedStatement pst;
             ResultSet rs;
             pst = conexao.con.prepareStatement(query);

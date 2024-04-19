@@ -45,7 +45,7 @@ public final class Principal extends javax.swing.JFrame {
         initComponents();
         carregaComboBoxEmpresa();
         jTextFieldProduto.requestFocus();
-        jButton2.setBorder(new RoundedBorder(10));
+        //jButton2.setBorder(new RoundedBorder(10));
         
     }
     
@@ -83,7 +83,7 @@ public final class Principal extends javax.swing.JFrame {
         jTextFieldQtdeEmbalagem = new javax.swing.JTextField();
         jTextFieldDescricao = new javax.swing.JTextField();
         jTextFieldProduto = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jCheckBox01 = new javax.swing.JCheckBox();
         jCheckBox02 = new javax.swing.JCheckBox();
@@ -125,7 +125,9 @@ public final class Principal extends javax.swing.JFrame {
         jTableEstoques = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEstoquesProduto = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -141,7 +143,7 @@ public final class Principal extends javax.swing.JFrame {
         jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Extrato do Produto v2.0");
+        setTitle("Extrato do Produto v2.1");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1344, 850));
 
@@ -253,7 +255,7 @@ public final class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -481,19 +483,10 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Buscar");
-        jButton2.setToolTipText("Buscar produto");
-        jButton2.setContentAreaFilled(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.setIconTextGap(1);
-        jButton2.setMaximumSize(new java.awt.Dimension(92, 30));
-        jButton2.setMinimumSize(new java.awt.Dimension(92, 30));
-        jButton2.setPreferredSize(new java.awt.Dimension(92, 45));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Carregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -505,9 +498,9 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextFieldProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTextFieldProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextFieldQtdeEmbalagem)
                     .addComponent(jTextFieldEmbalagem)
                     .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -519,7 +512,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -665,7 +658,7 @@ public final class Principal extends javax.swing.JFrame {
                                 .addComponent(jCheckBox09)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addComponent(jLabel09))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox10)
@@ -890,6 +883,31 @@ public final class Principal extends javax.swing.JFrame {
         jTextField1.setEnabled(false);
         jTextField1.setRequestFocusEnabled(false);
 
+        jLabel15.setText("Caminho do banco ");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addContainerGap(209, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("CONEXÃO", jPanel5);
+
         jMenu1.setText("Verificações");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -898,7 +916,7 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/olho.png"))); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/285651_search_icon.png"))); // NOI18N
         jMenuItem1.setText("VERIFICA INTEGRIDADE DO EXTRATO");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -913,7 +931,7 @@ public final class Principal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/olho.png"))); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/285651_search_icon.png"))); // NOI18N
         jMenuItem3.setText("VERIFICA ALMOX PADRAO NOS PRODUTOS");
         jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -928,7 +946,7 @@ public final class Principal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/definicoes (1).png"))); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299097_sync_cloud_icon.png"))); // NOI18N
         jMenuItem5.setText("MANUTENÇÃO DE PEDIDOS DE COMPRA");
         jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1004,14 +1022,11 @@ public final class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addComponent(jTextField1)))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1023,8 +1038,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -1059,7 +1073,6 @@ public final class Principal extends javax.swing.JFrame {
                 telaNotas.setVisible(true);
             }
             if (movimentoID.equals("03")) {
-                System.out.println(numeroDOC);
                 TelaTransAlmox transfAlmox = new TelaTransAlmox(empresa, numeroDOC);
                 transfAlmox.setVisible(true);
             }
@@ -1084,10 +1097,6 @@ public final class Principal extends javax.swing.JFrame {
     private void jTextFieldSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaldoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSaldoActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        botaoCarregar();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTableNfeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableNfeKeyPressed
 
@@ -1114,6 +1123,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
         Verifica verifica = new Verifica(codEmpresa, codAlmox);
         verifica.setVisible(true);
 
@@ -1168,6 +1178,7 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3MouseClicked
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
         TelaConferenciaAlmox tela = new TelaConferenciaAlmox(codEmpresa, codAlmox);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -1252,9 +1263,14 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5MouseClicked
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
         ManutencaoPedCompra telaManu = new ManutencaoPedCompra();
         telaManu.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        botaoCarregar();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1292,7 +1308,7 @@ public final class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox01;
     private javax.swing.JCheckBox jCheckBox02;
     private javax.swing.JCheckBox jCheckBox03;
@@ -1331,6 +1347,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1351,6 +1368,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1481,7 +1499,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             }
             
             if (movimentacao.getMOVIMENTOID().equals("09") && movimentacao.getENTRADASAIDA().equals("S")) {
-                descricaoOperacao = "DEVOLUÇÃO DE COMPRA / CANCELAMENTO DE DEVOLUÇÃO";
+                descricaoOperacao = "DEVOLUÇÃO DE COMPRA";
                 cont09++;
             }
             if (movimentacao.getMOVIMENTOID().equals("09") && movimentacao.getENTRADASAIDA().equals("E")) {
@@ -1584,7 +1602,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
         String json = conexao.pegaCaminho();
         Config config = new Gson().fromJson(json, Config.class);
         jPanel6.setToolTipText(config.getPath());
-        jTextField1.setText("BASE DE DADOS : " + config.getPath());
+        jTextField1.setText(config.getPath());
         try {
             listaEmpresas = empresaDAO.consultaEmpresa();
         } catch (ClassNotFoundException ex) {
