@@ -4,7 +4,9 @@ import java.awt.Color;
 import static java.awt.Color.WHITE;
 import java.awt.Component;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -35,6 +37,7 @@ public final class ExtratoLote extends javax.swing.JFrame {
         initComponents();
         empresa = empresaP;
         idLote = idLoteP;
+        carregaIcone();
         carregar(empresaP, idLoteP);
     }
 
@@ -373,4 +376,10 @@ public class PintarTabela extends DefaultTableCellRenderer {
             return label;
         }
     }
+public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
+    }
+
 }

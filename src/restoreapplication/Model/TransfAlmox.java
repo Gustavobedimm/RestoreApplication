@@ -9,6 +9,7 @@ public class TransfAlmox {
     private String qtde;
     private String qtdeembalagem;
     private String data;
+    private String obs;
 
     public String getEmpresa() {
         return empresa;
@@ -73,5 +74,14 @@ public class TransfAlmox {
     public void setData(String data) {
         this.data = data;
     }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+    
     
 }

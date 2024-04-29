@@ -1,9 +1,11 @@
 package restoreapplication.Telas;
 
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.Model.ExtratoProduto;
 import restoreapplication.DAO.ExtratoProdutoDAO;
@@ -26,6 +28,7 @@ public class Verifica extends javax.swing.JFrame {
         almox = almoxP;
         jTextField3.setText(empresa);
         jTextField4.setText(almox);
+        carregaIcone();
     }
 
     @SuppressWarnings("unchecked")
@@ -218,7 +221,7 @@ public class Verifica extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
                     .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -353,13 +356,11 @@ public void carregaProdutos() {
                 }
 
                 for (Produto prod : listaProdutos) {
-
-                    String codString = prod.getCODIGO();
                     ExtratoProdutoDAO extratoProdutoDAO = new ExtratoProdutoDAO();
                     ArrayList<ExtratoProduto> extratoDoProduto = new ArrayList();
 
                     try {
-                        extratoDoProduto = extratoProdutoDAO.extratoProduto(empresa, almox, codString);
+                        extratoDoProduto = extratoProdutoDAO.extratoProduto(empresa, almox, prod.getCODIGO());
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -379,13 +380,12 @@ public void carregaProdutos() {
                             saldoEsperado = saldoAnterior.subtract(qtd);
                             saldoAnterior = saldoAnterior.subtract(qtd);
                         }
+
                         String saldoEsperadoString = saldoEsperado.toString();
                         String saldoAtualString = saldoAtual.toString();
 
                         if (!saldoEsperadoString.equals(saldoAtualString)) {
                             String descricao = MontaDescricao(produto.getMOVIMENTOID(), produto.getENTRADASAIDA());
-
-                            model.addRow(new Object[]{produto.getPRODUTO(), saldoAtual.toPlainString(), saldoEsperado.toPlainString(), descricao, produto.getCODIGOID(), produto.getDATAHORA()});
                             erros++;
                             jTextField6.setText(Integer.toString(erros));
                             int conta = cont1 * 100 / erros;
@@ -406,6 +406,7 @@ public void carregaProdutos() {
                             jLabelCont09.setText(Integer.toString(cont9) + " - " + conta + "%");
                             conta = cont10 * 100 / erros;
                             jLabelCont10.setText(Integer.toString(cont10) + " - " + conta + "%");
+                            model.addRow(new Object[]{produto.getPRODUTO(), saldoAtual.toPlainString(), saldoEsperado.toPlainString(), descricao, produto.getCODIGOID(), produto.getDATAHORA()});
                             break;
                         }
                         saldoAnterior = saldoAtual;
@@ -463,5 +464,11 @@ public void carregaProdutos() {
             cont10++;
         }
         return descricaoOperacao;
+    }
+
+    public void carregaIcone() {
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 }

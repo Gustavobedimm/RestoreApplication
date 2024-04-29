@@ -1,9 +1,11 @@
 package restoreapplication.Telas;
 
 import java.awt.Color;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.BloqueioDAO;
 import restoreapplication.DAO.LoteValidadeMovDAO;
@@ -26,6 +28,7 @@ public final class TelaPedidos extends javax.swing.JFrame {
     public TelaPedidos(String empresa, String numeroPedido, boolean controlaLote) {
         initComponents();
         consultaPedido(empresa, numeroPedido);
+        carregaIcone();
         
         //if (controlaLote) {
         //    jPanelLoteMovimento.setVisible(true);
@@ -577,5 +580,10 @@ public void consultaPedido(String empresa, String numeroPedido) {
             model.addRow(new Object[]{loteMov.getPRODUTO(), loteMov.getIDLOTE(), loteMov.getDATAHORA(), loteMov.getUSUARIO(), loteMov.getQTDE()});
         }
 
+    }
+    public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 }

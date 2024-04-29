@@ -4,12 +4,13 @@
  */
 package restoreapplication.Telas;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.AlmoxDAO;
-import restoreapplication.Model.Bloqueio;
 import restoreapplication.Model.TransfAlmox;
 
 /**
@@ -28,6 +29,7 @@ public class TelaTransAlmox extends javax.swing.JFrame {
         initComponents();
          consultaTransf(empresaP, codigoP);
          jLabelDescricao.setText("TRANSFERENCIA ENTRE ALMOXARIFADOS "+codigoP);
+         carregaIcone();
         
     }
 
@@ -43,6 +45,8 @@ public class TelaTransAlmox extends javax.swing.JFrame {
         jLabelDescricao = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTransf = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Transferencia entre almoxarifados");
@@ -74,6 +78,11 @@ public class TelaTransAlmox extends javax.swing.JFrame {
             jTableTransf.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder("Observação"));
+        jScrollPane2.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,7 +91,8 @@ public class TelaTransAlmox extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelDescricao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,8 +101,10 @@ public class TelaTransAlmox extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelDescricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,7 +149,9 @@ public class TelaTransAlmox extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableTransf;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 public void consultaTransf(String empresaP, String codigoP){
     ArrayList<TransfAlmox> transferencias = new ArrayList<>();
@@ -153,7 +167,13 @@ public void consultaTransf(String empresaP, String codigoP){
         }
             
     for(TransfAlmox a: transferencias){
+        jTextArea1.setText(a.getObs());
     modelBlock.addRow(new Object[]{a.getEmpresa(),a.getProduto(),a.getAlmoxsaida(),a.getAlmoxentrada(),a.getQtde(),a.getQtdeembalagem(),a.getData()});
     }
 }
+public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
+    }
 }

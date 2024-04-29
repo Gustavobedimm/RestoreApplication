@@ -51,6 +51,7 @@ public class AlmoxDAO {
                 transf.setQtde(rs.getString("qtde"));
                 transf.setQtdeembalagem(rs.getString("qtdeembalagem"));
                 transf.setData(rs.getString("data"));
+                transf.setObs(rs.getString("observacao"));
                 transferencias.add(transf);
             }
         } catch (SQLException e) {

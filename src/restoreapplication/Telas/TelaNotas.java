@@ -3,7 +3,9 @@ package restoreapplication.Telas;
 import java.awt.Color;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.net.URL;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.LoteValidadeMovDAO;
 import restoreapplication.Model.Produto;
@@ -20,13 +22,15 @@ public final class TelaNotas extends javax.swing.JFrame {
     public TelaNotas() {
         initComponents();
     }
-    public TelaNotas(String empresa, String numeroDOC,boolean controlaLote) {
+
+    public TelaNotas(String empresa, String numeroDOC, boolean controlaLote) {
         initComponents();
         consultaPedido(empresa, numeroDOC);
-        if(controlaLote){
+        carregaIcone();
+        if (controlaLote) {
             jPanelLoteMovimento.setVisible(true);
-            consultaMovimentoLote(empresa,numeroDOC);
-        }else{
+            consultaMovimentoLote(empresa, numeroDOC);
+        } else {
             jPanelLoteMovimento.setVisible(false);
         }
     }
@@ -429,13 +433,13 @@ public void consultaPedido(String empresa, String numeroDOC) {
         TestNfe nfe = new TestNfe();
         TestNfeDAO nfeDAO = new TestNfeDAO();
         try {
-            nfe = nfeDAO.buscaNota(empresa,numeroDOC);
-            if(nfe.getSTATUS().equals("CA")){
-            jTextFieldStatus.setForeground(Color.red);
-            jTextFieldDataCancelamento.setForeground(Color.red);
-            jLabelDescricao.setForeground(Color.red);
+            nfe = nfeDAO.buscaNota(empresa, numeroDOC);
+            if (nfe.getSTATUS().equals("CA")) {
+                jTextFieldStatus.setForeground(Color.red);
+                jTextFieldDataCancelamento.setForeground(Color.red);
+                jLabelDescricao.setForeground(Color.red);
             }
-            
+
             jTextFieldEmpresa.setText(nfe.getEMPRESA());
             jTextFieldStatus.setText(nfe.getSTATUS());
             jTextFieldNota.setText(nfe.getNUMERONFE());
@@ -456,7 +460,7 @@ public void consultaPedido(String empresa, String numeroDOC) {
             jTextFieldCodigoFiscal.setText(nfe.getCODIGOFISCAL());
             jTextFieldMovimentaEstoque.setText(nfe.getMOVIMENTAESTOQUE());
             jTextFieldAtiva.setText(nfe.getATIVA());
-            
+
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
@@ -468,14 +472,15 @@ public void consultaPedido(String empresa, String numeroDOC) {
             listaProdutos = produtoDAO.produtosDaNota(numeroDOC, empresa);
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
-         }
+        }
         for (Produto produto : listaProdutos) {
-           model.addRow(new Object[]{empresa,produto.getCODIGO(),produto.getDESCRICAO(),produto.getQTDE(),produto.getALMOX()});
-         }
+            model.addRow(new Object[]{empresa, produto.getCODIGO(), produto.getDESCRICAO(), produto.getQTDE(), produto.getALMOX()});
+        }
     }
-public void consultaMovimentoLote(String empresa, String numeroDoc){
-    ArrayList<LoteValidadeMov> listaMovimentacoesLote = new ArrayList();
-    LoteValidadeMovDAO loteValidadeDAO = new LoteValidadeMovDAO();
+
+    public void consultaMovimentoLote(String empresa, String numeroDoc) {
+        ArrayList<LoteValidadeMov> listaMovimentacoesLote = new ArrayList();
+        LoteValidadeMovDAO loteValidadeDAO = new LoteValidadeMovDAO();
         try {
             listaMovimentacoesLote = loteValidadeDAO.getMovimentacaoLoteNfe(numeroDoc);
         } catch (ClassNotFoundException ex) {
@@ -486,8 +491,14 @@ public void consultaMovimentoLote(String empresa, String numeroDoc){
             model.removeRow(0);
         }
         for (LoteValidadeMov loteMov : listaMovimentacoesLote) {
-            model.addRow(new Object[]{loteMov.getPRODUTO(),loteMov.getIDLOTE(),loteMov.getDATAHORA(),loteMov.getUSUARIO(),loteMov.getQTDE()});
+            model.addRow(new Object[]{loteMov.getPRODUTO(), loteMov.getIDLOTE(), loteMov.getDATAHORA(), loteMov.getUSUARIO(), loteMov.getQTDE()});
         }
-    
-}
+
+    }
+
+    public void carregaIcone() {
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
+    }
 }

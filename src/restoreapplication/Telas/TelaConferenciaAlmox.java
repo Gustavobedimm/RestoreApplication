@@ -1,8 +1,10 @@
 package restoreapplication.Telas;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.ProdutoDAO;
@@ -23,6 +25,7 @@ public class TelaConferenciaAlmox extends javax.swing.JFrame {
         almox = almoxP;
         jTextField3.setText(empresa);
         jTextField4.setText(almox);
+        carregaIcone();
     }
 
     @SuppressWarnings("unchecked")
@@ -233,5 +236,10 @@ public void carregaProdutos() {
 
         thread.start();
 
+    }
+public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 }

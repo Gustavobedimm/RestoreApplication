@@ -1,8 +1,10 @@
 package restoreapplication.Telas;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.PedidoCompraDAO;
@@ -14,6 +16,7 @@ public class ManutencaoPedCompra extends javax.swing.JFrame {
 
     public ManutencaoPedCompra() {
         initComponents();
+        carregaIcone();
     }
 
     /**
@@ -427,5 +430,10 @@ public void iniciaProcesso() {
         jTextArea1.append("ANTES:  QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + prod.getQtderecebida() + " QTDERESTANTE: " + prod.getQtderestante() + " QTDECANCELADA: " + prod.getQtdecancelada() + "\n");
         jTextArea1.append("DEPOIS: QTDEPEDIDO: " + prod.getQtdepedida() + " QTDERECEBIDA: " + recebida + " QTDERESTANTE: " + restante + " QTDECANCELADA: " + cancelada + "\n");
         
+    }
+    public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 }

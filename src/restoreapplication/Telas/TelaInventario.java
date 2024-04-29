@@ -4,9 +4,11 @@
  */
 package restoreapplication.Telas;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.InventarioDAO;
 import restoreapplication.DAO.LoteValidadeMovDAO;
@@ -31,6 +33,7 @@ public class TelaInventario extends javax.swing.JFrame {
         initComponents();
         buscaInventario(empresa, lote);
         consultaMovimentoLote(empresa,lote);
+        carregaIcone();
         
     }
 
@@ -387,6 +390,11 @@ public void buscaInventario(String empresa, String lote) {
             model.addRow(new Object[]{loteMov.getPRODUTO(), loteMov.getIDLOTE(), loteMov.getDATAHORA(), loteMov.getUSUARIO(), loteMov.getQTDE()});
         }
 
+    }
+ public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 
 }

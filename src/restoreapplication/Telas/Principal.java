@@ -29,6 +29,8 @@ import restoreapplication.Model.LoteValidade;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.math.BigDecimal;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import restoreapplication.Conexao.Conn;
 import restoreapplication.Model.Config;
@@ -44,6 +46,7 @@ public final class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         carregaComboBoxEmpresa();
+        carregaIcone();
         jTextFieldProduto.requestFocus();
         //jButton2.setBorder(new RoundedBorder(10));
         
@@ -150,6 +153,7 @@ public final class Principal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Extrato (TESTEXTRATO)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextFieldSaldo.setBackground(new java.awt.Color(240, 240, 240));
+        jTextFieldSaldo.setForeground(new java.awt.Color(204, 51, 255));
         jTextFieldSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo Esp."));
         jTextFieldSaldo.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +163,7 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldEntrada.setBackground(new java.awt.Color(240, 240, 240));
+        jTextFieldEntrada.setForeground(new java.awt.Color(0, 153, 0));
         jTextFieldEntrada.setBorder(javax.swing.BorderFactory.createTitledBorder("Entrada (+)"));
         jTextFieldEntrada.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldEntrada.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +173,7 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldSaida.setBackground(new java.awt.Color(240, 240, 240));
+        jTextFieldSaida.setForeground(new java.awt.Color(255, 0, 0));
         jTextFieldSaida.setBorder(javax.swing.BorderFactory.createTitledBorder("Saida (-)"));
         jTextFieldSaida.setMaximumSize(new java.awt.Dimension(64, 22));
 
@@ -603,7 +609,7 @@ public final class Principal extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(118, 120, 237));
         jLabel13.setText("■");
 
-        jLabel14.setForeground(new java.awt.Color(60, 9, 108));
+        jLabel14.setForeground(new java.awt.Color(131, 56, 236));
         jLabel14.setText("■");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1087,6 +1093,10 @@ public final class Principal extends javax.swing.JFrame {
                 telaRetirada.setVisible(true);
             }
             if (movimentoID.equals("07")) {
+            }
+            if (movimentoID.equals("08")) {
+                TransfEmpresasTela transfEmpresas = new TransfEmpresasTela(numeroDOC);
+                transfEmpresas.setVisible(true);
             }
             if (movimentoID.equals("09")) {
             }
@@ -1696,6 +1706,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             Color foreground = Color.BLACK;
             
             Color VERMELHO = new Color(214, 40, 40);
+            Color VERDE = new Color(32, 139, 58);
 
             //PINTA POR TIPO DE OPERACAO
             if (jCheckBoxMenuItem1.isSelected()) {
@@ -1704,7 +1715,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 Color Amarelo = new Color(218, 165, 32);
                 Color roxoClaro = new Color(118, 120, 237);
                 Color verdeAgua = new Color(42, 157, 143);
-                Color transfAlmox = new Color(60, 9, 108);
+                Color transfAlmox = new Color(131, 56, 236);
                 Color transfFiliais = new Color(117, 13, 55);
                 Color devolucaoVenda = new Color(139, 69, 19);
                 Color devolucaoCompra = new Color(30, 144, 255);
@@ -1770,7 +1781,8 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 String saldo = objeto2.toString();
                 String saldoEsperado = objeto3.toString();
                 if (!saldo.equals(saldoEsperado)) {
-                    foreground = VERMELHO;
+                        foreground = VERMELHO;
+                    if(column == 5 ){foreground = VERDE;}
                 }
             }
             //label.setBackground(background);
@@ -1825,11 +1837,11 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             String controlaNumSerie = produto.getCONTROLANUMEROSERIE();
             
             if (controlaLote.equals("S")) {
-                jPanel9.setVisible(true);
+                //jPanel9.setVisible(true);
                 jCheckBoxControlaLote.setSelected(true);
                 carregarTabelaLote();
             } else {
-                jPanel9.setVisible(false);
+                //jPanel9.setVisible(false);
                 jCheckBoxControlaLote.setSelected(false);
             }
             if (ativo.equals("S")) {
@@ -1916,6 +1928,11 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
+    }
+    public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
     
 }

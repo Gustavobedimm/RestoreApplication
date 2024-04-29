@@ -3,9 +3,11 @@ package restoreapplication.Telas;
 import java.awt.Color;
 import static java.awt.Color.WHITE;
 import java.awt.Component;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,6 +31,7 @@ public class TelaRetirada extends javax.swing.JFrame {
         empresaPrincipal = empresa;
         //pedidoPricipal = documento;
         consultaRetirada(empresa, documento, controlaLote);
+        carregaIcone();
         
     }
 
@@ -504,5 +507,10 @@ public class PintarTabela extends DefaultTableCellRenderer {
             }
             return label;
         }
+    }
+public void carregaIcone(){
+        URL iconURL = getClass().getResource("/icons/eco.png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
     }
 }
