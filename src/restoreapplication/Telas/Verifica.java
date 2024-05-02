@@ -335,6 +335,7 @@ public void carregaProdutos() {
         Thread thread = new Thread() {
             @Override
             public void run() {
+                jButton1.setEnabled(false);
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 ArrayList<Produto> listaProdutos = new ArrayList();
                 try {
@@ -416,6 +417,7 @@ public void carregaProdutos() {
 
                 }
                 jProgressBar1.setValue(0);
+                jButton1.setEnabled(true);
             }
         };
 

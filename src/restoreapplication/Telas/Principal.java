@@ -57,6 +57,7 @@ public final class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTextFieldSaldo = new javax.swing.JTextField();
         jTextFieldEntrada = new javax.swing.JTextField();
@@ -142,18 +143,22 @@ public final class Principal extends javax.swing.JFrame {
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         jMenuItem4.setText("jMenuItem4");
 
+        jMenuItem2.setText("jMenuItem2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Extrato do Produto v2.1");
+        setTitle("Extrato do Produto v2.3");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1344, 850));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Extrato (TESTEXTRATO)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextFieldSaldo.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldSaldo.setForeground(new java.awt.Color(204, 51, 255));
+        jTextFieldSaldo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo Esp."));
         jTextFieldSaldo.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -182,11 +187,11 @@ public final class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "EMP", "ALM", "E/S", "QTDE", "SALD", "SALD ESP", "DATAHORA", "DOC.", "ID", "DESCRICAO", "CUSTOMEDIO", "CUSTOFINAL", "CUSTOREPMED", "CUSTOREP"
+                "EMP", "ALM", "E/S", "QTDE", "SALD", "SALD ESP", "DIFERENÇA", "DATAHORA", "DOC.", "ID", "DESCRICAO", "CUSTOMEDIO", "CUSTOFINAL", "CUSTOREPMED", "CUSTOREP"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, true, false, true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -238,18 +243,18 @@ public final class Principal extends javax.swing.JFrame {
             jTableNfe.getColumnModel().getColumn(4).setPreferredWidth(110);
             jTableNfe.getColumnModel().getColumn(5).setResizable(false);
             jTableNfe.getColumnModel().getColumn(5).setPreferredWidth(110);
-            jTableNfe.getColumnModel().getColumn(6).setResizable(false);
-            jTableNfe.getColumnModel().getColumn(6).setPreferredWidth(150);
             jTableNfe.getColumnModel().getColumn(7).setResizable(false);
-            jTableNfe.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jTableNfe.getColumnModel().getColumn(7).setPreferredWidth(150);
             jTableNfe.getColumnModel().getColumn(8).setResizable(false);
-            jTableNfe.getColumnModel().getColumn(8).setPreferredWidth(40);
+            jTableNfe.getColumnModel().getColumn(8).setPreferredWidth(100);
             jTableNfe.getColumnModel().getColumn(9).setResizable(false);
-            jTableNfe.getColumnModel().getColumn(9).setPreferredWidth(150);
+            jTableNfe.getColumnModel().getColumn(9).setPreferredWidth(40);
             jTableNfe.getColumnModel().getColumn(10).setResizable(false);
+            jTableNfe.getColumnModel().getColumn(10).setPreferredWidth(150);
             jTableNfe.getColumnModel().getColumn(11).setResizable(false);
             jTableNfe.getColumnModel().getColumn(12).setResizable(false);
             jTableNfe.getColumnModel().getColumn(13).setResizable(false);
+            jTableNfe.getColumnModel().getColumn(14).setResizable(false);
         }
 
         jTextFieldErros.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -820,11 +825,11 @@ public final class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ALMOX", "DISPONIVEL", "RETIRAR", "CONDICIONAL", "RESERVADO"
+                "ALMOX", "DISPONIVEL", "RETIRAR", "CONDICIONAL", "RESERVADO", "TRANSITO", "VENDA EXTERNA", "ENDEREÇO", "DATA/HORA ALTERAÇÃO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1017,6 +1022,19 @@ public final class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Pedidos");
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png"))); // NOI18N
+        jMenuItem6.setText("Pedidos pendentes");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1055,8 +1073,8 @@ public final class Principal extends javax.swing.JFrame {
         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             evt.consume();
             int linha = jTableNfe.getSelectedRow();
-            String numeroDOC = (String) jTableNfe.getValueAt(linha, 7);
-            String movimentoID = (String) jTableNfe.getValueAt(linha, 8);
+            String numeroDOC = (String) jTableNfe.getValueAt(linha, 8);
+            String movimentoID = (String) jTableNfe.getValueAt(linha, 9);
             String empresa = (String) jTableNfe.getValueAt(linha, 0);
             //01 = TVENPedido
             //02 = TEstNfe E e S S=Cancelamento
@@ -1282,6 +1300,12 @@ public final class Principal extends javax.swing.JFrame {
         botaoCarregar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        codEmpresa = listaEmpresas.get(jComboBoxEmpresa.getSelectedIndex()).getCodigo();
+        PedidosPendentes pedidosPendentes = new PedidosPendentes(codEmpresa);
+        pedidosPendentes.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1368,11 +1392,14 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -1530,9 +1557,9 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             String hora = data.substring(11, 21);
             
             if (movimentacao.getENTRADASAIDA().equals("S")) {
-                model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "SAIDA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
+                model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "SAIDA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(),saldoAtual.subtract(saldoEsperado).toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
             } else {
-                model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "ENTRADA", qtd, saldoAtual, saldoEsperado, dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
+                model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "ENTRADA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(),saldoAtual.subtract(saldoEsperado).toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
             }
             
         }
@@ -1546,6 +1573,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
         jLabel08.setText(Integer.toString(cont08) + " - " + calculaPercentual(cont08, tamanhoTot) + "%");
         jLabel09.setText(Integer.toString(cont09) + " - " + calculaPercentual(cont09, tamanhoTot) + "%");
         jLabel10.setText(Integer.toString(cont10) + " - " + calculaPercentual(cont10, tamanhoTot) + "%");
+        jTextFieldErros.setText("");
         if (erro > 0) {
             jTextFieldErros.setText(erro.toString());
             jTextFieldErros.setForeground(Color.red);
@@ -1565,7 +1593,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             model.removeRow(0);
         }
         for (Estoque estoque : listaEstoque) {
-            model.addRow(new Object[]{estoque.getALMOX(), estoque.getESTDISPONIVEL(), estoque.getESTARETIRAR(), estoque.getESTCONDICIONAL(), estoque.getESTRESERVADO()});
+            model.addRow(new Object[]{estoque.getALMOX(), estoque.getESTDISPONIVEL(), estoque.getESTARETIRAR(), estoque.getESTCONDICIONAL(), estoque.getESTRESERVADO(),estoque.getESTTRANSITO(),estoque.getESTVENDAEXTERNA(),estoque.getENDERECO(),estoque.getDATAHORAALTERACAO()});
         }
     }
     
@@ -1620,7 +1648,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
         }
         for (Empresa empresa : listaEmpresas) {
             
-            jComboBoxEmpresa.addItem(empresa.getCodigo() + " - " + empresa.getNomefantasia());
+            jComboBoxEmpresa.addItem(empresa.getCodigo() + " - " + empresa.getNomefantasia() + " - " + empresa.getVa());
         }
         codEmpresa = listaEmpresas.get(jComboBoxEmpresa.getSelectedIndex()).getCodigo();
         carregaComboAlmox(codEmpresa);
@@ -1707,10 +1735,11 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             
             Color VERMELHO = new Color(214, 40, 40);
             Color VERDE = new Color(32, 139, 58);
+            Color roxo = new Color(204,51,255);
 
             //PINTA POR TIPO DE OPERACAO
-            if (jCheckBoxMenuItem1.isSelected()) {
-                Object objeto1 = table.getValueAt(row, 8);
+            if (jCheckBox12.isSelected()) {
+                Object objeto1 = table.getValueAt(row, 9);
                 Color Azul = new Color(0, 0, 255);
                 Color Amarelo = new Color(218, 165, 32);
                 Color roxoClaro = new Color(118, 120, 237);
@@ -1720,6 +1749,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 Color devolucaoVenda = new Color(139, 69, 19);
                 Color devolucaoCompra = new Color(30, 144, 255);
                 Color pcp = new Color(56, 176, 0);
+                
                 
                 String valor2 = objeto1.toString();
                 
@@ -1783,6 +1813,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 if (!saldo.equals(saldoEsperado)) {
                         foreground = VERMELHO;
                     if(column == 5 ){foreground = VERDE;}
+                    if(column == 6){foreground = roxo;}
                 }
             }
             //label.setBackground(background);

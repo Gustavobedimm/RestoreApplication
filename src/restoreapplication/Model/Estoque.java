@@ -8,6 +8,10 @@ public class Estoque {
     private String ESTARETIRAR;
     private String ESTCONDICIONAL;
     private String ESTRESERVADO;
+    private String ESTVENDAEXTERNA;
+    private String ENDERECO;
+    private String ESTTRANSITO;
+    private String DATAHORAALTERACAO;
 
     public String getEMPRESA() {
         return EMPRESA;
@@ -56,5 +60,38 @@ public class Estoque {
     public void setESTRESERVADO(String ESTRESERVADO) {
         this.ESTRESERVADO = ESTRESERVADO;
     }
+
+    public String getESTVENDAEXTERNA() {
+        return ESTVENDAEXTERNA;
+    }
+
+    public void setESTVENDAEXTERNA(String ESTVENDAEXTERNA) {
+        this.ESTVENDAEXTERNA = ESTVENDAEXTERNA;
+    }
+
+    public String getENDERECO() {
+        return ENDERECO;
+    }
+
+    public void setENDERECO(String ENDERECO) {
+        this.ENDERECO = ENDERECO;
+    }
+
+    public String getESTTRANSITO() {
+        return ESTTRANSITO;
+    }
+
+    public void setESTTRANSITO(String ESTTRANSITO) {
+        this.ESTTRANSITO = ESTTRANSITO;
+    }
+
+    public String getDATAHORAALTERACAO() {
+        return DATAHORAALTERACAO;
+    }
+
+    public void setDATAHORAALTERACAO(String DATAHORAALTERACAO) {
+        this.DATAHORAALTERACAO = DATAHORAALTERACAO;
+    }
+    
     
 }

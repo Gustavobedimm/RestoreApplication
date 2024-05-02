@@ -20,6 +20,17 @@ public class Pedido {
     private String HORASAIDA;
     private String SEQUENCIALPAF;
     private String PEDIDOAGRUPAMENTO;
+    private String gerafinanceiro;
+    private String tipovenda;
+    private String qtdevolumes;
+    private String nfeletronica;
+    private String idtabelapreco;
+    private String renegociacaoagrupamento;
+    private String inutilizada;
+    private String denegada;
+    private String nfcancelada;
+    private String tipooperacao;
+    private String clienteendereco;
     
 
     public String getEMPRESA() {
@@ -173,6 +184,97 @@ public class Pedido {
     public void setPEDIDOAGRUPAMENTO(String PEDIDOAGRUPAMENTO) {
         this.PEDIDOAGRUPAMENTO = PEDIDOAGRUPAMENTO;
     }
+
+    public String getGerafinanceiro() {
+        return gerafinanceiro;
+    }
+
+    public void setGerafinanceiro(String gerafinanceiro) {
+        this.gerafinanceiro = gerafinanceiro;
+    }
+
+    public String getTipovenda() {
+        return tipovenda;
+    }
+
+    public void setTipovenda(String tipovenda) {
+        this.tipovenda = tipovenda;
+    }
+
+    public String getQtdevolumes() {
+        return qtdevolumes;
+    }
+
+    public void setQtdevolumes(String qtdevolumes) {
+        this.qtdevolumes = qtdevolumes;
+    }
+
+    public String getNfeletronica() {
+        return nfeletronica;
+    }
+
+    public void setNfeletronica(String nfeletronica) {
+        this.nfeletronica = nfeletronica;
+    }
+
+    public String getIdtabelapreco() {
+        return idtabelapreco;
+    }
+
+    public void setIdtabelapreco(String idtabelapreco) {
+        this.idtabelapreco = idtabelapreco;
+    }
+
+    public String getRenegociacaoagrupamento() {
+        return renegociacaoagrupamento;
+    }
+
+    public void setRenegociacaoagrupamento(String renegociacaoagrupamento) {
+        this.renegociacaoagrupamento = renegociacaoagrupamento;
+    }
+
+    public String getInutilizada() {
+        return inutilizada;
+    }
+
+    public void setInutilizada(String inutilizada) {
+        this.inutilizada = inutilizada;
+    }
+
+    public String getDenegada() {
+        return denegada;
+    }
+
+    public void setDenegada(String denegada) {
+        this.denegada = denegada;
+    }
+
+    public String getNfcancelada() {
+        return nfcancelada;
+    }
+
+    public void setNfcancelada(String nfcancelada) {
+        this.nfcancelada = nfcancelada;
+    }
+
+    public String getTipooperacao() {
+        return tipooperacao;
+    }
+
+    public void setTipooperacao(String tipooperacao) {
+        this.tipooperacao = tipooperacao;
+    }
+
+    public String getClienteendereco() {
+        return clienteendereco;
+    }
+
+    public void setClienteendereco(String clienteendereco) {
+        this.clienteendereco = clienteendereco;
+    }
+    
+    
+    
     
     
     

@@ -28,6 +28,10 @@ public class EstoqueDAO {
                 estoque.setESTARETIRAR(rs.getString("ESTARETIRAR"));
                 estoque.setESTCONDICIONAL(rs.getString("ESTCONDICIONAL"));
                 estoque.setESTRESERVADO(rs.getString("ESTRESERVADO"));
+                estoque.setESTVENDAEXTERNA(rs.getString("ESTVENDAEXTERNA"));
+                estoque.setENDERECO(rs.getString("ENDERECO"));
+                estoque.setESTTRANSITO(rs.getString("ESTTRANSITO"));
+                estoque.setDATAHORAALTERACAO(rs.getString("DATAHORAALTERACAO"));
 
                 listaEstoque.add(estoque);
             }

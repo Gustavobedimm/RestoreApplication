@@ -24,7 +24,7 @@ public class EmpresaDAO {
                 empresa.setCodigo(rs.getString("codigo"));
                 empresa.setNomefantasia(rs.getString("nomefantasia"));
                 empresa.setCnpj(rs.getString("cpfcnpj"));
-                //empresa.setAtivo(rs.getString("ativo"));
+                empresa.setVa(rs.getString("va"));
                 listaEmpresas.add(empresa);
             }
         } catch (SQLException e) {

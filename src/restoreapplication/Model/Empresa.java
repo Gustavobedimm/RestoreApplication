@@ -4,6 +4,7 @@ public class Empresa {
     private String nomefantasia;
     private String cnpj;
     private String ativo;
+    private String va;
 
     public String getCodigo() {
         return codigo;
@@ -36,6 +37,15 @@ public class Empresa {
     public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
+
+    public String getVa() {
+        return va;
+    }
+
+    public void setVa(String va) {
+        this.va = va;
+    }
+    
     
     
 }
