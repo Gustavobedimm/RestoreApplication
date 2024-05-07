@@ -33,25 +33,31 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import restoreapplication.Conexao.Conn;
+import restoreapplication.DAO.LicencaDAO;
+import restoreapplication.DAO.ReservadoDAO;
 import restoreapplication.Model.Config;
+import restoreapplication.Model.Licenca;
+import restoreapplication.Model.Reservado;
 
 public final class Principal extends javax.swing.JFrame {
-    
+
     String codEmpresa = "00";
     String codAlmox = "00";
     String codProduto = "0";
     ArrayList<Empresa> listaEmpresas = new ArrayList<>();
     ArrayList<Almox> listaAlmox = new ArrayList<>();
-    
+
     public Principal() {
         initComponents();
         carregaComboBoxEmpresa();
         carregaIcone();
         jTextFieldProduto.requestFocus();
+        carregaIcones();
+        carregaTabelaLicenca();
         //jButton2.setBorder(new RoundedBorder(10));
-        
+
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -65,10 +71,6 @@ public final class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableNfe = new javax.swing.JTable();
         jTextFieldErros = new javax.swing.JTextField();
-        jPanel9 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTableLoteValidade = new javax.swing.JTable();
-        jCheckBoxLotes = new javax.swing.JCheckBox();
         jPanel10 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jCheckBoxControlaLote = new javax.swing.JCheckBox();
@@ -107,7 +109,6 @@ public final class Principal extends javax.swing.JFrame {
         jCheckBox03 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
         jLabel05 = new javax.swing.JLabel();
         jLabel08 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -122,6 +123,8 @@ public final class Principal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabelMensagem = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableSaldo = new javax.swing.JTable();
@@ -129,9 +132,19 @@ public final class Principal extends javax.swing.JFrame {
         jTableEstoques = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEstoquesProduto = new javax.swing.JTable();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTableReserdados = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTableLoteValidade = new javax.swing.JTable();
+        jCheckBoxLotes = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableLicenca = new javax.swing.JTable();
+        jLabel17 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -151,7 +164,7 @@ public final class Principal extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Extrato do Produto v2.3");
+        setTitle("Extrato do Produto v2.5");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1344, 850));
 
@@ -191,7 +204,7 @@ public final class Principal extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, false, true, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -230,9 +243,8 @@ public final class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableNfe);
         if (jTableNfe.getColumnModel().getColumnCount() > 0) {
-            jTableNfe.getColumnModel().getColumn(0).setMinWidth(50);
+            jTableNfe.getColumnModel().getColumn(0).setResizable(false);
             jTableNfe.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTableNfe.getColumnModel().getColumn(0).setMaxWidth(50);
             jTableNfe.getColumnModel().getColumn(1).setResizable(false);
             jTableNfe.getColumnModel().getColumn(1).setPreferredWidth(50);
             jTableNfe.getColumnModel().getColumn(2).setResizable(false);
@@ -243,6 +255,7 @@ public final class Principal extends javax.swing.JFrame {
             jTableNfe.getColumnModel().getColumn(4).setPreferredWidth(110);
             jTableNfe.getColumnModel().getColumn(5).setResizable(false);
             jTableNfe.getColumnModel().getColumn(5).setPreferredWidth(110);
+            jTableNfe.getColumnModel().getColumn(6).setResizable(false);
             jTableNfe.getColumnModel().getColumn(7).setResizable(false);
             jTableNfe.getColumnModel().getColumn(7).setPreferredWidth(150);
             jTableNfe.getColumnModel().getColumn(8).setResizable(false);
@@ -292,67 +305,13 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estoque Lote(TESTLOTEVALIDADEESTOQUE)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
-
-        jTableLoteValidade.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Emp", "ID", "Lote", "Fab", "Val", "Est"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableLoteValidade.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableLoteValidadeMouseClicked(evt);
-            }
-        });
-        jScrollPane7.setViewportView(jTableLoteValidade);
-
-        jCheckBoxLotes.setText("Mostrar todos os Lotes do Produto");
-        jCheckBoxLotes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxLotesActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBoxLotes)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxLotes)
-                .addContainerGap())
-        );
-
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configurações do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jCheckBoxControlaLote.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxControlaLote.setText("Controla Lote de Validade ");
+        jCheckBoxControlaLote.setEnabled(false);
         jCheckBoxControlaLote.setFocusable(false);
         jCheckBoxControlaLote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,22 +321,27 @@ public final class Principal extends javax.swing.JFrame {
 
         jCheckBoxAtivo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxAtivo.setText("Ativo ");
+        jCheckBoxAtivo.setEnabled(false);
         jCheckBoxAtivo.setFocusable(false);
 
         jCheckBoxEstFracionado.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxEstFracionado.setText("Estoque fracionado");
+        jCheckBoxEstFracionado.setEnabled(false);
         jCheckBoxEstFracionado.setFocusable(false);
 
         jCheckBoxProdGenerico.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxProdGenerico.setText("Produto generico");
+        jCheckBoxProdGenerico.setEnabled(false);
         jCheckBoxProdGenerico.setFocusable(false);
 
         jCheckBoxDispVenda.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxDispVenda.setText("Disponivel p/ Venda");
+        jCheckBoxDispVenda.setEnabled(false);
         jCheckBoxDispVenda.setFocusable(false);
 
         jCheckBoxContSerie.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxContSerie.setText("Controla numero de serie");
+        jCheckBoxContSerie.setEnabled(false);
         jCheckBoxContSerie.setFocusable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -626,70 +590,73 @@ public final class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBox11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCheckBox12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addComponent(jSeparator2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox08)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel08))
-                            .addComponent(jSeparator3)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox02)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel02))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox01)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel01))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox05)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel05))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox03)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel03))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox06)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel06))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox09)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                                 .addComponent(jLabel09))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jCheckBox07)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel07))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel7))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addComponent(jSeparator2)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabelMensagem)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,9 +711,11 @@ public final class Principal extends javax.swing.JFrame {
                 .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jLabelMensagem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
@@ -780,6 +749,8 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(150, 150));
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(300, 100));
@@ -889,12 +860,140 @@ public final class Principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("  TESTPRODUTO    ", jScrollPane3);
 
+        jTableReserdados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Empresa", "Almox", "Produto Principal", "Item Principal", "ID Formulação", "Formula", "Qtde", "Qtde Embalagem", "Documento", "Tipo", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableReserdados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableReserdadosMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(jTableReserdados);
+        if (jTableReserdados.getColumnModel().getColumnCount() > 0) {
+            jTableReserdados.getColumnModel().getColumn(0).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(1).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(2).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(3).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(4).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(5).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(6).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(7).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(8).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(9).setResizable(false);
+            jTableReserdados.getColumnModel().getColumn(10).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1125, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("ESTOQUE RESERVADO", jPanel7);
+
+        jTableLoteValidade.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Emp", "ID", "Lote", "Fab", "Val", "Est"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableLoteValidade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableLoteValidadeMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(jTableLoteValidade);
+
+        jCheckBoxLotes.setText("Mostrar todos os Lotes do Produto");
+        jCheckBoxLotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxLotesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jCheckBoxLotes)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1113, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBoxLotes))
+        );
+
+        jTabbedPane1.addTab("LOTE DE VALIDADE", jPanel8);
+
         jTextField1.setEditable(false);
         jTextField1.setBorder(null);
         jTextField1.setEnabled(false);
         jTextField1.setRequestFocusEnabled(false);
 
-        jLabel15.setText("Caminho do banco ");
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png"))); // NOI18N
+
+        jTableLicenca.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero", "Empresa", "Versão"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTableLicenca);
+        if (jTableLicenca.getColumnModel().getColumnCount() > 0) {
+            jTableLicenca.getColumnModel().getColumn(0).setResizable(false);
+            jTableLicenca.getColumnModel().getColumn(1).setResizable(false);
+            jTableLicenca.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jLabel17.setText("TGERLICENCA");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -903,21 +1002,32 @@ public final class Principal extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addContainerGap(209, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 593, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel15)
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("CONEXÃO", jPanel5);
+        jTabbedPane1.addTab("TGERLICENCA", jPanel5);
 
         jMenu1.setText("Verificações");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -1045,11 +1155,8 @@ public final class Principal extends javax.swing.JFrame {
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1059,9 +1166,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1191,13 +1296,13 @@ public final class Principal extends javax.swing.JFrame {
             int linha = jTableLoteValidade.getSelectedRow();
             String empresa = (String) jTableLoteValidade.getValueAt(linha, 0);
             String idLote = (String) jTableLoteValidade.getValueAt(linha, 1);
-            
+
             if (!empresa.equals("SOMA")) {
                 ExtratoLote extratoLote = new ExtratoLote(empresa, idLote);
                 extratoLote.setVisible(true);
             }
         }
-        
+
 
     }//GEN-LAST:event_jTableLoteValidadeMouseClicked
 
@@ -1235,19 +1340,19 @@ public final class Principal extends javax.swing.JFrame {
             //jPanel5.setVisible(false);
             //jPanel3.setVisible(false);
             //jPanel7.setVisible(false);
-            jPanel9.setVisible(false);
+            //jPanel9.setVisible(false);
         } else {
             jTabbedPane1.setVisible(true);
             //jPanel5.setVisible(true);
             //jPanel3.setVisible(true);
             //jPanel7.setVisible(true);
-            jPanel9.setVisible(true);
+            //jPanel9.setVisible(true);
         }
 
     }//GEN-LAST:event_jCheckBoxMenuItem2ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        
+
 
     }//GEN-LAST:event_jMenu2ActionPerformed
 
@@ -1279,7 +1384,7 @@ public final class Principal extends javax.swing.JFrame {
 
     private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
         if (jCheckBox11.isSelected()) {
-            
+
             jCheckBoxMenuItem5.setSelected(true);
         } else {
             jCheckBoxMenuItem5.setSelected(false);
@@ -1297,6 +1402,9 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextFieldEntrada.setText("0");
+        jTextFieldSaida.setText("0");
+        jTextFieldSaldo.setText("0");
         botaoCarregar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1305,6 +1413,19 @@ public final class Principal extends javax.swing.JFrame {
         PedidosPendentes pedidosPendentes = new PedidosPendentes(codEmpresa);
         pedidosPendentes.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jTableReserdadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableReserdadosMouseClicked
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            int linha = jTableReserdados.getSelectedRow();
+            String tipo = (String) jTableReserdados.getValueAt(linha, 9);
+            String doc = (String) jTableReserdados.getValueAt(linha, 8);
+            if(tipo.equals("PEDIDO")){
+                TelaPedidos telaPedidos = new TelaPedidos(codEmpresa, doc, true);
+                telaPedidos.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jTableReserdadosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1381,7 +1502,8 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1390,6 +1512,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelMensagem;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1407,20 +1530,25 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableEstoques;
     private javax.swing.JTable jTableEstoquesProduto;
+    private javax.swing.JTable jTableLicenca;
     private javax.swing.JTable jTableLoteValidade;
     private javax.swing.JTable jTableNfe;
+    private javax.swing.JTable jTableReserdados;
     private javax.swing.JTable jTableSaldo;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldDescricao;
@@ -1433,170 +1561,245 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSaldo;
     // End of variables declaration//GEN-END:variables
 public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
-        DefaultTableModel model = (DefaultTableModel) jTableNfe.getModel();
-        jTableNfe.setShowHorizontalLines(false);
-        jTableNfe.setShowVerticalLines(false);
-        while (jTableNfe.getRowCount() > 0) {
-            model.removeRow(0);
-        }
-        BigDecimal entradas = new BigDecimal("0.0");
-        BigDecimal saidas = new BigDecimal("0.0");
-        BigDecimal saldo = new BigDecimal("0.0");
-        
-        var formatter = new DecimalFormat("#,###.##");
-        var s = new DecimalFormatSymbols();
-        s.setDecimalSeparator(',');
-        s.setGroupingSeparator('.');
-        formatter.setDecimalFormatSymbols(s);
-        
-        BigDecimal saldoGravadoAnterior = new BigDecimal("0");
-        Integer erro = 0;
-        int cont01 = 0;
-        int cont02 = 0;
-        int cont03 = 0;
-        int cont05 = 0;
-        int cont06 = 0;
-        int cont07 = 0;
-        int cont08 = 0;
-        int cont09 = 0;
-        int cont10 = 0;
-        int tamanhoTot = listaExtrato.size();
-        for (ExtratoProduto movimentacao : listaExtrato) {
-            BigDecimal qtd = new BigDecimal(movimentacao.getQTDE());
-            BigDecimal saldoAtual = new BigDecimal(movimentacao.getSALDO());
-            BigDecimal saldoEsperado = new BigDecimal("0");
-            if (movimentacao.getENTRADASAIDA().equals("E")) {
-                saldoEsperado = saldoGravadoAnterior.add(qtd);
-                saldoGravadoAnterior = saldoGravadoAnterior.add(qtd);
-                entradas = entradas.add(qtd);
-            } else {
-                saldoEsperado = saldoGravadoAnterior.subtract(qtd);
-                saldoGravadoAnterior = saldoGravadoAnterior.subtract(qtd);
-                saidas = saidas.add(qtd);
-            }
-            if (!saldoAtual.toString().equals(saldoEsperado.toString())) {
-                erro++;
-            }
-            saldo = entradas.subtract(saidas);
-            String entradasString = formatter.format(entradas);
-            String saidasString = formatter.format(saidas);
-            String saldoString = formatter.format(saldo);
-            
-            jTextFieldEntrada.setText(entradasString);
-            jTextFieldSaida.setText(saidasString);
-            jTextFieldSaldo.setText(saldoString);
-            jTableNfe.setDefaultRenderer(Object.class, new PintarTabela());
-            String descricaoOperacao = "";
-            if (movimentacao.getMOVIMENTOID().equals("01") && movimentacao.getENTRADASAIDA().equals("S")) {
-                descricaoOperacao = "VENDA DE MERCADORIA";
-                cont01++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("01") && movimentacao.getENTRADASAIDA().equals("E")) {
-                descricaoOperacao = "CANCELAMENTO DE VENDA DE MERCADORIA";
-                cont01++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("02") && movimentacao.getENTRADASAIDA().equals("E")) {
-                descricaoOperacao = "COMPRA DE MERCADORIA";
-                cont02++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("02") && movimentacao.getENTRADASAIDA().equals("S")) {
-                descricaoOperacao = "CANCELAMENTO COMPRA DE MERCADORIA";
-                cont02++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("03")) {
-                descricaoOperacao = "TRANSFERENCIA ENTRE ALMOXARIFADO";
-                cont03++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("04")) {
-                descricaoOperacao = "TRANSFERENCIA ENTRE PRODUTOS";
-            }
-            if (movimentacao.getMOVIMENTOID().equals("05")) {
-                descricaoOperacao = "INVENTARIO";
-                cont05++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("06") && movimentacao.getENTRADASAIDA().equals("S")) {
-                descricaoOperacao = "RETIRADA (ENTREGA FUTURA)";
-                cont06++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("06") && movimentacao.getENTRADASAIDA().equals("E")) {
-                descricaoOperacao = "CANCELAMENTO DE RETIRADA (ENTREGA FUTURA)";
-                cont06++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("07") && movimentacao.getENTRADASAIDA().equals("E")) {
-                descricaoOperacao = "DEVOLUÇÃO DE VENDA";
-                cont07++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("07") && movimentacao.getENTRADASAIDA().equals("S")) {
-                descricaoOperacao = "CANCELAMENTO DE DEVOLUÇÃO DE VENDA";
-                cont07++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("08")) {
-                descricaoOperacao = "TRANSFERENCIA ENTRE FILIAIS";
-                cont08++;
-            }
-            
-            if (movimentacao.getMOVIMENTOID().equals("09") && movimentacao.getENTRADASAIDA().equals("S")) {
-                descricaoOperacao = "DEVOLUÇÃO DE COMPRA";
-                cont09++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("09") && movimentacao.getENTRADASAIDA().equals("E")) {
-                descricaoOperacao = "CANCELAMENTO DE DEVOLUÇÃO DE COMPRA";
-                cont09++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("10")) {
-                descricaoOperacao = "ORDEM DE PRODUÇAO";
-                cont10++;
-            }
-            if (movimentacao.getMOVIMENTOID().equals("14")) {
-                descricaoOperacao = "MOVIMENTAÇÃO INTERNA DE MERCADORIA";
-            }
-            String data = movimentacao.getDATAHORA();
-            String dia = data.substring(8, 10);
-            String mes = data.substring(5, 7);
-            String ano = data.substring(0, 4);
-            String hora = data.substring(11, 21);
-            
-            if (movimentacao.getENTRADASAIDA().equals("S")) {
-                model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "SAIDA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(),saldoAtual.subtract(saldoEsperado).toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
-            } else {
-                model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "ENTRADA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(),saldoAtual.subtract(saldoEsperado).toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
-            }
-            
-        }
-        
-        jLabel01.setText(Integer.toString(cont01) + " - " + calculaPercentual(cont01, tamanhoTot) + "%");
-        jLabel02.setText(Integer.toString(cont02) + " - " + calculaPercentual(cont02, tamanhoTot) + "%");
-        jLabel03.setText(Integer.toString(cont03) + " - " + calculaPercentual(cont03, tamanhoTot) + "%");
-        jLabel05.setText(Integer.toString(cont05) + " - " + calculaPercentual(cont05, tamanhoTot) + "%");
-        jLabel06.setText(Integer.toString(cont06) + " - " + calculaPercentual(cont06, tamanhoTot) + "%");
-        jLabel07.setText(Integer.toString(cont07) + " - " + calculaPercentual(cont07, tamanhoTot) + "%");
-        jLabel08.setText(Integer.toString(cont08) + " - " + calculaPercentual(cont08, tamanhoTot) + "%");
-        jLabel09.setText(Integer.toString(cont09) + " - " + calculaPercentual(cont09, tamanhoTot) + "%");
-        jLabel10.setText(Integer.toString(cont10) + " - " + calculaPercentual(cont10, tamanhoTot) + "%");
-        jTextFieldErros.setText("");
-        if (erro > 0) {
-            jTextFieldErros.setText(erro.toString());
-            jTextFieldErros.setForeground(Color.red);
-        } else {
-            jTextFieldErros.setText(erro.toString());
-            jTextFieldErros.setForeground(Color.black);
-            
-        }
+                DefaultTableModel model = (DefaultTableModel) jTableNfe.getModel();
+                jTableNfe.setShowHorizontalLines(false);
+                jTableNfe.setShowVerticalLines(false);
+                while (jTableNfe.getRowCount() > 0) {
+                    model.removeRow(0);
+                }
+                BigDecimal entradas = new BigDecimal("0.0");
+                BigDecimal saidas = new BigDecimal("0.0");
+                BigDecimal saldo = new BigDecimal("0.0");
+
+                var formatter = new DecimalFormat("#,###.##");
+                var s = new DecimalFormatSymbols();
+                s.setDecimalSeparator(',');
+                s.setGroupingSeparator('.');
+                formatter.setDecimalFormatSymbols(s);
+
+                BigDecimal saldoGravadoAnterior = new BigDecimal("0");
+                Integer erro = 0;
+                int cont01 = 0;
+                int cont02 = 0;
+                int cont03 = 0;
+                int cont05 = 0;
+                int cont06 = 0;
+                int cont07 = 0;
+                int cont08 = 0;
+                int cont09 = 0;
+                int cont10 = 0;
+                int tamanhoTot = listaExtrato.size();
+                for (ExtratoProduto movimentacao : listaExtrato) {
+
+                    BigDecimal qtd = new BigDecimal(movimentacao.getQTDE());
+                    BigDecimal saldoAtual = new BigDecimal(movimentacao.getSALDO());
+                    BigDecimal saldoEsperado = new BigDecimal("0");
+                    if (movimentacao.getENTRADASAIDA().equals("E")) {
+                        saldoEsperado = saldoGravadoAnterior.add(qtd);
+                        saldoGravadoAnterior = saldoGravadoAnterior.add(qtd);
+                        entradas = entradas.add(qtd);
+                    } else {
+                        saldoEsperado = saldoGravadoAnterior.subtract(qtd);
+                        saldoGravadoAnterior = saldoGravadoAnterior.subtract(qtd);
+                        saidas = saidas.add(qtd);
+                    }
+                    if (!saldoAtual.toString().equals(saldoEsperado.toString())) {
+                        erro++;
+                    }
+                    saldo = entradas.subtract(saidas);
+                    String entradasString = formatter.format(entradas);
+                    String saidasString = formatter.format(saidas);
+                    String saldoString = formatter.format(saldo);
+
+                    jTextFieldEntrada.setText(entradasString);
+                    jTextFieldSaida.setText(saidasString);
+                    jTextFieldSaldo.setText(saldoString);
+                    jTableNfe.setDefaultRenderer(Object.class, new PintarTabela());
+                    String descricaoOperacao = "";
+                    if (movimentacao.getMOVIMENTOID().equals("01") && movimentacao.getENTRADASAIDA().equals("S")) {
+                        descricaoOperacao = "VENDA DE MERCADORIA";
+                        cont01++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("01") && movimentacao.getENTRADASAIDA().equals("E")) {
+                        descricaoOperacao = "CANCELAMENTO DE VENDA DE MERCADORIA";
+                        cont01++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("02") && movimentacao.getENTRADASAIDA().equals("E")) {
+                        descricaoOperacao = "COMPRA DE MERCADORIA";
+                        cont02++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("02") && movimentacao.getENTRADASAIDA().equals("S")) {
+                        descricaoOperacao = "CANCELAMENTO COMPRA DE MERCADORIA";
+                        cont02++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("03")) {
+                        descricaoOperacao = "TRANSFERENCIA ENTRE ALMOXARIFADO";
+                        cont03++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("04")) {
+                        descricaoOperacao = "TRANSFERENCIA ENTRE PRODUTOS";
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("05")) {
+                        descricaoOperacao = "INVENTARIO";
+                        cont05++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("06") && movimentacao.getENTRADASAIDA().equals("S")) {
+                        descricaoOperacao = "RETIRADA (ENTREGA FUTURA)";
+                        cont06++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("06") && movimentacao.getENTRADASAIDA().equals("E")) {
+                        descricaoOperacao = "CANCELAMENTO DE RETIRADA (ENTREGA FUTURA)";
+                        cont06++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("07") && movimentacao.getENTRADASAIDA().equals("E")) {
+                        descricaoOperacao = "DEVOLUÇÃO DE VENDA";
+                        cont07++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("07") && movimentacao.getENTRADASAIDA().equals("S")) {
+                        descricaoOperacao = "CANCELAMENTO DE DEVOLUÇÃO DE VENDA";
+                        cont07++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("08")) {
+                        descricaoOperacao = "TRANSFERENCIA ENTRE FILIAIS";
+                        cont08++;
+                    }
+
+                    if (movimentacao.getMOVIMENTOID().equals("09") && movimentacao.getENTRADASAIDA().equals("S")) {
+                        descricaoOperacao = "DEVOLUÇÃO DE COMPRA";
+                        cont09++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("09") && movimentacao.getENTRADASAIDA().equals("E")) {
+                        descricaoOperacao = "CANCELAMENTO DE DEVOLUÇÃO DE COMPRA";
+                        cont09++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("10")) {
+                        descricaoOperacao = "ORDEM DE PRODUÇAO";
+                        cont10++;
+                    }
+                    if (movimentacao.getMOVIMENTOID().equals("14")) {
+                        descricaoOperacao = "MOVIMENTAÇÃO INTERNA DE MERCADORIA";
+                    }
+                    String data = movimentacao.getDATAHORA();
+                    String dia = data.substring(8, 10);
+                    String mes = data.substring(5, 7);
+                    String ano = data.substring(0, 4);
+                    String hora = data.substring(11, 21);
+
+                    if (movimentacao.getENTRADASAIDA().equals("S")) {
+                        model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "SAIDA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(), saldoAtual.subtract(saldoEsperado).toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
+                    } else {
+                        model.addRow(new Object[]{movimentacao.getEMPRESA(), movimentacao.getALMOX(), "ENTRADA", qtd, saldoAtual.toPlainString(), saldoEsperado.toPlainString(), saldoAtual.subtract(saldoEsperado).toPlainString(), dia + "/" + mes + "/" + ano + " - " + hora, movimentacao.getCODIGOID(), movimentacao.getMOVIMENTOID(), descricaoOperacao, movimentacao.getCUSTOMEDIO(), movimentacao.getCUSTOFINAL(), movimentacao.getCUSTOMEDIOREPOSICAO(), movimentacao.getCUSTOREPOSICAO()});
+                    }
+                    jTableNfe.scrollRectToVisible(jTableNfe.getCellRect(jTableNfe.getRowCount() - 1, 0, true));
+                }
+
+                jLabel01.setText(Integer.toString(cont01) + " - " + calculaPercentual(cont01, tamanhoTot) + "%");
+                jLabel02.setText(Integer.toString(cont02) + " - " + calculaPercentual(cont02, tamanhoTot) + "%");
+                jLabel03.setText(Integer.toString(cont03) + " - " + calculaPercentual(cont03, tamanhoTot) + "%");
+                jLabel05.setText(Integer.toString(cont05) + " - " + calculaPercentual(cont05, tamanhoTot) + "%");
+                jLabel06.setText(Integer.toString(cont06) + " - " + calculaPercentual(cont06, tamanhoTot) + "%");
+                jLabel07.setText(Integer.toString(cont07) + " - " + calculaPercentual(cont07, tamanhoTot) + "%");
+                jLabel08.setText(Integer.toString(cont08) + " - " + calculaPercentual(cont08, tamanhoTot) + "%");
+                jLabel09.setText(Integer.toString(cont09) + " - " + calculaPercentual(cont09, tamanhoTot) + "%");
+                jLabel10.setText(Integer.toString(cont10) + " - " + calculaPercentual(cont10, tamanhoTot) + "%");
+                jTextFieldErros.setText("");
+                if (erro > 0) {
+                    jTextFieldErros.setText(erro.toString());
+                    jTextFieldErros.setForeground(Color.red);
+                } else {
+                    jTextFieldErros.setText(erro.toString());
+                    jTextFieldErros.setForeground(Color.black);
+
+                }
     }
-    
+
     public void carregarTabelaEstoque(ArrayList<Estoque> listaEstoque) {
         DefaultTableModel model = (DefaultTableModel) jTableEstoques.getModel();
         jTableEstoques.setShowHorizontalLines(false);
         jTableEstoques.setShowVerticalLines(false);
-        
+
         while (jTableEstoques.getRowCount() > 0) {
             model.removeRow(0);
         }
         for (Estoque estoque : listaEstoque) {
-            model.addRow(new Object[]{estoque.getALMOX(), estoque.getESTDISPONIVEL(), estoque.getESTARETIRAR(), estoque.getESTCONDICIONAL(), estoque.getESTRESERVADO(),estoque.getESTTRANSITO(),estoque.getESTVENDAEXTERNA(),estoque.getENDERECO(),estoque.getDATAHORAALTERACAO()});
+            model.addRow(new Object[]{estoque.getALMOX(), estoque.getESTDISPONIVEL(), estoque.getESTARETIRAR(), estoque.getESTCONDICIONAL(), estoque.getESTRESERVADO(), estoque.getESTTRANSITO(), estoque.getESTVENDAEXTERNA(), estoque.getENDERECO(), estoque.getDATAHORAALTERACAO()});
         }
+        jTableEstoques.setDefaultRenderer(Object.class, new PintarTabelaEstoque());
     }
-    
+
+    public void carregarTabelaReservados() {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                jLabelMensagem.setText("Carregando estoques reservados...");
+                jProgressBar1.setMaximum(100);
+                DefaultTableModel model = (DefaultTableModel) jTableReserdados.getModel();
+                jTableReserdados.setShowHorizontalLines(false);
+                jTableReserdados.setShowVerticalLines(false);
+
+                while (jTableReserdados.getRowCount() > 0) {
+                    model.removeRow(0);
+                }
+
+                ReservadoDAO reservadoDAO = new ReservadoDAO();
+                ArrayList<Reservado> listapcps = new ArrayList();
+                ArrayList<Reservado> listaPedidos = new ArrayList();
+                ArrayList<Reservado> listaDevolucoes = new ArrayList();
+                //ArrayList<Reservado> listaOrdensServico = new ArrayList();
+                //PCP
+                jProgressBar1.setValue(25);
+                jLabelMensagem.setText("Ordens de produção...");
+                try {
+                    listapcps = reservadoDAO.getReservadoPCP(codEmpresa, codAlmox, codProduto);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //PEDIDO DE VENDA
+                jProgressBar1.setValue(50);
+                jLabelMensagem.setText("Pedidos de venda...");
+                try {
+                    listaPedidos = reservadoDAO.getReservadoPEDIDO(codEmpresa, codAlmox, codProduto);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //DEVOLUCAO PENDENTES
+                jLabelMensagem.setText("Devoluções de compra...");
+                jProgressBar1.setValue(75);
+                try {
+                    listaDevolucoes = reservadoDAO.getReservadoDEVOLUCAO(codEmpresa, codAlmox, codProduto);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //ORDENS DE SERVICO
+                jProgressBar1.setValue(100);
+                jLabelMensagem.setText("Ordens de serviço...");
+                //try {
+                //    listaOrdensServico = reservadoDAO.getReservadoORDEMSERVICO(codEmpresa, codAlmox, codProduto);
+                //} catch (ClassNotFoundException ex) {
+                //    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                //}
+
+                for (Reservado reservado : listapcps) {
+                    model.addRow(new Object[]{reservado.getEmpresa(), reservado.getAlmox(), reservado.getProduto_principal(), reservado.getItem_pricipal(), reservado.getIdformulacao(), reservado.getFormula(), reservado.getQtde(), reservado.getQtdeembalagem(), "", "FORMULAÇÃO PCP","PEN"});
+                }
+                for (Reservado reservado : listaPedidos) {
+                    model.addRow(new Object[]{reservado.getEmpresa(), reservado.getAlmox(), reservado.getProduto_principal(), reservado.getItem_pricipal(), reservado.getIdformulacao(), reservado.getFormula(), reservado.getQtde(), reservado.getQtdeembalagem(), reservado.getPedido(), "PEDIDO",reservado.getStatus()});
+                }
+                for (Reservado reservado : listaDevolucoes) {
+                    model.addRow(new Object[]{reservado.getEmpresa(), reservado.getAlmox(), reservado.getProduto_principal(), reservado.getItem_pricipal(), reservado.getIdformulacao(), reservado.getFormula(), reservado.getQtde(), reservado.getQtdeembalagem(), reservado.getPedido(), "DEVOLUÇÃO ",reservado.getStatus()});
+                }
+                //for (Reservado reservado : listaOrdensServico) {
+                //    model.addRow(new Object[]{reservado.getEmpresa(), reservado.getAlmox(), reservado.getProduto_principal(), reservado.getItem_pricipal(), reservado.getIdformulacao(), reservado.getFormula(), reservado.getQtde(), reservado.getQtdeembalagem(), reservado.getPedido(), "ORDEM DE SERVIÇO"});
+                //}
+
+                jLabelMensagem.setText("Concluido");
+                jProgressBar1.setValue(0);
+            }
+        };
+
+        thread.start();
+    }
+
     public void carregarTabelaLote() {
         ArrayList<LoteValidade> listaLote = new ArrayList();
         LoteValidadeDAO loteValidadeDAO = new LoteValidadeDAO();
@@ -1617,7 +1820,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 soma = soma + Float.parseFloat(loteValidade.getEstoqueatual());
                 model.addRow(new Object[]{loteValidade.getEmpresa(), loteValidade.getIdentificador(), loteValidade.getLote(), loteValidade.getFabricacao(), loteValidade.getVencimento(), loteValidade.getEstoqueatual()});
             }
-            
+
         } else {
             for (LoteValidade loteValidade : listaLote) {
                 soma = soma + Float.parseFloat(loteValidade.getEstoqueatual());
@@ -1625,15 +1828,15 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 if (estAtual != 0) {
                     model.addRow(new Object[]{loteValidade.getEmpresa(), loteValidade.getIdentificador(), loteValidade.getLote(), loteValidade.getFabricacao(), loteValidade.getVencimento(), loteValidade.getEstoqueatual()});
                 }
-                
+
             }
         }
-        
+
         if (!listaLote.isEmpty()) {
             model.addRow(new Object[]{"SOMA", "", "", "", "", soma});
         }
     }
-    
+
     public void carregaComboBoxEmpresa() {
         EmpresaDAO empresaDAO = new EmpresaDAO();
         Conn conexao = new Conn();
@@ -1647,19 +1850,19 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Empresa empresa : listaEmpresas) {
-            
-            jComboBoxEmpresa.addItem(empresa.getCodigo() + " - " + empresa.getNomefantasia() + " - " + empresa.getVa());
+
+            jComboBoxEmpresa.addItem(empresa.getCodigo() + " - " + empresa.getNomefantasia());
         }
         codEmpresa = listaEmpresas.get(jComboBoxEmpresa.getSelectedIndex()).getCodigo();
         carregaComboAlmox(codEmpresa);
     }
-    
+
     public void carregaComboAlmox(String empresa) {
         int tamanho = jComboBoxAlmox.getItemCount();
         if (tamanho > 0) {
             jComboBoxAlmox.removeAllItems();
         }
-        
+
         AlmoxDAO almoxDAO = new AlmoxDAO();
         try {
             listaAlmox = almoxDAO.consultaAlmox(empresa);
@@ -1675,14 +1878,14 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
     public void getAlmox() {
         codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
     }
-    
+
     public void carregaTabelaSaldo(String produtoP) {
         var formatter = new DecimalFormat("#,###.##");
         var s = new DecimalFormatSymbols();
         s.setDecimalSeparator(',');
         s.setGroupingSeparator('.');
         formatter.setDecimalFormatSymbols(s);
-        
+
         DefaultTableModel model = (DefaultTableModel) jTableSaldo.getModel();
         jTableSaldo.setShowHorizontalLines(false);
         jTableSaldo.setShowVerticalLines(false);
@@ -1699,7 +1902,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
         BigDecimal entradasSoma = new BigDecimal("0.0");
         BigDecimal saidasSoma = new BigDecimal("0.0");
         BigDecimal soma = new BigDecimal("0.0");
-        
+
         for (Produto produto : listaSaldosProdutos) {
             BigDecimal entradas = new BigDecimal(produto.getENTRADA());
             BigDecimal saidas = new BigDecimal(produto.getSAIDA());
@@ -1708,34 +1911,102 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             BigDecimal entrada = new BigDecimal(produto.getENTRADA());
             BigDecimal saida = new BigDecimal(produto.getSAIDA());
             BigDecimal atual = new BigDecimal(produto.getATUAL());
-            
+
             entradasSoma = entradasSoma.add(entradas);
             saidasSoma = saidasSoma.add(saidas);
             model.addRow(new Object[]{produto.getEMPRESA(), produto.getALMOX(), produto.getANOSMES(), anterior.toPlainString(), entrada.toPlainString(), saida.toPlainString(), atual.toPlainString()});
+
         }
         if (!listaSaldosProdutos.isEmpty()) {
             soma = entradasSoma.subtract(saidasSoma);
             String aux1 = formatter.format(entradasSoma);
             String aux2 = formatter.format(saidasSoma);
             String aux3 = formatter.format(soma);
-            
+
             model.addRow(new Object[]{"SOMA", "", "", "", "(+)" + aux1, "(-)" + aux2, "E + S = " + aux3});
+            jTableSaldo.scrollRectToVisible(jTableSaldo.getCellRect(jTableSaldo.getRowCount() - 1, 0, true));
         }
-        
+
+    }
+
+    public void carregaTabelaLicenca() {
+        DefaultTableModel model = (DefaultTableModel) jTableLicenca.getModel();
+        jTableEstoques.setShowHorizontalLines(false);
+        jTableEstoques.setShowVerticalLines(false);
+        LicencaDAO licencaDAO = new LicencaDAO();
+        ArrayList<Licenca> listaLicencas = new ArrayList();
+        try {
+            listaLicencas = licencaDAO.getLicenca();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        while (jTableLicenca.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        for (Licenca licenca : listaLicencas) {
+            model.addRow(new Object[]{licenca.getNumero(), licenca.getEmpresa(), licenca.getVersao()});
+        }
+    }
+    public void carregaIcones(){
+        jTabbedPane1.setIconAt(0, new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png")));
+        jTabbedPane1.setIconAt(1, new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png")));
+        jTabbedPane1.setIconAt(2, new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png")));
+        jTabbedPane1.setIconAt(3, new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png")));
+        jTabbedPane1.setIconAt(4, new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png")));
+        jTabbedPane1.setIconAt(5, new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png")));
+    }
+
+    public class PintarTabelaEstoque extends DefaultTableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
+            Color foreground = Color.BLACK;
+            Color VERDE = new Color(32, 139, 58);
+            Color Amarelo = new Color(218, 165, 32);
+            Color roxoClaro = new Color(118, 120, 237);
+            Color transfAlmox = new Color(131, 56, 236);
+            Color transfFiliais = new Color(117, 13, 55);
+            Color laranja = new Color(255, 165, 0);
+            if (column == 1) {
+                foreground = VERDE;
+            }
+            if (column == 2) {
+                foreground = transfAlmox;
+            }
+            if (column == 3) {
+                foreground = transfFiliais;
+            }
+            if (column == 4) {
+                foreground = laranja;
+            }
+            if (column == 5) {
+                foreground = roxoClaro;
+            }
+            if (column == 6) {
+                foreground = Amarelo;
+            }
+            label.setForeground(foreground);
+            if (isSelected) {
+                label.setForeground(WHITE);
+            }
+            return label;
+        }
     }
 
     public class PintarTabela extends DefaultTableCellRenderer {
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); //To change body of generated methods, choose Tools | Templates.
             //INICIA AS CORES***************************************************
             Color background = Color.WHITE;
             Color foreground = Color.BLACK;
-            
+
             Color VERMELHO = new Color(214, 40, 40);
             Color VERDE = new Color(32, 139, 58);
-            Color roxo = new Color(204,51,255);
+            Color roxo = new Color(204, 51, 255);
 
             //PINTA POR TIPO DE OPERACAO
             if (jCheckBox12.isSelected()) {
@@ -1749,10 +2020,9 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 Color devolucaoVenda = new Color(139, 69, 19);
                 Color devolucaoCompra = new Color(30, 144, 255);
                 Color pcp = new Color(56, 176, 0);
-                
-                
+
                 String valor2 = objeto1.toString();
-                
+
                 if (jCheckBox01.isSelected()) {
                     if (valor2.equals("01")) {
                         foreground = Amarelo;
@@ -1799,7 +2069,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                         foreground = pcp;
                     }
                 }
-                
+
             }
             //if(column == 1 ){
             //    foreground = VERMELHO;
@@ -1811,9 +2081,13 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 String saldo = objeto2.toString();
                 String saldoEsperado = objeto3.toString();
                 if (!saldo.equals(saldoEsperado)) {
-                        foreground = VERMELHO;
-                    if(column == 5 ){foreground = VERDE;}
-                    if(column == 6){foreground = roxo;}
+                    foreground = VERMELHO;
+                    if (column == 5) {
+                        foreground = VERDE;
+                    }
+                    if (column == 6) {
+                        foreground = roxo;
+                    }
                 }
             }
             //label.setBackground(background);
@@ -1825,7 +2099,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             return label;
         }
     }
-    
+
     public void botaoCarregar() {
         getAlmox();
         String tmp = jTextFieldProduto.getText();
@@ -1834,14 +2108,14 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
         }
         jTextFieldProduto.setText(tmp);
         codProduto = tmp;
-        
+
         ArrayList<Estoque> listaEstoque = new ArrayList();
         EstoqueDAO estoqueDAO = new EstoqueDAO();
         String produtoString = jTextFieldProduto.getText();
         ProdutoDAO produtoDAO = new ProdutoDAO();
         Produto produto = new Produto();
         jTextFieldErros.setText("");
-        
+
         try {
             produto = produtoDAO.consultaProduto(codEmpresa, produtoString);
             if (!produtoString.equals(produto.getPRODUTOPRINCIPAL())) {
@@ -1866,7 +2140,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             String produtoGenerico = produto.getPRODUTOGENERICO();
             String dispVenda = produto.getDISPONIVELVENDA();
             String controlaNumSerie = produto.getCONTROLANUMEROSERIE();
-            
+
             if (controlaLote.equals("S")) {
                 //jPanel9.setVisible(true);
                 jCheckBoxControlaLote.setSelected(true);
@@ -1910,7 +2184,7 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
                 model.removeRow(0);
             }
             model.addRow(new Object[]{"TODOS", produto.getESTDISPONIVEL(), produto.getESTARETIRAR(), produto.getESTCONDICIONAL(), produto.getESTRESERVADO()});
-            
+
             ExtratoProdutoDAO extratoDAO = new ExtratoProdutoDAO();
             ArrayList<ExtratoProduto> listaExtrato = new ArrayList();
             try {
@@ -1918,24 +2192,25 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             carregarTabela(listaExtrato);
             carregarTabelaEstoque(listaEstoque);
             carregaTabelaSaldo(produtoString);
+            carregarTabelaReservados();
+
         }
     }
 
     public String calculaPercentual(int cont, int tamanhoTot) {
         String aux = "0.0";
         if (tamanhoTot > 0 && cont > 0) {
-        //BigDecimal contAux = new BigDecimal(Integer.toString(cont)+".00");
-        //BigDecimal tamanhoTotAux = new BigDecimal(Integer.toString(tamanhoTot)+".00");
-        //BigDecimal resultAux = new BigDecimal("0.0");
-        //BigDecimal multiple = new BigDecimal("100.0");
-        //resultAux = contAux.multiply(multiple);
-        //resultAux = resultAux.divide(tamanhoTotAux);
-        
-        
+            //BigDecimal contAux = new BigDecimal(Integer.toString(cont)+".00");
+            //BigDecimal tamanhoTotAux = new BigDecimal(Integer.toString(tamanhoTot)+".00");
+            //BigDecimal resultAux = new BigDecimal("0.0");
+            //BigDecimal multiple = new BigDecimal("100.0");
+            //resultAux = contAux.multiply(multiple);
+            //resultAux = resultAux.divide(tamanhoTotAux);
+
             double result = cont * 100 / tamanhoTot;
             aux = Double.toString(result);
         }
@@ -1943,27 +2218,33 @@ public void carregarTabela(ArrayList<ExtratoProduto> listaExtrato) {
     }
 
     private static class RoundedBorder implements Border {
+
         private int radius;
+
         RoundedBorder(int radius) {
             this.radius = radius;
         }
+
         @Override
         public Insets getBorderInsets(Component c) {
             return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
         }
+
         @Override
         public boolean isBorderOpaque() {
             return true;
         }
+
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
-    public void carregaIcone(){
+
+    public void carregaIcone() {
         URL iconURL = getClass().getResource("/icons/eco.png");
         ImageIcon icon = new ImageIcon(iconURL);
         this.setIconImage(icon.getImage());
     }
-    
+
 }

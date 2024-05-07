@@ -71,7 +71,15 @@ public class PedidoDAO {
         ArrayList<Pedido> listaPedidos = new ArrayList<>();
         
         try {
-            String query = "SELECT * FROM TVENPEDIDO TP WHERE TP.STATUS = 'CXA' AND TP.EMPRESA = '"+empresa+"'";
+            String query = "Select * From TVENPRODUTO PRD\n" +
+"Inner Join TVENPEDIDO PED On (PED.EMPRESA = PRD.EMPRESA And PED.CODIGO = PRD.PEDIDO) \n" +
+"Where ((PED.STATUS In ('CXA') And\n" +
+"      PRD.TIPOVENDA In ('N', 'T', 'P', 'M')) Or (PED.STATUS = 'PEN' And \n" +
+"      PRD.TIPOVENDA In ('M', 'N'))) And \n" +
+"      PRD.TIPOGRUPO = 'R' And \n" +
+"      PRD.MOVIMENTAESTOQUE = 'S' And \n" +
+"      PRD.EMPRESA = '"+empresa+"' And\n" +
+"      ((PED.PEDIDOAGRUPAMENTO Is Null) Or (PED.PEDIDOAGRUPAMENTO = PED.CODIGO))";
             PreparedStatement pst;
             ResultSet rs;
             pst = conexao.con.prepareStatement(query);
