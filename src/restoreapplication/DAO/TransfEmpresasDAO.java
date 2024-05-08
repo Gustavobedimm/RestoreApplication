@@ -3,7 +3,9 @@ package restoreapplication.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import restoreapplication.Conexao.Conn;
+import restoreapplication.Model.TransfEmpresaItem;
 import restoreapplication.Model.TransfEmpresas;
 
 public class TransfEmpresasDAO {
@@ -18,7 +20,6 @@ public class TransfEmpresasDAO {
             pst = conexao.con.prepareStatement(query);
             rs = pst.executeQuery();
             while (rs.next()) {
-                System.out.println("entrei no while");
                 transf.setId(rs.getString("idesttransfempresa"));
                 transf.setData(rs.getString("data"));
                 transf.setHora(rs.getString("hora"));
@@ -35,6 +36,29 @@ public class TransfEmpresasDAO {
         }
         conexao.FecharConexao();
         return transf;
+    }
+    public ArrayList getTransferenciaItens(String id) throws ClassNotFoundException {
+       conexao.Conectar();
+        ArrayList<TransfEmpresaItem> listaItens = new ArrayList();
+        try {
+            String query = "select * from TESTTRANSFEMPRESAITENS te where te.idtransfempresa = '"+id+"'";
+            PreparedStatement pst;
+            ResultSet rs;
+            pst = conexao.con.prepareStatement(query);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TransfEmpresaItem item = new TransfEmpresaItem();
+                item.setIdtransfempresa(rs.getString("idtransfempresa"));
+                item.setIdtransfempresaitens(rs.getString("idtransfempresaitens"));
+                item.setQuantidade(rs.getString("quantidade"));
+                item.setProduto(rs.getString("produto"));
+                listaItens.add(item);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro na Conexão com o Banco " + e);
+        }
+        conexao.FecharConexao();
+        return listaItens;
     }
     
 }

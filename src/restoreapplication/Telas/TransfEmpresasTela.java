@@ -1,15 +1,20 @@
 package restoreapplication.Telas;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.TransfEmpresasDAO;
+import restoreapplication.Model.TransfEmpresaItem;
 import restoreapplication.Model.TransfEmpresas;
 
 public class TransfEmpresasTela extends javax.swing.JFrame {
+
     public TransfEmpresasTela() {
         initComponents();
     }
+
     public TransfEmpresasTela(String id) {
         initComponents();
         carregaDados(id);
@@ -33,12 +38,13 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jTextFieldEmpDestino = new javax.swing.JTextField();
         jTextFieldAlmoxDestino = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableLoteMovimento = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Transferencia entre empresas");
@@ -154,16 +160,6 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
                 .addGap(60, 60, 60))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Codigo", "Quantidade", "Usuario Conf.", "Data Conf.", "Situação Conf."
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/9054941_bx_transfer_icon.png"))); // NOI18N
 
@@ -176,20 +172,57 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Quantidade", "Usuario Conf.", "Data Conf.", "Situação Conf."
+                "Id Transf Itens", "Id Transf", "Produto", "Qtde"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jLabel3.setText("falta colocar as movimentações dos lotes de validade.");
+
+        jTableLoteMovimento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Produto", "IDLote", "Hora", "Usuario", "Qtde"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableLoteMovimento);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(262, 262, 262))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +233,8 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -218,9 +252,11 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(17, 17, 17)))
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addContainerGap())
         );
 
@@ -267,14 +303,15 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableLoteMovimento;
     private javax.swing.JTextArea jTextAreaObs;
     private javax.swing.JTextField jTextFieldAlmoxDestino;
     private javax.swing.JTextField jTextFieldAlmoxOrigem;
@@ -286,18 +323,17 @@ public class TransfEmpresasTela extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldStatus;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
-public void carregaDados(String id){
-    TransfEmpresas transf = new TransfEmpresas();
-    TransfEmpresasDAO dao = new TransfEmpresasDAO();
-    
+public void carregaDados(String id) {
+        TransfEmpresas transf = new TransfEmpresas();
+        TransfEmpresasDAO dao = new TransfEmpresasDAO();
         try {
             transf = dao.getTransferencia(id);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(TransfEmpresasTela.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(transf.getId() == null){
-            JOptionPane.showMessageDialog(null, "Registro "+id+" não encontrado na tabela TESTTRANSFEMPRESA.");
-        }else{
+        if (transf.getId() == null) {
+            JOptionPane.showMessageDialog(null, "Registro " + id + " não encontrado na tabela TESTTRANSFEMPRESA.");
+        } else {
             jTextFieldID.setText(transf.getId());
             jTextFieldData.setText(transf.getData());
             jTextFieldHora.setText(transf.getHora());
@@ -308,7 +344,22 @@ public void carregaDados(String id){
             jTextFieldEmpDestino.setText(transf.getEmpresaDestino());
             jTextFieldAlmoxOrigem.setText(transf.getAlmoxOrigem());
             jTextFieldAlmoxDestino.setText(transf.getAlmoxDestino());
+
+            ArrayList<TransfEmpresaItem> listaItens = new ArrayList();
+            try {
+                listaItens = dao.getTransferenciaItens(id);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TransfEmpresasTela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            while (jTable2.getRowCount() > 0) {
+                model.removeRow(0);
+            }
+            for (TransfEmpresaItem item : listaItens) {
+                model.addRow(new Object[]{item.getIdtransfempresaitens(), item.getIdtransfempresa(), item.getProduto(), item.getQuantidade()});
+            }
+
         }
-}
-    
+    }
+
 }

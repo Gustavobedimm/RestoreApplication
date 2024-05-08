@@ -324,7 +324,7 @@ public final class TelaPedidos extends javax.swing.JFrame {
 
         jLabelDescricao.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelDescricao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelDescricao.setText("VENDA");
+        jLabelDescricao.setText("TVENPEDIDO ");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produtos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
@@ -616,6 +616,7 @@ public void consultaPedido(String empresa, String numeroPedido) {
                 jLabelMensagem.setForeground(Color.red);
                 jLabelMensagem.setText("Documento pendente no caixa e reservando estoque.");
             }
+            jLabelDescricao.setText("TVENPEDIDO - " + pedido.getDESCRICAO() );
             jTextFieldEmpresa.setText(pedido.getEMPRESA());
             jTextFieldCodigo.setText(pedido.getCODIGO());
             jTextFieldData.setText(pedido.getDATA());
@@ -665,10 +666,6 @@ public void consultaPedido(String empresa, String numeroPedido) {
             modelBlock.addRow(new Object[]{bloqueio.getEmpresa(),bloqueio.getTipo(),bloqueio.getDescricao(),bloqueio.getData(),bloqueio.getHora(),bloqueio.getStatus(),bloqueio.getDataliberacao(),bloqueio.getHoraliberacao(),bloqueio.getProduto()});
         }
         //FIM DOS BLOQUEIOS
-        
-        
-        
-        
         ProdutoDAO produtoDAO = new ProdutoDAO();
         //PRODUTOS PEDIDO
         ArrayList<Produto> listaProdutos = new ArrayList();

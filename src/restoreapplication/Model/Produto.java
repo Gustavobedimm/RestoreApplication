@@ -8,6 +8,8 @@ public class Produto {
     private String ESTARETIRAR;
     private String ESTCONDICIONAL;
     private String ESTRESERVADO;
+    private String ESTTRANSITO;
+    private String ESTVENDAEXTERNA;
     private String PRODUTOPRINCIPAL;
     private String CONTROLALOTE;
     private String ATIVO;
@@ -15,6 +17,11 @@ public class Produto {
     private String PRODUTOGENERICO;
     private String DISPONIVELVENDA;
     private String CONTROLANUMEROSERIE;
+    private String ESTOQUEMINIMO;
+    private String ESTOQUEMAXIMO;
+    private String ULTENTRADAQTDE;
+    private String ULTENTRADADATA;
+    private String ULTENTRADASAIDA;
     //venda
     private String QTDE;
     private String EMBALEGEM;
@@ -212,6 +219,64 @@ public class Produto {
     public void setEMBALEGEM(String EMBALEGEM) {
         this.EMBALEGEM = EMBALEGEM;
     }
+
+    public String getESTTRANSITO() {
+        return ESTTRANSITO;
+    }
+
+    public void setESTTRANSITO(String ESTTRANSITO) {
+        this.ESTTRANSITO = ESTTRANSITO;
+    }
+
+    public String getESTVENDAEXTERNA() {
+        return ESTVENDAEXTERNA;
+    }
+
+    public void setESTVENDAEXTERNA(String ESTVENDAEXTERNA) {
+        this.ESTVENDAEXTERNA = ESTVENDAEXTERNA;
+    }
+
+    public String getESTOQUEMINIMO() {
+        return ESTOQUEMINIMO;
+    }
+
+    public void setESTOQUEMINIMO(String ESTOQUEMINIMO) {
+        this.ESTOQUEMINIMO = ESTOQUEMINIMO;
+    }
+
+    public String getESTOQUEMAXIMO() {
+        return ESTOQUEMAXIMO;
+    }
+
+    public void setESTOQUEMAXIMO(String ESTOQUEMAXIMO) {
+        this.ESTOQUEMAXIMO = ESTOQUEMAXIMO;
+    }
+
+    public String getULTENTRADAQTDE() {
+        return ULTENTRADAQTDE;
+    }
+
+    public void setULTENTRADAQTDE(String ULTENTRADAQTDE) {
+        this.ULTENTRADAQTDE = ULTENTRADAQTDE;
+    }
+
+    public String getULTENTRADADATA() {
+        return ULTENTRADADATA;
+    }
+
+    public void setULTENTRADADATA(String ULTENTRADADATA) {
+        this.ULTENTRADADATA = ULTENTRADADATA;
+    }
+
+    public String getULTENTRADASAIDA() {
+        return ULTENTRADASAIDA;
+    }
+
+    public void setULTENTRADASAIDA(String ULTENTRADASAIDA) {
+        this.ULTENTRADASAIDA = ULTENTRADASAIDA;
+    }
+    
+    
     
     
     

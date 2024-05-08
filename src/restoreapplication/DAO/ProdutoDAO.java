@@ -36,6 +36,13 @@ Conn conexao = new Conn();
                 produto.setCONTROLANUMEROSERIE(rs.getString("CONTROLANUMEROSERIE"));
                 produto.setQTDE(rs.getString("QTDEEMBALAGEM"));
                 produto.setEMBALEGEM(rs.getString("EMBALAGEM"));
+                produto.setESTTRANSITO(rs.getString("ESTTRANSITO"));
+                produto.setESTVENDAEXTERNA(rs.getString("ESTVENDAEXTERNA"));
+                produto.setESTOQUEMINIMO(rs.getString("ESTOQUEMINIMO"));
+                produto.setESTOQUEMAXIMO(rs.getString("ESTOQUEMAXIMO"));
+                produto.setULTENTRADAQTDE(rs.getString("ULTENTRADAQTDE"));
+                produto.setULTENTRADADATA(rs.getString("ULTENTRADADATA"));
+                produto.setULTENTRADASAIDA(rs.getString("ULTSAIDADATA"));
                 
             }
         } catch (SQLException e) {
