@@ -167,14 +167,13 @@ public final class Principal extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Extrato do Produto v2.6");
+        setTitle("Extrato do Produto v2.7");
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1344, 850));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Extrato (TESTEXTRATO)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextFieldSaldo.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldSaldo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldSaldo.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo Esp."));
         jTextFieldSaldo.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldSaldo.addActionListener(new java.awt.event.ActionListener() {
@@ -282,7 +281,6 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldEstMinimo.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldEstMinimo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldEstMinimo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque minimo"));
         jTextFieldEstMinimo.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldEstMinimo.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +290,6 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldEstMaximo.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldEstMaximo.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldEstMaximo.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque maximo"));
         jTextFieldEstMaximo.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldEstMaximo.addActionListener(new java.awt.event.ActionListener() {
@@ -302,7 +299,6 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldUltEntQtde.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldUltEntQtde.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldUltEntQtde.setBorder(javax.swing.BorderFactory.createTitledBorder("Ult. Entrada Qtde"));
         jTextFieldUltEntQtde.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldUltEntQtde.addActionListener(new java.awt.event.ActionListener() {
@@ -312,7 +308,6 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldUltEntData.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldUltEntData.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldUltEntData.setBorder(javax.swing.BorderFactory.createTitledBorder("Ult. Entrada Data"));
         jTextFieldUltEntData.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldUltEntData.addActionListener(new java.awt.event.ActionListener() {
@@ -322,7 +317,6 @@ public final class Principal extends javax.swing.JFrame {
         });
 
         jTextFieldUltSaidaData.setBackground(new java.awt.Color(240, 240, 240));
-        jTextFieldUltSaidaData.setForeground(new java.awt.Color(0, 0, 0));
         jTextFieldUltSaidaData.setBorder(javax.swing.BorderFactory.createTitledBorder("Ult. Saida Data"));
         jTextFieldUltSaidaData.setMaximumSize(new java.awt.Dimension(64, 22));
         jTextFieldUltSaidaData.addActionListener(new java.awt.event.ActionListener() {
@@ -379,8 +373,13 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setForeground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Configurações do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        jCheckBoxControlaLote.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxControlaLote.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxControlaLote.setText("Controla Lote de Validade ");
         jCheckBoxControlaLote.setEnabled(false);
@@ -391,26 +390,31 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxAtivo.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxAtivo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxAtivo.setText("Ativo ");
         jCheckBoxAtivo.setEnabled(false);
         jCheckBoxAtivo.setFocusable(false);
 
+        jCheckBoxEstFracionado.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxEstFracionado.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxEstFracionado.setText("Estoque fracionado");
         jCheckBoxEstFracionado.setEnabled(false);
         jCheckBoxEstFracionado.setFocusable(false);
 
+        jCheckBoxProdGenerico.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxProdGenerico.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxProdGenerico.setText("Produto generico");
         jCheckBoxProdGenerico.setEnabled(false);
         jCheckBoxProdGenerico.setFocusable(false);
 
+        jCheckBoxDispVenda.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxDispVenda.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxDispVenda.setText("Disponivel p/ Venda");
         jCheckBoxDispVenda.setEnabled(false);
         jCheckBoxDispVenda.setFocusable(false);
 
+        jCheckBoxContSerie.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBoxContSerie.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxContSerie.setText("Controla numero de serie");
         jCheckBoxContSerie.setEnabled(false);
@@ -453,6 +457,7 @@ public final class Principal extends javax.swing.JFrame {
 
         jCheckBoxControlaLote.getAccessibleContext().setAccessibleDescription("");
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empresa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel6.setToolTipText("Empresa ");
         jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -511,15 +516,19 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextFieldEmbalagem.setEditable(false);
+        jTextFieldEmbalagem.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldEmbalagem.setBorder(javax.swing.BorderFactory.createTitledBorder("Embalagem"));
 
         jTextFieldQtdeEmbalagem.setEditable(false);
+        jTextFieldQtdeEmbalagem.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldQtdeEmbalagem.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade por embalagem"));
 
         jTextFieldDescricao.setEditable(false);
+        jTextFieldDescricao.setBackground(new java.awt.Color(255, 255, 255));
         jTextFieldDescricao.setBorder(javax.swing.BorderFactory.createTitledBorder("Descrição"));
 
         jTextFieldProduto.setBorder(javax.swing.BorderFactory.createTitledBorder("Codigo"));
@@ -569,24 +578,34 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cores e Atalhos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
+        jCheckBox01.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox01.setText("01 - Venda");
 
+        jCheckBox02.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox02.setText("02 - Compra");
 
+        jCheckBox07.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox07.setText("07 - Devolução de Venda");
 
+        jCheckBox09.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox09.setText("09 - Devolução de Compra");
 
+        jCheckBox05.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox05.setText("05 - Inventário");
 
+        jCheckBox08.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox08.setText("08 - Transferência filiais");
 
+        jCheckBox10.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox10.setText("10 - PCP");
 
+        jCheckBox06.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox06.setText("06 - Retirada");
 
+        jCheckBox11.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox11.setSelected(true);
         jCheckBox11.setText("Mostrar erros no extrato [ F8 ]");
         jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
@@ -595,6 +614,7 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
+        jCheckBox12.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox12.setText("Mostrar cores no extrato [ F9 ]");
         jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -610,6 +630,7 @@ public final class Principal extends javax.swing.JFrame {
 
         jLabel09.setText("0");
 
+        jCheckBox03.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox03.setText("03 - Transferência Almox");
 
         jLabel7.setText("Maximizar/Diminuir [ F11 ]");
@@ -820,7 +841,6 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTabbedPane1.setMinimumSize(new java.awt.Dimension(150, 150));
@@ -968,7 +988,7 @@ public final class Principal extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1133, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1017,7 +1037,7 @@ public final class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jCheckBoxLotes)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1117, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 1109, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -1073,7 +1093,7 @@ public final class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 597, Short.MAX_VALUE)))
+                        .addGap(0, 589, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1489,13 +1509,14 @@ public final class Principal extends javax.swing.JFrame {
             evt.consume();
             int linha = jTableReserdados.getSelectedRow();
             String tipo = (String) jTableReserdados.getValueAt(linha, 9);
-            String doc = (String) jTableReserdados.getValueAt(linha, 8);
             if (tipo.equals("PEDIDO")) {
+                String doc = (String) jTableReserdados.getValueAt(linha, 8);
                 TelaPedidos telaPedidos = new TelaPedidos(codEmpresa, doc, true);
                 telaPedidos.setVisible(true);
             }
             if (tipo.equals("FORMULAÇÃO PCP")) {
-                FormulacaoPCP telaformulacao = new FormulacaoPCP();
+                String doc = (String) jTableReserdados.getValueAt(linha, 4);
+                FormulacaoPCP telaformulacao = new FormulacaoPCP(codEmpresa,doc);
                 telaformulacao.setVisible(true);
             }
         }
