@@ -12,6 +12,7 @@ public class Estoque {
     private String ENDERECO;
     private String ESTTRANSITO;
     private String DATAHORAALTERACAO;
+    private String PRODUTO;
 
     public String getEMPRESA() {
         return EMPRESA;
@@ -92,6 +93,15 @@ public class Estoque {
     public void setDATAHORAALTERACAO(String DATAHORAALTERACAO) {
         this.DATAHORAALTERACAO = DATAHORAALTERACAO;
     }
+
+    public String getPRODUTO() {
+        return PRODUTO;
+    }
+
+    public void setPRODUTO(String PRODUTO) {
+        this.PRODUTO = PRODUTO;
+    }
+    
     
     
 }

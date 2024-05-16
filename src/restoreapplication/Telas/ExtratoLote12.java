@@ -20,7 +20,7 @@ import restoreapplication.Model.LoteValidadeMov;
  *
  * @author gustavo.mazutti
  */
-public final class ExtratoLote extends javax.swing.JFrame {
+public final class ExtratoLote12 extends javax.swing.JFrame {
 
     ArrayList<LoteValidadeMov> listaMovLote = new ArrayList();
     String empresa;
@@ -29,11 +29,11 @@ public final class ExtratoLote extends javax.swing.JFrame {
     /**
      * Creates new form ExtratoLote
      */
-    public ExtratoLote() {
+    public ExtratoLote12() {
         initComponents();
     }
 
-    public ExtratoLote(String empresaP, String idLoteP) {
+    public ExtratoLote12(String empresaP, String idLoteP) {
         initComponents();
         empresa = empresaP;
         idLote = idLoteP;
@@ -270,20 +270,21 @@ public final class ExtratoLote extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExtratoLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExtratoLote12.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExtratoLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExtratoLote12.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExtratoLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExtratoLote12.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExtratoLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ExtratoLote12.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExtratoLote().setVisible(true);
+                new ExtratoLote12().setVisible(true);
             }
         });
     }

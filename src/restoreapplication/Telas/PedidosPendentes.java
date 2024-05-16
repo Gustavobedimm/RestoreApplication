@@ -7,6 +7,7 @@ package restoreapplication.Telas;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.PedidoDAO;
 import restoreapplication.Model.Pedido;
@@ -176,10 +177,8 @@ public void consultaPedidos(String empresa) {
         while (jTable1.getRowCount() > 0) {
             model.removeRow(0);
         }
-
-        for (Pedido pedido : listaPedidos) {
+            for (Pedido pedido : listaPedidos) {
             model.addRow(new Object[]{pedido.getEMPRESA(),pedido.getCODIGO(),pedido.getCLIENTENOME(),pedido.getDATA(),pedido.getHORA(),pedido.getVALORBRUTO(),pedido.getALMOX(),pedido.getSTATUS()});
         }
-
     }
 }

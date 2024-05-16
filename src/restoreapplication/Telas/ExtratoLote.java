@@ -50,8 +50,10 @@ public final class ExtratoLote extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableLote = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jLabelErro1 = new javax.swing.JLabel();
+        jLabelDescricao2 = new javax.swing.JLabel();
+        jTextFieldAlteracao = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTextFieldFabricacao = new javax.swing.JTextField();
         jTextFieldVencimento = new javax.swing.JTextField();
@@ -63,53 +65,34 @@ public final class ExtratoLote extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldAlteracao = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableLote = new javax.swing.JTable();
         jTextFieldEstoque = new javax.swing.JTextField();
-        jLabelErro1 = new javax.swing.JLabel();
-        jLabelDescricao2 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Movimentações do Lote de Validade");
         setResizable(false);
 
-        jTableLote.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-            },
-            new String [] {
-                "Emp", "Qtde", "Saldo", "Orig", "Prod", "Doc", "Data", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
+        jLabelErro1.setForeground(new java.awt.Color(255, 0, 51));
+        jLabelErro1.setText("As mov. do lote não batem com o estoque do lote.");
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTableLote);
-        if (jTableLote.getColumnModel().getColumnCount() > 0) {
-            jTableLote.getColumnModel().getColumn(0).setResizable(false);
-            jTableLote.getColumnModel().getColumn(0).setPreferredWidth(15);
-            jTableLote.getColumnModel().getColumn(1).setResizable(false);
-            jTableLote.getColumnModel().getColumn(1).setPreferredWidth(30);
-            jTableLote.getColumnModel().getColumn(2).setResizable(false);
-            jTableLote.getColumnModel().getColumn(2).setPreferredWidth(30);
-            jTableLote.getColumnModel().getColumn(3).setResizable(false);
-            jTableLote.getColumnModel().getColumn(3).setPreferredWidth(15);
-            jTableLote.getColumnModel().getColumn(4).setResizable(false);
-            jTableLote.getColumnModel().getColumn(4).setPreferredWidth(30);
-            jTableLote.getColumnModel().getColumn(5).setResizable(false);
-            jTableLote.getColumnModel().getColumn(5).setPreferredWidth(30);
-            jTableLote.getColumnModel().getColumn(7).setResizable(false);
-            jTableLote.getColumnModel().getColumn(7).setPreferredWidth(15);
-        }
+        jLabelDescricao2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabelDescricao2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDescricao2.setText("LOTE DE VALIDADE");
+
+        jTextFieldAlteracao.setToolTipText("TESTLOTEVALIDADEESTOQUE");
+        jTextFieldAlteracao.setBorder(javax.swing.BorderFactory.createTitledBorder("Ultima Alteração "));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Lote de Validade"));
+        jPanel1.setOpaque(false);
 
+        jTextFieldFabricacao.setForeground(new java.awt.Color(0, 153, 0));
         jTextFieldFabricacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Fabricação"));
 
+        jTextFieldVencimento.setForeground(new java.awt.Color(255, 0, 0));
         jTextFieldVencimento.setBorder(javax.swing.BorderFactory.createTitledBorder("Vencimento"));
 
         jTextFieldIdLote.setBorder(javax.swing.BorderFactory.createTitledBorder("ID Lote"));
@@ -119,6 +102,7 @@ public final class ExtratoLote extends javax.swing.JFrame {
         jTextFieldProduto.setBorder(javax.swing.BorderFactory.createTitledBorder("Produto Principal"));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Status"));
+        jPanel2.setOpaque(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("V - Vendido");
@@ -185,68 +169,115 @@ public final class ExtratoLote extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldIdLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldIdLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
-        jTextFieldAlteracao.setToolTipText("TESTLOTEVALIDADEESTOQUE");
-        jTextFieldAlteracao.setBorder(javax.swing.BorderFactory.createTitledBorder("Ultima Alteração "));
+        jTableLote.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Emp", "Qtde", "Saldo", "Orig", "Prod", "Doc", "Data", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableLote.setOpaque(false);
+        jTableLote.setShowHorizontalLines(false);
+        jTableLote.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(jTableLote);
+        if (jTableLote.getColumnModel().getColumnCount() > 0) {
+            jTableLote.getColumnModel().getColumn(0).setResizable(false);
+            jTableLote.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTableLote.getColumnModel().getColumn(1).setResizable(false);
+            jTableLote.getColumnModel().getColumn(1).setPreferredWidth(30);
+            jTableLote.getColumnModel().getColumn(2).setResizable(false);
+            jTableLote.getColumnModel().getColumn(2).setPreferredWidth(30);
+            jTableLote.getColumnModel().getColumn(3).setResizable(false);
+            jTableLote.getColumnModel().getColumn(3).setPreferredWidth(15);
+            jTableLote.getColumnModel().getColumn(4).setResizable(false);
+            jTableLote.getColumnModel().getColumn(4).setPreferredWidth(30);
+            jTableLote.getColumnModel().getColumn(5).setResizable(false);
+            jTableLote.getColumnModel().getColumn(5).setPreferredWidth(30);
+            jTableLote.getColumnModel().getColumn(7).setResizable(false);
+            jTableLote.getColumnModel().getColumn(7).setPreferredWidth(15);
+        }
 
         jTextFieldEstoque.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextFieldEstoque.setToolTipText("TESTLOTEVALIDADEESTOQUE");
         jTextFieldEstoque.setBorder(javax.swing.BorderFactory.createTitledBorder("Estoque"));
 
-        jLabelErro1.setText("As mov. do lote não batem com o estoque do lote.");
+        jProgressBar1.setString("Estoque");
+        jProgressBar1.setStringPainted(true);
 
-        jLabelDescricao2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabelDescricao2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelDescricao2.setText("LOTE DE VALIDADE");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabelErro1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelDescricao2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelDescricao2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelErro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelErro1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                        .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabelDescricao2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelDescricao2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldAlteracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelErro1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -279,6 +310,9 @@ public final class ExtratoLote extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ExtratoLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -297,6 +331,8 @@ public final class ExtratoLote extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelErro1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableLote;
     private javax.swing.JTextField jTextFieldAlteracao;
@@ -332,16 +368,35 @@ public void carregar(String empresa, String idLote) {
         }
         
         BigDecimal saldo = new BigDecimal("0.0");
+        var entrada = Double.valueOf("0.00");
+        var saida = Double.valueOf("0.00");
+        var aux = Double.valueOf("0.00");
+        
         for (LoteValidadeMov movLote : listaMovLote) {
             jTableLote.setDefaultRenderer(Object.class, new PintarTabela());
             if(movLote.getSTATUS().equals("C")){
                 model2.addRow(new Object[]{movLote.getEMPRESA(), movLote.getQTDE(),"", movLote.getORIGEM(), movLote.getPRODUTO(), movLote.getIDVENDA(),movLote.getDATAHORA(),movLote.getSTATUS()});
             }else{
                 BigDecimal qtd = new BigDecimal(movLote.getQTDE());
+                aux = Double.parseDouble(movLote.getQTDE());
+                if(aux < 0){
+                    saida = saida + aux;
+                }else{
+                    entrada = entrada + aux;
+                }
                 saldo = saldo.add(qtd);
                 model2.addRow(new Object[]{movLote.getEMPRESA(), movLote.getQTDE(),saldo, movLote.getORIGEM(), movLote.getPRODUTO(), movLote.getIDVENDA(),movLote.getDATAHORA(),movLote.getSTATUS()});
             }
         }
+        int max = entrada.intValue();
+        int min =  saida.intValue();
+        int progress = max + min;
+        System.out.println("Maximo : " +max);
+        System.out.println("Minimo : " +min);
+        System.out.println("Progress : " +progress);
+        jProgressBar1.setMaximum(max);
+        jProgressBar1.setValue(progress);
+        jProgressBar1.setString(progress + "/" + max);
         
         BigDecimal estoque = new BigDecimal(lote.getEstoqueatual());
         if (!saldo.equals(estoque)){
