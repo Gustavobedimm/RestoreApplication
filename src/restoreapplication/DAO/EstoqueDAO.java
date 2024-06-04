@@ -1,4 +1,5 @@
 package restoreapplication.DAO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,14 +8,15 @@ import restoreapplication.Conexao.Conn;
 import restoreapplication.Model.Estoque;
 
 public class EstoqueDAO {
+
     Conn conexao = new Conn();
-    
-    public ArrayList estoqueProduto(String produtoP,String empresa) throws ClassNotFoundException {
-       conexao.Conectar();
-        
+
+    public ArrayList estoqueProduto(String produtoP, String empresa) throws ClassNotFoundException {
+        conexao.Conectar();
+
         ArrayList<Estoque> listaEstoque = new ArrayList();
         try {
-            String query = "select * from testestoque te where te.produto = '"+produtoP+"' and te.empresa = '"+empresa+"'";
+            String query = "select * from testestoque te where te.produto = '" + produtoP + "' and te.empresa = '" + empresa + "'";
             PreparedStatement pst;
             ResultSet rs;
             pst = conexao.con.prepareStatement(query);
@@ -32,7 +34,6 @@ public class EstoqueDAO {
                 estoque.setENDERECO(rs.getString("ENDERECO"));
                 estoque.setESTTRANSITO(rs.getString("ESTTRANSITO"));
                 estoque.setDATAHORAALTERACAO(rs.getString("DATAHORAALTERACAO"));
-                
 
                 listaEstoque.add(estoque);
             }
@@ -42,9 +43,10 @@ public class EstoqueDAO {
         conexao.FecharConexao();
         return listaEstoque;
     }
+
     public ArrayList estoqueProdutoReservadoNegativo() throws ClassNotFoundException {
-       conexao.Conectar();
-        
+        conexao.Conectar();
+
         ArrayList<Estoque> listaEstoque = new ArrayList();
         try {
             String query = "select * from testestoque te where te.estreservado < 0";
@@ -75,9 +77,10 @@ public class EstoqueDAO {
         conexao.FecharConexao();
         return listaEstoque;
     }
+
     public ArrayList estoqueProdutoReservadoPositivo() throws ClassNotFoundException {
-       conexao.Conectar();
-        
+        conexao.Conectar();
+
         ArrayList<Estoque> listaEstoque = new ArrayList();
         try {
             String query = "select * from testestoque te where te.estreservado > 0";
@@ -108,5 +111,29 @@ public class EstoqueDAO {
         conexao.FecharConexao();
         return listaEstoque;
     }
-    
+
+    public String getSaldo(String empresa, String produto, String almox) throws ClassNotFoundException {
+        conexao.Conectar();
+        String saldo = "";
+        try {
+            String query = "SELECT    CAST((Pdt2.EstDisponivel + Pdt2.EstReservado + Pdt2.EstCondicional + Pdt2.EstTransito) AS NUMERIC(18,8)) AS SaldoTotal\n"
+                    + "          FROM TEstEstoque Pdt2\n"
+                    + "    WHERE Pdt2.Empresa = " + empresa + "\n"
+                    + "      AND Pdt2.Produto = " + produto + "\n"
+                    + "      AND Pdt2.ALMOX = " + almox + "";
+            PreparedStatement pst;
+            ResultSet rs;
+            pst = conexao.con.prepareStatement(query);
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                saldo = rs.getString("SaldoTotal");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro na Conexão com o Banco " + e);
+        }
+        conexao.FecharConexao();
+        return saldo;
+    }
+
 }

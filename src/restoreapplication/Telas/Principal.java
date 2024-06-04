@@ -1392,7 +1392,10 @@ public final class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
-        Verifica verifica = new Verifica(codEmpresa, codAlmox);
+        String empresaSelecionada = listaEmpresas.get(jComboBoxEmpresa.getSelectedIndex()).getNomefantasia();
+        String almoxSelecionado = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getDescricao();
+        
+        Verifica verifica = new Verifica(codEmpresa, codAlmox,empresaSelecionada,almoxSelecionado);
         verifica.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
