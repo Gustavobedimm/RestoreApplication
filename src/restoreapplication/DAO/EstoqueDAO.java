@@ -43,6 +43,35 @@ public class EstoqueDAO {
         conexao.FecharConexao();
         return listaEstoque;
     }
+    public Estoque estoqueProdutoAlmox(String produtoP, String empresa,String almox) throws ClassNotFoundException {
+        conexao.Conectar();
+        Estoque estoque = new Estoque();
+        try {
+            String query = "select * from testestoque te where te.produto = '" + produtoP + "' and te.empresa = '" + empresa + "' and te.almox = '"+almox+"'";
+            PreparedStatement pst;
+            ResultSet rs;
+            pst = conexao.con.prepareStatement(query);
+            rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                estoque.setEMPRESA(rs.getString("EMPRESA"));
+                estoque.setPRODUTO(rs.getString("PRODUTO"));
+                estoque.setALMOX(rs.getString("ALMOX"));
+                estoque.setESTDISPONIVEL(rs.getString("ESTDISPONIVEL"));
+                estoque.setESTARETIRAR(rs.getString("ESTARETIRAR"));
+                estoque.setESTCONDICIONAL(rs.getString("ESTCONDICIONAL"));
+                estoque.setESTRESERVADO(rs.getString("ESTRESERVADO"));
+                estoque.setESTVENDAEXTERNA(rs.getString("ESTVENDAEXTERNA"));
+                estoque.setENDERECO(rs.getString("ENDERECO"));
+                estoque.setESTTRANSITO(rs.getString("ESTTRANSITO"));
+                estoque.setDATAHORAALTERACAO(rs.getString("DATAHORAALTERACAO"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro na Conexão com o Banco " + e);
+        }
+        conexao.FecharConexao();
+        return estoque;
+    }
 
     public ArrayList estoqueProdutoReservadoNegativo() throws ClassNotFoundException {
         conexao.Conectar();
@@ -114,7 +143,7 @@ public class EstoqueDAO {
 
     public String getSaldo(String empresa, String produto, String almox) throws ClassNotFoundException {
         conexao.Conectar();
-        String saldo = "";
+        String saldo = null;
         try {
             String query = "SELECT    CAST((Pdt2.EstDisponivel + Pdt2.EstReservado + Pdt2.EstCondicional + Pdt2.EstTransito) AS NUMERIC(18,8)) AS SaldoTotal\n"
                     + "          FROM TEstEstoque Pdt2\n"

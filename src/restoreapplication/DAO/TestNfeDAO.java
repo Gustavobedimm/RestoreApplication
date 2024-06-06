@@ -62,6 +62,7 @@ public class TestNfeDAO {
                 nota.setDATAFATURA(rs.getString("DATAFATURA"));
                 nota.setDATACANCEL(rs.getString("DATACANCEL"));
                 nota.setDATAVALIDACAO(rs.getString("DATAVALIDACAO"));
+                nota.setESTTRANSITO(rs.getString("ESTTRANSITO"));
                 nota.setTIPO(rs.getString("TIPO"));
                 nota.setCHAVENFE(rs.getString("CHAVENFE"));
                 //inner join TESTNATUREZA

@@ -11,7 +11,10 @@ import restoreapplication.DAO.EstoqueDAO;
 import restoreapplication.Model.ExtratoProduto;
 import restoreapplication.DAO.ExtratoProdutoDAO;
 import restoreapplication.DAO.ProdutoDAO;
+import restoreapplication.DAO.ProdutoEmTransitoDAO;
+import restoreapplication.Model.Estoque;
 import restoreapplication.Model.Produto;
+import restoreapplication.Model.ProdutoEmTransito;
 
 public class Verifica extends javax.swing.JFrame {
 
@@ -23,18 +26,22 @@ public class Verifica extends javax.swing.JFrame {
         initComponents();
     }
 
-    public Verifica(String empresaP, String almoxP,String descricaoEmpresa,String descricaoAlmox) {
+    public Verifica(String empresaP, String almoxP, String descricaoEmpresa, String descricaoAlmox) {
         initComponents();
         empresa = empresaP;
         almox = almoxP;
         jTextField3.setText(empresa);
         jTextField17.setText(empresa);
+        jTextField33.setText(empresa);
         jTextField4.setText(almox);
         jTextField8.setText(almox);
+        jTextField26.setText(almox);
         jTextField18.setText(descricaoEmpresa);
         jTextField22.setText(descricaoEmpresa);
+        jTextField34.setText(descricaoEmpresa);
         jTextField19.setText(descricaoAlmox);
         jTextField23.setText(descricaoAlmox);
+        jTextField35.setText(descricaoAlmox);
         carregaIcone();
     }
 
@@ -47,7 +54,7 @@ public class Verifica extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jPanelPrincipal = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelSaldoExtrato = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -87,7 +94,7 @@ public class Verifica extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabelCont10 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelSaldoExtratoxSaldoEstoque = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -108,6 +115,25 @@ public class Verifica extends javax.swing.JFrame {
         jTextField23 = new javax.swing.JTextField();
         jTextField24 = new javax.swing.JTextField();
         jTextField25 = new javax.swing.JTextField();
+        jPanelEstoqueEmTransito = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        jButton3 = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        jTextField26 = new javax.swing.JTextField();
+        jTextField27 = new javax.swing.JTextField();
+        jTextField28 = new javax.swing.JTextField();
+        jTextField29 = new javax.swing.JTextField();
+        jTextField30 = new javax.swing.JTextField();
+        jTextField31 = new javax.swing.JTextField();
+        jTextField32 = new javax.swing.JTextField();
+        jTextField33 = new javax.swing.JTextField();
+        jTextField34 = new javax.swing.JTextField();
+        jTextField35 = new javax.swing.JTextField();
+        jTextField36 = new javax.swing.JTextField();
+        jTextField37 = new javax.swing.JTextField();
 
         jLabel1.setText("jLabel1");
 
@@ -126,8 +152,9 @@ public class Verifica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Verificações");
-        setMaximumSize(new java.awt.Dimension(1150, 859));
         setResizable(false);
+
+        jPanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -317,41 +344,67 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel6.setText("06 - RETIRADA");
 
-        jLabelCont01.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont01.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont01.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont01.setText("0");
+        jLabelCont01.setOpaque(true);
 
-        jLabelCont02.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont02.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont02.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont02.setText("0");
+        jLabelCont02.setOpaque(true);
 
-        jLabelCont03.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont03.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont03.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont03.setText("0");
+        jLabelCont03.setOpaque(true);
 
-        jLabelCont05.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont05.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont05.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont05.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont05.setText("0");
+        jLabelCont05.setOpaque(true);
 
-        jLabelCont06.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont06.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont06.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont06.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont06.setText("0");
+        jLabelCont06.setOpaque(true);
 
         jLabel22.setText("07 - DEVOLUÇÃO DE VENDA");
 
-        jLabelCont07.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont07.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont07.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont07.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont07.setText("0");
+        jLabelCont07.setOpaque(true);
 
         jLabel24.setText("08 - TRANSFERENCIA ENTRE FILIAIS");
 
-        jLabelCont08.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont08.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont08.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont08.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont08.setText("0");
+        jLabelCont08.setOpaque(true);
 
         jLabel26.setText("09 - DEVOLUÇÃO DE COMPRA");
 
-        jLabelCont09.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont09.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont09.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont09.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont09.setText("0");
+        jLabelCont09.setOpaque(true);
 
         jLabel28.setText("10 - ORDEM DE PRODUÇÃO");
 
-        jLabelCont10.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelCont10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont10.setText("0");
+        jLabelCont10.setOpaque(true);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -367,13 +420,13 @@ public class Verifica extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelCont06, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelCont05, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelCont03, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelCont02, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelCont01, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelCont03, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabelCont01, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -382,13 +435,14 @@ public class Verifica extends javax.swing.JFrame {
                     .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCont10)
-                    .addComponent(jLabelCont09)
-                    .addComponent(jLabelCont08)
-                    .addComponent(jLabelCont07))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelCont08, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelCont07, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelCont10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(jLabelCont09, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,25 +491,25 @@ public class Verifica extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelSaldoExtratoLayout = new javax.swing.GroupLayout(jPanelSaldoExtrato);
+        jPanelSaldoExtrato.setLayout(jPanelSaldoExtratoLayout);
+        jPanelSaldoExtratoLayout.setHorizontalGroup(
+            jPanelSaldoExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSaldoExtratoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelSaldoExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanelSaldoExtratoLayout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelSaldoExtratoLayout.setVerticalGroup(
+            jPanelSaldoExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSaldoExtratoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelSaldoExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -463,7 +517,7 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("SALDO EXTRATO", jPanel3);
+        jTabbedPane1.addTab("SALDO EXTRATO", jPanelSaldoExtrato);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
@@ -644,22 +698,22 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelSaldoExtratoxSaldoEstoqueLayout = new javax.swing.GroupLayout(jPanelSaldoExtratoxSaldoEstoque);
+        jPanelSaldoExtratoxSaldoEstoque.setLayout(jPanelSaldoExtratoxSaldoEstoqueLayout);
+        jPanelSaldoExtratoxSaldoEstoqueLayout.setHorizontalGroup(
+            jPanelSaldoExtratoxSaldoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSaldoExtratoxSaldoEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelSaldoExtratoxSaldoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanelSaldoExtratoxSaldoEstoqueLayout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(582, 582, 582)))
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        jPanelSaldoExtratoxSaldoEstoqueLayout.setVerticalGroup(
+            jPanelSaldoExtratoxSaldoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSaldoExtratoxSaldoEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -667,7 +721,213 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("SALDO EXTRATO X SALDO ESTOQUE", jPanel5);
+        jTabbedPane1.addTab("SALDO EXTRATO X SALDO ESTOQUE", jPanelSaldoExtratoxSaldoEstoque);
+
+        jPanel10.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Empresa", "Almox", "Produto", "Qtde Trânsito NFs", "Qtde Trânsito Estoque", "Documento", "Mensagem"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(0).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(0).setMaxWidth(100);
+            jTable4.getColumnModel().getColumn(1).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(1).setMaxWidth(100);
+            jTable4.getColumnModel().getColumn(2).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTable4.getColumnModel().getColumn(3).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTable4.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(4).setMaxWidth(100);
+            jTable4.getColumnModel().getColumn(5).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(5).setMaxWidth(100);
+        }
+
+        jProgressBar3.setStringPainted(true);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
+        jButton3.setText("Iniciar verificação nos produtos em trânsito");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                    .addComponent(jProgressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addContainerGap())
+        );
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
+
+        jTextField26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField27.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField27.setText("Almox.");
+        jTextField27.setEnabled(false);
+        jTextField27.setFocusable(false);
+
+        jTextField28.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextField28.setForeground(new java.awt.Color(255, 0, 0));
+        jTextField28.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField29.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField30.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField30.setText("Erros");
+        jTextField30.setEnabled(false);
+        jTextField30.setFocusable(false);
+
+        jTextField31.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField31.setText("Produtos");
+        jTextField31.setEnabled(false);
+        jTextField31.setFocusable(false);
+
+        jTextField32.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField32.setText("Empresa");
+        jTextField32.setEnabled(false);
+        jTextField32.setFocusable(false);
+
+        jTextField33.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField34.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField35.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField36.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField36.setText("PRODUTOS EM TRÂNSITO");
+
+        jTextField37.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextField37.setForeground(new java.awt.Color(255, 0, 0));
+        jTextField37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField37.setText("ERROS ENCONTRADOS");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField34, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField35))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField37))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField36)))))
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField37, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelEstoqueEmTransitoLayout = new javax.swing.GroupLayout(jPanelEstoqueEmTransito);
+        jPanelEstoqueEmTransito.setLayout(jPanelEstoqueEmTransitoLayout);
+        jPanelEstoqueEmTransitoLayout.setHorizontalGroup(
+            jPanelEstoqueEmTransitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEstoqueEmTransitoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelEstoqueEmTransitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelEstoqueEmTransitoLayout.createSequentialGroup()
+                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(582, 582, 582)))
+                .addContainerGap())
+        );
+        jPanelEstoqueEmTransitoLayout.setVerticalGroup(
+            jPanelEstoqueEmTransitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEstoqueEmTransitoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("ESTOQUE EM TRÂNSITO", jPanelEstoqueEmTransito);
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);
@@ -709,6 +969,10 @@ public class Verifica extends javax.swing.JFrame {
         SaldoxExtrato();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ProcessaProdutoEmTransito();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -747,6 +1011,7 @@ public class Verifica extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -770,23 +1035,29 @@ public class Verifica extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCont09;
     private javax.swing.JLabel jLabelCont10;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelEstoqueEmTransito;
     private javax.swing.JPanel jPanelPrincipal;
+    private javax.swing.JPanel jPanelSaldoExtrato;
+    private javax.swing.JPanel jPanelSaldoExtratoxSaldoEstoque;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JProgressBar jProgressBar2;
+    private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
@@ -804,7 +1075,19 @@ public class Verifica extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField25;
+    private javax.swing.JTextField jTextField26;
+    private javax.swing.JTextField jTextField27;
+    private javax.swing.JTextField jTextField28;
+    private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField30;
+    private javax.swing.JTextField jTextField31;
+    private javax.swing.JTextField jTextField32;
+    private javax.swing.JTextField jTextField33;
+    private javax.swing.JTextField jTextField34;
+    private javax.swing.JTextField jTextField35;
+    private javax.swing.JTextField jTextField36;
+    private javax.swing.JTextField jTextField37;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField7;
@@ -818,10 +1101,10 @@ public void carregaProdutos() {
             public void run() {
                 jButton1.setEnabled(false);
                 jButton2.setEnabled(false);
-                
+
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 ArrayList<Produto> listaProdutos = new ArrayList();
-                
+
                 try {
                     listaProdutos = produtoDAO.buscaCodigos(empresa);
                 } catch (ClassNotFoundException ex) {
@@ -878,10 +1161,10 @@ public void carregaProdutos() {
                             jLabelCont05.setText(Integer.toString(cont5));
                             jLabelCont06.setText(Integer.toString(cont6));
                             jLabelCont07.setText(Integer.toString(cont7));
-                            jLabelCont08.setText(Integer.toString(cont8) );
-                            jLabelCont09.setText(Integer.toString(cont9) );
+                            jLabelCont08.setText(Integer.toString(cont8));
+                            jLabelCont09.setText(Integer.toString(cont9));
                             jLabelCont10.setText(Integer.toString(cont10));
-                            
+
                             model.addRow(new Object[]{produto.getPRODUTO(), saldoAtual.toPlainString(), saldoEsperado.toPlainString(), descricao, produto.getCODIGOID(), produto.getDATAHORA()});
                             break;
                         }
@@ -895,7 +1178,7 @@ public void carregaProdutos() {
                 jProgressBar1.setValue(0);
                 jButton1.setEnabled(true);
                 jButton2.setEnabled(true);
-                
+
             }
         };
 
@@ -943,10 +1226,19 @@ public void carregaProdutos() {
                         } catch (ClassNotFoundException ex) {
                             Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        if (!saldo.equals(extratoProduto.getSALDO())) {
+                        if(extratoProduto.getSALDO() == null){
+                            extratoProduto.setSALDO("0.0");
+                        }
+                        double saldoExtrato = Double.parseDouble(extratoProduto.getSALDO());
+                        if(saldo == null && saldoExtrato > 0){
+                            model.addRow(new Object[]{prod.getCODIGO(), saldo, extratoProduto.getSALDO(), "Produto tem saldo na TESTEXTRATO porem não tem registro na TESTESTOQUE para o almox selecionado."});
+                            erros++;
+                        }
+                        if (saldo != null && !saldo.equals(extratoProduto.getSALDO())) {
                             erros++;
                             model.addRow(new Object[]{prod.getCODIGO(), saldo, extratoProduto.getSALDO(), "Saldo do extrato não bate com saldo da TESTESTOQUE"});
                         }
+                    
                     }
                     indice++;
                     jProgressBar2.setValue(indice);
@@ -955,6 +1247,158 @@ public void carregaProdutos() {
                 jProgressBar2.setValue(0);
                 jButton2.setEnabled(true);
                 jButton1.setEnabled(true);
+            }
+        };
+
+        thread.start();
+
+    }
+
+    public void ProcessaProdutoEmTransito() {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                //System.out.println("PRODUTOS EM TRANSITO -----------------");
+                ProdutoEmTransitoDAO produtoEmTransitoDAO = new ProdutoEmTransitoDAO();
+                ExtratoProdutoDAO extratoProdutoDAO = new ExtratoProdutoDAO();
+                ArrayList<ProdutoEmTransito> listaProdutos = new ArrayList();
+                
+                //BUSCA TODOS OS PRODUTOS QUE ESTAO EM NOTAS EM TRANSITO
+                try {
+                    listaProdutos = produtoEmTransitoDAO.getProdutosEmTransito(empresa, almox);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                int qtdeProdutos = listaProdutos.size();
+                jTextField29.setText(Integer.toString(qtdeProdutos));
+                jProgressBar3.setMaximum(qtdeProdutos);
+                EstoqueDAO estoqueDAO = new EstoqueDAO();
+                int cont = 0;
+                int erros = 0;
+                DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+                while (jTable4.getRowCount() > 0) {
+                    model.removeRow(0);
+                }
+                for (ProdutoEmTransito prod : listaProdutos) {
+                    Estoque estoque = new Estoque();
+                    cont++;
+                    jProgressBar3.setValue(cont);
+                    //BUSCA O ESTOQUE DO PRODUTO
+                    try {
+                        estoque = estoqueDAO.estoqueProdutoAlmox(prod.getProduto(), empresa, almox);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    ExtratoProduto extratoProduto = new ExtratoProduto();
+                    //BUSCA A ULTIMA LINHA DO EXTRATO PARA PEGAR O SALDO
+                    try {
+                        extratoProduto = extratoProdutoDAO.getLastLine(empresa, almox, prod.getProduto());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                    double saldo = 0;
+                    // VERIFICA SE TEM REGISTRO NO EXTRATO DO PRODUTO
+                    if(extratoProduto.getSALDO() == null){
+                        saldo = 0;
+                    }else{
+                        saldo = Double.parseDouble(extratoProduto.getSALDO());
+                        
+                    }
+                    
+                    if(saldo > 0 && estoque.getPRODUTO() == null){
+                        erros++;
+                        model.addRow(new Object[]{empresa, almox, prod.getProduto(),prod.getQuantidade(),"Não enxiste",prod.getNumeronfe(), "Possui saldo no EXTRATO porem não tem registro na TESTESTOQUE. (Saldo Extrato : "+extratoProduto.getSALDO()+")"});
+                        estoque.setESTTRANSITO("0.0");
+                    }
+                    // verificar se registro da test estoque exites e se existir verificar se o valor bate das notas em transito com testestoque
+                    BigDecimal qtdNF = new BigDecimal(prod.getQuantidade());
+                    BigDecimal qtdEST = new BigDecimal(estoque.getESTTRANSITO());
+                    qtdNF = qtdNF.setScale(3);
+                    qtdEST = qtdEST.setScale(3);
+                    int comparacao = qtdNF.compareTo(qtdEST);
+                    if (estoque.getPRODUTO() != null && comparacao != 0) {
+                        erros++;
+                        model.addRow(new Object[]{empresa, almox, prod.getProduto(),qtdNF.toPlainString(),qtdEST.toPlainString(),prod.getNumeronfe(), "Saldos não estão batendo."});
+                    }
+                    jTextField28.setText(Integer.toString(erros));
+                }
+                jProgressBar3.setValue(0);
+                
+            }
+        };
+
+        thread.start();
+
+    }
+    public void ProcessaTodosOsProdutos() {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                //System.out.println("TODOS OS PRODUTOS -----------------");
+                ProdutoDAO produtoDAO = new ProdutoDAO();
+                
+                ExtratoProdutoDAO extratoProdutoDAO = new ExtratoProdutoDAO();
+                ArrayList<Produto> listaProdutos = new ArrayList();
+                //BUSCA TODOS OS CODIGOS DE PRODUTOS ATIVOS DA BASE
+                try {
+                    listaProdutos = produtoDAO.buscaCodigos(empresa);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                int qtdeProdutos = listaProdutos.size();
+                jTextField29.setText(Integer.toString(qtdeProdutos));
+                jProgressBar3.setMaximum(qtdeProdutos);
+                EstoqueDAO estoqueDAO = new EstoqueDAO();
+                int cont = 0;
+                int erros = 0;
+                
+                DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+                //while (jTable4.getRowCount() > 0) {
+                //    model.removeRow(0);
+                //}
+                
+                
+                for (Produto prod : listaProdutos) {
+                    cont++;
+                    jProgressBar3.setValue(cont);
+                    Estoque estoque = new Estoque();
+                    //BUSCA A TESTESTOQUE DO PRODUTO
+                    try {
+                        estoque = estoqueDAO.estoqueProdutoAlmox(prod.getCODIGO(), empresa, almox);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    ExtratoProduto extratoProduto = new ExtratoProduto();
+                    //BUSCA A ULTIMA LINHA DO EXTRATO DO PRODUTO PARA CONSEGUIR O SALDO DO EXTRATO
+                    try {
+                        extratoProduto = extratoProdutoDAO.getLastLine(empresa, almox, prod.getCODIGO());
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Verifica.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                    float saldo = 0;
+                    // VERIFICA SE TEM REGISTRO NO EXTRATO DO PRODUTO
+                    if(extratoProduto.getSALDO() == null){
+                        //produto sem movimentação na extrato
+                        saldo = 0;
+                    }else{
+                        saldo = Float.parseFloat(extratoProduto.getSALDO());
+                    }
+                    //TEM SALDO POREM NAO TEM REGISTRO NA TESTESTOQUE
+                    if(saldo > 0 && estoque.getPRODUTO() == null){
+                        erros++;
+                        jTextField28.setText(Integer.toString(erros));
+                        model.addRow(new Object[]{empresa, almox, prod.getCODIGO(), "Possui saldo no EXTRATO porem não tem registro na TESTESTOQUE. ("+extratoProduto.getSALDO()+")"});
+                        //System.out.println("Produto " + prod.getCODIGO() + " : Possui saldo no EXTRATO porem não tem registro na TESTESTOQUE. EMPRESA : " + empresa + " ALMOX : " + almox);
+                    }
+                }
+                jProgressBar3.setValue(0);
+                
             }
         };
 

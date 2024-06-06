@@ -20,6 +20,7 @@ public class TestNfe {
     private String STATUS;
     private String CHAVENFE;
     private String OBS;
+    private String ESTTRANSITO;
     //inner TESTNATUREZA
     private String DESCRICAO;
     private String CODIGOFISCAL;
@@ -194,6 +195,15 @@ public class TestNfe {
     public void setATIVA(String ATIVA) {
         this.ATIVA = ATIVA;
     }
+
+    public String getESTTRANSITO() {
+        return ESTTRANSITO;
+    }
+
+    public void setESTTRANSITO(String ESTTRANSITO) {
+        this.ESTTRANSITO = ESTTRANSITO;
+    }
+    
     
     
     

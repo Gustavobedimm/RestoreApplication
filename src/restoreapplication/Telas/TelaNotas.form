@@ -32,7 +32,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelDescricao" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
@@ -42,20 +46,22 @@
                       </Group>
                       <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabelMensagem" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jLabelDescricao" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabelDescricao" min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+              <Component id="jLabelMensagem" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
@@ -283,11 +289,13 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jTextFieldIdNatureza" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldCodigoFiscal" max="32767" attributes="0"/>
+                              <Component id="jTextFieldCodigoFiscal" min="-2" pref="100" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldMovimentaEstoque" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextFieldAtiva" min="-2" pref="89" max="-2" attributes="0"/>
+                              <Component id="jTextFieldAtiva" min="-2" pref="62" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldEstTransito" min="-2" pref="97" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jTextFieldDataPedido" min="-2" pref="132" max="-2" attributes="0"/>
                           </Group>
@@ -323,6 +331,7 @@
                           <Component id="jTextFieldCodigoFiscal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldMovimentaEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldAtiva" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldEstTransito" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -555,9 +564,26 @@
                 </Property>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldEstTransito">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Est Transito"/>
+                  </Border>
+                </Property>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabelMensagem">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="0" red="cc" type="rgb"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
