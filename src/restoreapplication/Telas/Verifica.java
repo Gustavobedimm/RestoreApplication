@@ -1,11 +1,14 @@
 package restoreapplication.Telas;
 
+import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import restoreapplication.DAO.EstoqueDAO;
 import restoreapplication.Model.ExtratoProduto;
@@ -24,6 +27,7 @@ public class Verifica extends javax.swing.JFrame {
 
     public Verifica() {
         initComponents();
+        
     }
 
     public Verifica(String empresaP, String almoxP, String descricaoEmpresa, String descricaoAlmox) {
@@ -43,6 +47,7 @@ public class Verifica extends javax.swing.JFrame {
         jTextField23.setText(descricaoAlmox);
         jTextField35.setText(descricaoAlmox);
         carregaIcone();
+        jPanelSaldoExtrato.putClientProperty( FlatClientProperties.STYLE, "arc: 8" );
     }
 
     @SuppressWarnings("unchecked")
@@ -58,9 +63,6 @@ public class Verifica extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jTextField4 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
@@ -94,14 +96,13 @@ public class Verifica extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabelCont10 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jButton4 = new javax.swing.JButton();
         jPanelSaldoExtratoxSaldoEstoque = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jProgressBar2 = new javax.swing.JProgressBar();
-        jButton2 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jTextField8 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
@@ -115,12 +116,13 @@ public class Verifica extends javax.swing.JFrame {
         jTextField23 = new javax.swing.JTextField();
         jTextField24 = new javax.swing.JTextField();
         jTextField25 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jButton6 = new javax.swing.JButton();
         jPanelEstoqueEmTransito = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jButton3 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jTextField26 = new javax.swing.JTextField();
         jTextField27 = new javax.swing.JTextField();
@@ -134,6 +136,9 @@ public class Verifica extends javax.swing.JFrame {
         jTextField35 = new javax.swing.JTextField();
         jTextField36 = new javax.swing.JTextField();
         jTextField37 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jProgressBar3 = new javax.swing.JProgressBar();
 
         jLabel1.setText("jLabel1");
 
@@ -152,6 +157,9 @@ public class Verifica extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Verificações");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(1150, 697));
+        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setResizable(false);
 
         jPanelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -159,6 +167,9 @@ public class Verifica extends javax.swing.JFrame {
         jTabbedPane1.setToolTipText("");
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
+        jPanelSaldoExtrato.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -182,48 +193,20 @@ public class Verifica extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png"))); // NOI18N
-        jLabel10.setText("Faz a comparação das transações do extrato e verifica se o saldo entre  elas esta correto.");
-
-        jProgressBar1.setStringPainted(true);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
-        jButton1.setText("Iniciar verificação");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addContainerGap())))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -264,7 +247,7 @@ public class Verifica extends javax.swing.JFrame {
         jTextField20.setText("PRODUTOS A SEREM PROCESSADOS");
 
         jTextField21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField21.setForeground(new java.awt.Color(255, 0, 0));
+        jTextField21.setForeground(new java.awt.Color(102, 102, 102));
         jTextField21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField21.setText("ERROS ENCONTRADOS");
 
@@ -332,6 +315,7 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movimentações com erro", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jLabel2.setText("01 - VENDA DE MERCADORIA");
@@ -344,31 +328,31 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel6.setText("06 - RETIRADA");
 
-        jLabelCont01.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont01.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont01.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont01.setText("0");
         jLabelCont01.setOpaque(true);
 
-        jLabelCont02.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont02.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont02.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont02.setText("0");
         jLabelCont02.setOpaque(true);
 
-        jLabelCont03.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont03.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont03.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont03.setText("0");
         jLabelCont03.setOpaque(true);
 
-        jLabelCont05.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont05.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont05.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont05.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont05.setText("0");
         jLabelCont05.setOpaque(true);
 
-        jLabelCont06.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont06.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont06.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont06.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont06.setText("0");
@@ -376,7 +360,7 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel22.setText("07 - DEVOLUÇÃO DE VENDA");
 
-        jLabelCont07.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont07.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont07.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont07.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont07.setText("0");
@@ -384,7 +368,7 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel24.setText("08 - TRANSFERENCIA ENTRE FILIAIS");
 
-        jLabelCont08.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont08.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont08.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont08.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont08.setText("0");
@@ -392,7 +376,7 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel26.setText("09 - DEVOLUÇÃO DE COMPRA");
 
-        jLabelCont09.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont09.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont09.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont09.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont09.setText("0");
@@ -400,7 +384,7 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel28.setText("10 - ORDEM DE PRODUÇÃO");
 
-        jLabelCont10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelCont10.setBackground(new java.awt.Color(95, 105, 112));
         jLabelCont10.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCont10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont10.setText("0");
@@ -491,6 +475,24 @@ public class Verifica extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
+        jButton1.setText("Iniciar verificação");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jProgressBar1.setStringPainted(true);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299045_sign_error_icon.png"))); // NOI18N
+        jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelSaldoExtratoLayout = new javax.swing.GroupLayout(jPanelSaldoExtrato);
         jPanelSaldoExtrato.setLayout(jPanelSaldoExtratoLayout);
         jPanelSaldoExtratoLayout.setHorizontalGroup(
@@ -502,7 +504,13 @@ public class Verifica extends javax.swing.JFrame {
                     .addGroup(jPanelSaldoExtratoLayout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSaldoExtratoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelSaldoExtratoLayout.setVerticalGroup(
@@ -513,12 +521,21 @@ public class Verifica extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSaldoExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton4))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("SALDO EXTRATO", jPanelSaldoExtrato);
 
+        jPanelSaldoExtratoxSaldoEstoque.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -542,54 +559,20 @@ public class Verifica extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(2).setMaxWidth(150);
         }
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png"))); // NOI18N
-        jLabel11.setText("Faz a comparação do saldo do extrato com o saldo do estoque.");
-
-        jProgressBar2.setStringPainted(true);
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
-        jButton2.setText("Iniciar verificação");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299086_info_sign_icon.png"))); // NOI18N
-        jLabel12.setText("Saldo Estoque = EstDisponivel + EstReservado + EstCondicional + EstTransito");
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)))
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -630,7 +613,7 @@ public class Verifica extends javax.swing.JFrame {
         jTextField24.setText("PRODUTOS A SEREM PROCESSADOS");
 
         jTextField25.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField25.setForeground(new java.awt.Color(255, 0, 0));
+        jTextField25.setForeground(new java.awt.Color(102, 102, 102));
         jTextField25.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField25.setText("ERROS ENCONTRADOS");
 
@@ -698,6 +681,19 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
+        jButton2.setText("Iniciar verificação");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jProgressBar2.setStringPainted(true);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299045_sign_error_icon.png"))); // NOI18N
+        jButton6.setText("Cancelar");
+
         javax.swing.GroupLayout jPanelSaldoExtratoxSaldoEstoqueLayout = new javax.swing.GroupLayout(jPanelSaldoExtratoxSaldoEstoque);
         jPanelSaldoExtratoxSaldoEstoque.setLayout(jPanelSaldoExtratoxSaldoEstoqueLayout);
         jPanelSaldoExtratoxSaldoEstoqueLayout.setHorizontalGroup(
@@ -708,7 +704,13 @@ public class Verifica extends javax.swing.JFrame {
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelSaldoExtratoxSaldoEstoqueLayout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(582, 582, 582)))
+                        .addGap(582, 582, 582))
+                    .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSaldoExtratoxSaldoEstoqueLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelSaldoExtratoxSaldoEstoqueLayout.setVerticalGroup(
@@ -717,12 +719,21 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelSaldoExtratoxSaldoEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton6))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("SALDO EXTRATO X SALDO ESTOQUE", jPanelSaldoExtratoxSaldoEstoque);
 
+        jPanelEstoqueEmTransito.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
@@ -763,39 +774,20 @@ public class Verifica extends javax.swing.JFrame {
             jTable4.getColumnModel().getColumn(5).setMaxWidth(100);
         }
 
-        jProgressBar3.setStringPainted(true);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
-        jButton3.setText("Iniciar verificação nos produtos em trânsito");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                    .addComponent(jProgressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
         );
 
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
 
         jTextField26.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -836,7 +828,7 @@ public class Verifica extends javax.swing.JFrame {
         jTextField36.setText("PRODUTOS EM TRÂNSITO");
 
         jTextField37.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField37.setForeground(new java.awt.Color(255, 0, 0));
+        jTextField37.setForeground(new java.awt.Color(102, 102, 102));
         jTextField37.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField37.setText("ERROS ENCONTRADOS");
 
@@ -904,6 +896,19 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299110_check_sign_icon.png"))); // NOI18N
+        jButton3.setText("Iniciar verificação nos produtos em trânsito");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/299045_sign_error_icon.png"))); // NOI18N
+        jButton5.setText("Cancelar");
+
+        jProgressBar3.setStringPainted(true);
+
         javax.swing.GroupLayout jPanelEstoqueEmTransitoLayout = new javax.swing.GroupLayout(jPanelEstoqueEmTransito);
         jPanelEstoqueEmTransito.setLayout(jPanelEstoqueEmTransitoLayout);
         jPanelEstoqueEmTransitoLayout.setHorizontalGroup(
@@ -914,7 +919,13 @@ public class Verifica extends javax.swing.JFrame {
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelEstoqueEmTransitoLayout.createSequentialGroup()
                         .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(582, 582, 582)))
+                        .addGap(582, 582, 582))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstoqueEmTransitoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelEstoqueEmTransitoLayout.setVerticalGroup(
@@ -923,8 +934,14 @@ public class Verifica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelEstoqueEmTransitoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("ESTOQUE EM TRÂNSITO", jPanelEstoqueEmTransito);
@@ -942,7 +959,7 @@ public class Verifica extends javax.swing.JFrame {
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -972,6 +989,10 @@ public class Verifica extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         ProcessaProdutoEmTransito();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1012,10 +1033,10 @@ public class Verifica extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
@@ -1190,6 +1211,7 @@ public void carregaProdutos() {
         Thread thread = new Thread() {
             @Override
             public void run() {
+                
                 jButton2.setEnabled(false);
                 jButton1.setEnabled(false);
                 ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -1271,6 +1293,9 @@ public void carregaProdutos() {
                 }
                 
                 int qtdeProdutos = listaProdutos.size();
+                if(qtdeProdutos < 1){
+                    JOptionPane.showMessageDialog(null, "Nenhum produto com estoque em trânsito.");
+                }
                 jTextField29.setText(Integer.toString(qtdeProdutos));
                 jProgressBar3.setMaximum(qtdeProdutos);
                 EstoqueDAO estoqueDAO = new EstoqueDAO();

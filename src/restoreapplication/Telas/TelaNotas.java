@@ -476,10 +476,11 @@ public void consultaPedido(String empresa, String numeroDOC) {
                 jTextFieldDataCancelamento.setForeground(Color.red);
                 jLabelDescricao.setForeground(Color.red);
             }
-            if (nfe.getESTTRANSITO().equals("S")){
-                jLabelMensagem.setText("MERCADORIA EM TRÂNSITO.");
+            if (nfe.getESTTRANSITO() != null) {
+                if (nfe.getESTTRANSITO().equals("S")) {
+                    jLabelMensagem.setText("MERCADORIA EM TRÂNSITO.");
+                }
             }
-            System.out.println(nfe.getESTTRANSITO());
 
             jTextFieldEmpresa.setText(nfe.getEMPRESA());
             jTextFieldStatus.setText(nfe.getSTATUS());

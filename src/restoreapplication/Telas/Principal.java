@@ -1,5 +1,6 @@
 package restoreapplication.Telas;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.google.gson.Gson;
 import java.awt.Color;
 import static java.awt.Color.WHITE;
@@ -30,6 +31,12 @@ import java.math.BigDecimal;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartMouseEvent;
+import org.jfree.chart.ChartMouseListener;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 import restoreapplication.Conexao.Conn;
 import restoreapplication.DAO.LicencaDAO;
 import restoreapplication.DAO.ReservadoDAO;
@@ -46,9 +53,20 @@ public final class Principal extends javax.swing.JFrame {
     String codProduto = "0";
     ArrayList<Empresa> listaEmpresas = new ArrayList<>();
     ArrayList<Almox> listaAlmox = new ArrayList<>();
+    int cont01 = 0;
+    int cont02 = 0;
+    int cont03 = 0;
+    int cont05 = 0;
+    int cont06 = 0;
+    int cont07 = 0;
+    int cont08 = 0;
+    int cont09 = 0;
+    int cont10 = 0;
 
     public Principal() {
         initComponents();
+        jPanelProduto.putClientProperty(FlatClientProperties.STYLE, "arc: 10");
+        jPanelCores.putClientProperty(FlatClientProperties.STYLE, "arc: 10");
         carregaComboBoxEmpresa();
         carregaIcone();
         carregaIcones();
@@ -56,8 +74,8 @@ public final class Principal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         jTextFieldProduto.requestFocus();
-        //[44,84,156]cor azul eco
 
+        //[44,84,156]cor azul eco
     }
 
     @SuppressWarnings("unchecked")
@@ -88,30 +106,19 @@ public final class Principal extends javax.swing.JFrame {
         jCheckBox08 = new javax.swing.JCheckBox();
         jCheckBox10 = new javax.swing.JCheckBox();
         jCheckBox06 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
-        jSeparator2 = new javax.swing.JSeparator();
-        jLabel01 = new javax.swing.JLabel();
-        jLabel02 = new javax.swing.JLabel();
-        jLabel07 = new javax.swing.JLabel();
-        jLabel09 = new javax.swing.JLabel();
         jCheckBox03 = new javax.swing.JCheckBox();
-        jLabel05 = new javax.swing.JLabel();
-        jLabel08 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel06 = new javax.swing.JLabel();
-        jLabel03 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanelProgresso = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jPanel1 = new javax.swing.JPanel();
         jPanelAreaDeTrabalho = new javax.swing.JPanel();
         jPanelExtrato = new javax.swing.JPanel();
         jTextFieldSaldo = new javax.swing.JTextField();
@@ -164,10 +171,14 @@ public final class Principal extends javax.swing.JFrame {
 
         jPanelLateral.setBackground(new java.awt.Color(71, 79, 86));
         jPanelLateral.setForeground(new java.awt.Color(255, 255, 255));
-        jPanelLateral.setMinimumSize(new java.awt.Dimension(328, 920));
+        jPanelLateral.setMaximumSize(new java.awt.Dimension(354, 32767));
+        jPanelLateral.setMinimumSize(new java.awt.Dimension(354, 920));
+        jPanelLateral.setPreferredSize(new java.awt.Dimension(354, 635));
 
         jPanelProduto.setBackground(new java.awt.Color(95, 105, 112));
-        jPanelProduto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 100, 100)));
+        jPanelProduto.setMaximumSize(new java.awt.Dimension(330, 32767));
+        jPanelProduto.setMinimumSize(new java.awt.Dimension(330, 0));
+        jPanelProduto.setPreferredSize(new java.awt.Dimension(330, 267));
 
         jTextFieldEmbalagem.setEditable(false);
         jTextFieldEmbalagem.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -189,6 +200,7 @@ public final class Principal extends javax.swing.JFrame {
         jTextFieldDescricao.setMinimumSize(new java.awt.Dimension(1, 22));
         jTextFieldDescricao.setPreferredSize(new java.awt.Dimension(1, 22));
 
+        jTextFieldProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextFieldProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldProduto.setToolTipText("Código do produto");
         jTextFieldProduto.setBorder(null);
@@ -212,14 +224,14 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
-        jCheckBoxAtivo.setBackground(new java.awt.Color(44, 84, 160));
+        jCheckBoxAtivo.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBoxAtivo.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxAtivo.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxAtivo.setText("Produto Ativo ");
         jCheckBoxAtivo.setFocusable(false);
         jCheckBoxAtivo.setOpaque(false);
 
-        jCheckBoxControlaLote.setBackground(new java.awt.Color(44, 84, 160));
+        jCheckBoxControlaLote.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBoxControlaLote.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxControlaLote.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxControlaLote.setText("Controla Lote de Validade ");
@@ -231,28 +243,28 @@ public final class Principal extends javax.swing.JFrame {
             }
         });
 
-        jCheckBoxProdGenerico.setBackground(new java.awt.Color(44, 84, 160));
+        jCheckBoxProdGenerico.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBoxProdGenerico.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxProdGenerico.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxProdGenerico.setText("Produto generico");
         jCheckBoxProdGenerico.setFocusable(false);
         jCheckBoxProdGenerico.setOpaque(false);
 
-        jCheckBoxEstFracionado.setBackground(new java.awt.Color(44, 84, 160));
+        jCheckBoxEstFracionado.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBoxEstFracionado.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxEstFracionado.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxEstFracionado.setText("Estoque fracionado");
         jCheckBoxEstFracionado.setFocusable(false);
         jCheckBoxEstFracionado.setOpaque(false);
 
-        jCheckBoxContSerie.setBackground(new java.awt.Color(44, 84, 160));
+        jCheckBoxContSerie.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBoxContSerie.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxContSerie.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxContSerie.setText("Controla numero de serie");
         jCheckBoxContSerie.setFocusable(false);
         jCheckBoxContSerie.setOpaque(false);
 
-        jCheckBoxDispVenda.setBackground(new java.awt.Color(44, 84, 160));
+        jCheckBoxDispVenda.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBoxDispVenda.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jCheckBoxDispVenda.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBoxDispVenda.setText("Disponivel p/ Venda");
@@ -294,43 +306,35 @@ public final class Principal extends javax.swing.JFrame {
         jPanelProduto.setLayout(jPanelProdutoLayout);
         jPanelProdutoLayout.setHorizontalGroup(
             jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProdutoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelProdutoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAlmox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelProdutoLayout.createSequentialGroup()
+                        .addComponent(jTextFieldEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldQtdeEmbalagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jComboBoxEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelProdutoLayout.createSequentialGroup()
                         .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                        .addGap(92, 92, 92)
-                                        .addComponent(jTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                        .addComponent(jTextFieldEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jTextFieldQtdeEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jCheckBoxAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jCheckBoxControlaLote, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                        .addComponent(jCheckBoxAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(jCheckBoxControlaLote, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                        .addComponent(jCheckBoxEstFracionado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(jCheckBoxProdGenerico, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                                        .addComponent(jCheckBoxContSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(jCheckBoxDispVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelProdutoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAlmox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jCheckBoxEstFracionado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jCheckBoxProdGenerico, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelProdutoLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxContSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jCheckBoxDispVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelProdutoLayout.setVerticalGroup(
@@ -350,7 +354,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addComponent(jComboBoxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxAlmox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jCheckBoxAtivo)
                     .addComponent(jCheckBoxControlaLote))
@@ -366,132 +370,90 @@ public final class Principal extends javax.swing.JFrame {
         jCheckBoxControlaLote.getAccessibleContext().setAccessibleDescription("");
 
         jPanelCores.setBackground(new java.awt.Color(95, 105, 112));
-        jPanelCores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(100, 100, 100)));
-        jPanelCores.setMaximumSize(new java.awt.Dimension(272, 271));
-        jPanelCores.setMinimumSize(new java.awt.Dimension(272, 271));
+        jPanelCores.setMaximumSize(new java.awt.Dimension(330, 271));
+        jPanelCores.setMinimumSize(new java.awt.Dimension(330, 271));
+        jPanelCores.setPreferredSize(new java.awt.Dimension(330, 281));
 
-        jCheckBox01.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox01.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox01.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox01.setText("01 - Venda");
         jCheckBox01.setOpaque(false);
 
-        jCheckBox02.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox02.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox02.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox02.setText("02 - Compra");
         jCheckBox02.setOpaque(false);
 
-        jCheckBox07.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox07.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox07.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox07.setText("07 - Devolução de Venda");
+        jCheckBox07.setText("07 - Dev. de Venda");
         jCheckBox07.setOpaque(false);
 
-        jCheckBox09.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox09.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox09.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox09.setText("09 - Devolução de Compra");
+        jCheckBox09.setText("09 - Dev. de Compra");
         jCheckBox09.setOpaque(false);
 
-        jCheckBox05.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox05.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox05.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox05.setText("05 - Inventário");
         jCheckBox05.setOpaque(false);
 
-        jCheckBox08.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox08.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox08.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox08.setText("08 - Transferência filiais");
+        jCheckBox08.setText("08 - Transf. filiais");
         jCheckBox08.setOpaque(false);
 
-        jCheckBox10.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox10.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox10.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox10.setText("10 - PCP");
         jCheckBox10.setOpaque(false);
 
-        jCheckBox06.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox06.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox06.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox06.setText("06 - Retirada");
         jCheckBox06.setOpaque(false);
 
-        jCheckBox11.setBackground(new java.awt.Color(44, 84, 156));
-        jCheckBox11.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox11.setSelected(true);
-        jCheckBox11.setText("Mostrar erros [ F8 ]");
-        jCheckBox11.setOpaque(false);
-        jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox11ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox12.setBackground(new java.awt.Color(44, 84, 156));
-        jCheckBox12.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox12.setText("Mostrar cores [ F9 ]");
-        jCheckBox12.setOpaque(false);
-        jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox12ActionPerformed(evt);
-            }
-        });
-
-        jSeparator2.setBackground(new java.awt.Color(95, 105, 112));
-        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel01.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel01.setText("0");
-
-        jLabel02.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel02.setText("0");
-
-        jLabel07.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel07.setText("0");
-
-        jLabel09.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel09.setText("0");
-
-        jCheckBox03.setBackground(new java.awt.Color(44, 84, 156));
+        jCheckBox03.setBackground(new java.awt.Color(95, 105, 112));
         jCheckBox03.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox03.setText("03 - Transferência Almox");
+        jCheckBox03.setText("03 - Transf. Almox");
         jCheckBox03.setOpaque(false);
 
-        jLabel05.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel05.setText("0");
-
-        jLabel08.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel08.setText("0");
-
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("0");
-
-        jLabel06.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel06.setText("0");
-
-        jLabel03.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel03.setText("0");
-
-        jLabel3.setForeground(new java.awt.Color(218, 165, 32));
-        jLabel3.setText("■");
-
-        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel4.setText("■");
-
-        jLabel5.setForeground(new java.awt.Color(139, 69, 19));
-        jLabel5.setText("■");
-
-        jLabel6.setForeground(new java.awt.Color(30, 144, 255));
-        jLabel6.setText("■");
-
-        jLabel9.setForeground(new java.awt.Color(42, 157, 143));
-        jLabel9.setText("■");
-
-        jLabel11.setForeground(new java.awt.Color(117, 13, 55));
-        jLabel11.setText("■");
-
+        jLabel12.setBackground(new java.awt.Color(95, 105, 112));
         jLabel12.setForeground(new java.awt.Color(56, 176, 0));
-        jLabel12.setText("■");
+        jLabel12.setText("■■■");
 
+        jLabel6.setBackground(new java.awt.Color(95, 105, 112));
+        jLabel6.setForeground(new java.awt.Color(30, 144, 255));
+        jLabel6.setText("■■■");
+
+        jLabel11.setBackground(new java.awt.Color(95, 105, 112));
+        jLabel11.setForeground(new java.awt.Color(117, 13, 55));
+        jLabel11.setText("■■■");
+
+        jLabel5.setBackground(new java.awt.Color(95, 105, 112));
+        jLabel5.setForeground(new java.awt.Color(139, 69, 19));
+        jLabel5.setText("■■■");
+
+        jLabel13.setBackground(new java.awt.Color(95, 105, 112));
         jLabel13.setForeground(new java.awt.Color(118, 120, 237));
-        jLabel13.setText("■");
+        jLabel13.setText("■■■");
 
+        jLabel9.setBackground(new java.awt.Color(95, 105, 112));
+        jLabel9.setForeground(new java.awt.Color(42, 157, 143));
+        jLabel9.setText("■■■");
+
+        jLabel14.setBackground(new java.awt.Color(95, 105, 112));
         jLabel14.setForeground(new java.awt.Color(131, 56, 236));
-        jLabel14.setText("■");
+        jLabel14.setText("■■■");
+
+        jLabel4.setBackground(new java.awt.Color(95, 105, 112));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel4.setText("■■■");
+
+        jLabel3.setBackground(new java.awt.Color(95, 105, 112));
+        jLabel3.setForeground(new java.awt.Color(218, 165, 32));
+        jLabel3.setText("■■■");
 
         javax.swing.GroupLayout jPanelCoresLayout = new javax.swing.GroupLayout(jPanelCores);
         jPanelCores.setLayout(jPanelCoresLayout);
@@ -501,123 +463,87 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCoresLayout.createSequentialGroup()
+                        .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCoresLayout.createSequentialGroup()
+                                .addComponent(jCheckBox06)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel13))
+                            .addComponent(jCheckBox09, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCoresLayout.createSequentialGroup()
+                                .addComponent(jCheckBox10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel12)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelCoresLayout.createSequentialGroup()
                         .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator2)
                             .addGroup(jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox08)
+                                .addComponent(jCheckBox03)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel08))
-                            .addGroup(jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox02)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel02))
-                            .addGroup(jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox01)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel01))
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelCoresLayout.createSequentialGroup()
                                 .addComponent(jCheckBox05)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel05))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox03)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel03))
-                            .addGroup(jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox06)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel06))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox09)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel09))
-                            .addGroup(jPanelCoresLayout.createSequentialGroup()
-                                .addComponent(jCheckBox10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel10))
+                                .addComponent(jLabel9))
                             .addGroup(jPanelCoresLayout.createSequentialGroup()
                                 .addComponent(jCheckBox07)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel07)))
-                        .addContainerGap())
-                    .addGroup(jPanelCoresLayout.createSequentialGroup()
-                        .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox12)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanelCoresLayout.createSequentialGroup()
+                                .addComponent(jCheckBox08)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel11))
+                            .addGroup(jPanelCoresLayout.createSequentialGroup()
+                                .addComponent(jCheckBox01)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelCoresLayout.createSequentialGroup()
+                                .addComponent(jCheckBox02)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelCoresLayout.setVerticalGroup(
-            jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanelCoresLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox01)
-                    .addComponent(jLabel01)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jCheckBox01))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox02)
-                    .addComponent(jLabel02)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jCheckBox02))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox03)
-                    .addComponent(jLabel03)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(jCheckBox03))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox05)
-                    .addComponent(jLabel05)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(jCheckBox05))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox06)
-                    .addComponent(jLabel06)
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13)
+                    .addComponent(jCheckBox06))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox07)
-                    .addComponent(jLabel07)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jCheckBox07))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox08)
-                    .addComponent(jLabel08)
-                    .addComponent(jLabel11))
+                    .addComponent(jLabel11)
+                    .addComponent(jCheckBox08))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox09)
-                    .addComponent(jLabel09)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jCheckBox09))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox10)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox11, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel12)
+                    .addComponent(jCheckBox10))
+                .addGap(255, 255, 255))
         );
 
         jPanelProgresso.setBackground(new java.awt.Color(71, 79, 86));
@@ -643,6 +569,13 @@ public final class Principal extends javax.swing.JFrame {
                 .addGap(65, 65, 65))
         );
 
+        jPanel1.setBackground(new java.awt.Color(71, 79, 86));
+        jPanel1.setFocusable(false);
+        jPanel1.setMaximumSize(new java.awt.Dimension(342, 252));
+        jPanel1.setMinimumSize(new java.awt.Dimension(342, 252));
+        jPanel1.setPreferredSize(new java.awt.Dimension(342, 252));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         javax.swing.GroupLayout jPanelLateralLayout = new javax.swing.GroupLayout(jPanelLateral);
         jPanelLateral.setLayout(jPanelLateralLayout);
         jPanelLateralLayout.setHorizontalGroup(
@@ -651,21 +584,28 @@ public final class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelProgresso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelCores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                    .addGroup(jPanelLateralLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanelCores, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelLateralLayout.setVerticalGroup(
             jPanelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLateralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelCores, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("");
 
         jPanelAreaDeTrabalho.setBackground(new java.awt.Color(255, 255, 255));
         jPanelAreaDeTrabalho.setAlignmentX(0.0F);
@@ -823,7 +763,7 @@ public final class Principal extends javax.swing.JFrame {
             jPanelExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelExtratoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 961, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelExtratoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1013,7 +953,7 @@ public final class Principal extends javax.swing.JFrame {
             .addGroup(TestlotevalidadeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jCheckBoxLotes)
-                .addContainerGap(732, Short.MAX_VALUE))
+                .addContainerGap(630, Short.MAX_VALUE))
             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         TestlotevalidadeLayout.setVerticalGroup(
@@ -1068,7 +1008,7 @@ public final class Principal extends javax.swing.JFrame {
             EstoqueReservadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EstoqueReservadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE))
         );
         EstoqueReservadoLayout.setVerticalGroup(
             EstoqueReservadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1119,7 +1059,7 @@ public final class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(533, Short.MAX_VALUE))
+                .addContainerGap(431, Short.MAX_VALUE))
             .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         TgerlicencaLayout.setVerticalGroup(
@@ -1220,7 +1160,7 @@ public final class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Configurações");
+        jMenu2.setText("Opções");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu2ActionPerformed(evt);
@@ -1283,7 +1223,7 @@ public final class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
             .addComponent(jPanelAreaDeTrabalho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1394,9 +1334,10 @@ public final class Principal extends javax.swing.JFrame {
         codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
         String empresaSelecionada = listaEmpresas.get(jComboBoxEmpresa.getSelectedIndex()).getNomefantasia();
         String almoxSelecionado = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getDescricao();
-        
-        Verifica verifica = new Verifica(codEmpresa, codAlmox,empresaSelecionada,almoxSelecionado);
+
+        Verifica verifica = new Verifica(codEmpresa, codAlmox, empresaSelecionada, almoxSelecionado);
         verifica.setVisible(true);
+        //verifica.SaldoxExtrato();
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -1452,11 +1393,6 @@ public final class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        if (jCheckBoxMenuItem1.isSelected()) {
-            jCheckBox12.setSelected(true);
-        } else {
-            jCheckBox12.setSelected(false);
-        }
         jTableNfe.setDefaultRenderer(Object.class, new PintarTabela());
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
@@ -1494,37 +1430,17 @@ public final class Principal extends javax.swing.JFrame {
             jTextFieldUltEntData.setText("");
             jTextFieldUltSaidaData.setText("");
             botaoCarregar();
+            //montaGrafico();
         }
     }//GEN-LAST:event_jTextFieldProdutoKeyPressed
 
     private void jCheckBoxMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem5ActionPerformed
-        if (jCheckBoxMenuItem5.isSelected()) {
-            jCheckBox11.setSelected(true);
-        } else {
-            jCheckBox11.setSelected(false);
-        }
+
     }//GEN-LAST:event_jCheckBoxMenuItem5ActionPerformed
 
     private void jCheckBoxControlaLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxControlaLoteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxControlaLoteActionPerformed
-
-    private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox12ActionPerformed
-        if (jCheckBox12.isSelected()) {
-            jCheckBoxMenuItem1.setSelected(true);
-        } else {
-            jCheckBoxMenuItem1.setSelected(false);
-        }
-    }//GEN-LAST:event_jCheckBox12ActionPerformed
-
-    private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
-        if (jCheckBox11.isSelected()) {
-
-            jCheckBoxMenuItem5.setSelected(true);
-        } else {
-            jCheckBoxMenuItem5.setSelected(false);
-        }
-    }//GEN-LAST:event_jCheckBox11ActionPerformed
 
     private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
 
@@ -1647,8 +1563,6 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox08;
     private javax.swing.JCheckBox jCheckBox09;
     private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBoxAtivo;
     private javax.swing.JCheckBox jCheckBoxContSerie;
     private javax.swing.JCheckBox jCheckBoxControlaLote;
@@ -1662,15 +1576,6 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxProdGenerico;
     private javax.swing.JComboBox<String> jComboBoxAlmox;
     private javax.swing.JComboBox<String> jComboBoxEmpresa;
-    private javax.swing.JLabel jLabel01;
-    private javax.swing.JLabel jLabel02;
-    private javax.swing.JLabel jLabel03;
-    private javax.swing.JLabel jLabel05;
-    private javax.swing.JLabel jLabel06;
-    private javax.swing.JLabel jLabel07;
-    private javax.swing.JLabel jLabel08;
-    private javax.swing.JLabel jLabel09;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1688,6 +1593,7 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAreaDeTrabalho;
     private javax.swing.JPanel jPanelCores;
     private javax.swing.JPanel jPanelExtrato;
@@ -1703,7 +1609,6 @@ public final class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableEstoques;
     private javax.swing.JTable jTableEstoquesProduto;
@@ -1868,15 +1773,16 @@ public void carregarTabela(String produto) {
             jTableNfe.scrollRectToVisible(jTableNfe.getCellRect(jTableNfe.getRowCount() - 1, 0, true));
         }
 
-        jLabel01.setText(Integer.toString(cont01) + " - " + calculaPercentual(cont01, tamanhoTot) + "%");
-        jLabel02.setText(Integer.toString(cont02) + " - " + calculaPercentual(cont02, tamanhoTot) + "%");
-        jLabel03.setText(Integer.toString(cont03) + " - " + calculaPercentual(cont03, tamanhoTot) + "%");
-        jLabel05.setText(Integer.toString(cont05) + " - " + calculaPercentual(cont05, tamanhoTot) + "%");
-        jLabel06.setText(Integer.toString(cont06) + " - " + calculaPercentual(cont06, tamanhoTot) + "%");
-        jLabel07.setText(Integer.toString(cont07) + " - " + calculaPercentual(cont07, tamanhoTot) + "%");
-        jLabel08.setText(Integer.toString(cont08) + " - " + calculaPercentual(cont08, tamanhoTot) + "%");
-        jLabel09.setText(Integer.toString(cont09) + " - " + calculaPercentual(cont09, tamanhoTot) + "%");
-        jLabel10.setText(Integer.toString(cont10) + " - " + calculaPercentual(cont10, tamanhoTot) + "%");
+        //jLabel01.setText(Integer.toString(cont01) + " - " + calculaPercentual(cont01, tamanhoTot) + "%");
+        //jLabel02.setText(Integer.toString(cont02) + " - " + calculaPercentual(cont02, tamanhoTot) + "%");
+        //jLabel03.setText(Integer.toString(cont03) + " - " + calculaPercentual(cont03, tamanhoTot) + "%");
+        //jLabel05.setText(Integer.toString(cont05) + " - " + calculaPercentual(cont05, tamanhoTot) + "%");
+        //jLabel06.setText(Integer.toString(cont06) + " - " + calculaPercentual(cont06, tamanhoTot) + "%");
+        //jLabel07.setText(Integer.toString(cont07) + " - " + calculaPercentual(cont07, tamanhoTot) + "%");
+        //jLabel08.setText(Integer.toString(cont08) + " - " + calculaPercentual(cont08, tamanhoTot) + "%");
+        //jLabel09.setText(Integer.toString(cont09) + " - " + calculaPercentual(cont09, tamanhoTot) + "%");
+        //jLabel10.setText(Integer.toString(cont10) + " - " + calculaPercentual(cont10, tamanhoTot) + "%");
+        montaGrafico(cont01, cont02, cont03, cont05, cont06, cont07, cont08, cont09, cont10);
         jTextFieldErros.setText("");
         if (erro > 0) {
             jTextFieldErros.setText(erro.toString());
@@ -2047,7 +1953,7 @@ public void carregarTabela(String produto) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Almox a : listaAlmox) {
-            jComboBoxAlmox.addItem( a.getCodigo() + " - " + a.getDescricao());
+            jComboBoxAlmox.addItem(a.getCodigo() + " - " + a.getDescricao());
         }
         codAlmox = listaAlmox.get(jComboBoxAlmox.getSelectedIndex()).getCodigo();
     }
@@ -2187,7 +2093,7 @@ public void carregarTabela(String produto) {
             Color roxo = new Color(204, 51, 255);
 
             //PINTA POR TIPO DE OPERACAO
-            if (jCheckBox12.isSelected()) {
+            if (jCheckBoxMenuItem1.isSelected()) {
                 Object objeto1 = table.getValueAt(row, 9);
                 Color Azul = new Color(0, 0, 255);
                 Color Amarelo = new Color(218, 165, 32);
@@ -2384,6 +2290,50 @@ public void carregarTabela(String produto) {
         URL iconURL = getClass().getResource("/icons/eco.png");
         ImageIcon icon = new ImageIcon(iconURL);
         this.setIconImage(icon.getImage());
+    }
+
+    public void montaGrafico(int cont01, int cont02, int cont03, int cont05, int cont06, int cont07, int cont08, int cont09, int cont10) {
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                jPanel1.removeAll();
+               DefaultPieDataset dataset = new DefaultPieDataset();
+                if (cont01 > 0) {dataset.setValue("Vendas", cont01);}
+                if (cont02 > 0) {dataset.setValue("Compras", cont02);}
+                if (cont03 > 0) {dataset.setValue("Trânsf. Almox", cont03);}
+                if (cont05 > 0) {dataset.setValue("Inventario", cont05);}
+                if (cont06 > 0) { dataset.setValue("Retirada", cont06);}
+                if (cont07 > 0) { dataset.setValue("Dev. Venda", cont07);}
+                if (cont08 > 0) { dataset.setValue("Trânsf. Filiais", cont08);}
+                if (cont09 > 0) { dataset.setValue("Dev. Compra", cont09);}
+                if (cont10 > 0) {dataset.setValue("PCP", cont10);}
+        
+                JFreeChart chart = ChartFactory.createPieChart(
+                    "Operações", // chart title 
+                    dataset, // data    
+                    true, // include legend   
+                    true,
+                    false);
+                chart.setBackgroundPaint(Color.gray);
+                chart.getTitle().setPaint(Color.white);
+                ChartPanel myChart = new ChartPanel(chart, true, true, true, true, true);
+                myChart.setVisible(true);
+    
+                jPanel1.setSize(342, 250);
+                myChart.setPreferredSize(new java.awt.Dimension(jPanel1.getWidth(), jPanel1.getHeight()));
+                myChart.setSize(new java.awt.Dimension(jPanel1.getWidth(), jPanel1.getHeight()));
+                //myChart.setPopupMenu(null);
+                jPanel1.setLayout(new java.awt.BorderLayout());
+                jPanel1.add(myChart);
+                jPanel1.validate();
+                jPanel1.repaint();
+            }
+        };
+
+        thread.start();
+
+        
     }
 
 }

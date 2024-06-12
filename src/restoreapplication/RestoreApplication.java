@@ -15,8 +15,9 @@ public class RestoreApplication {
     public static void main(String[] args) {
 
         try {
+            UIManager.setLookAndFeel( new FlatMacLightLaf() );
             //UIManager.setLookAndFeel( new FlatLightLaf() );
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -24,6 +25,7 @@ public class RestoreApplication {
         if (defaults.get("Table.alternateRowColor") == null) {
             defaults.put("Table.alternateRowColor", new Color(240, 240, 240));
         }
+        
 
         Principal principal = new Principal();
         principal.setVisible(true);

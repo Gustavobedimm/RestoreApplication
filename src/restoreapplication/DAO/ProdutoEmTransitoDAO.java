@@ -16,11 +16,11 @@ public class ProdutoEmTransitoDAO {
 
         ArrayList<ProdutoEmTransito> listaProdutos = new ArrayList();
         try {
-            String query = "SELECT TNP.EMPRESA,TNP.ALMOX,TNP.PRODUTO,SUM(TNP.QTDE) as QUANTIDADE,TN.NUMERONFE,TN.FORNECEDOR\n" +
+            String query = "SELECT TNP.EMPRESA,TNP.ALMOX,TNP.PRODUTO,SUM(TNP.QTDE) as QUANTIDADE\n" +
 "FROM TESTNFEPROD TNP\n" +
 "JOIN TESTNFE TN ON TN.EMPRESA = TNP.EMPRESA AND TN.CODIGOID = TNP.CODIGOID\n" +
 "WHERE TN.ESTTRANSITO = 'S' and tn.EMPRESA = '"+empresa+"' and tnp.ALMOX = '"+almox+"'\n" +
-"GROUP by  TNP.EMPRESA,TNP.ALMOX,TNP.PRODUTO,TN.NUMERONFE,TN.FORNECEDOR";
+"GROUP by  TNP.EMPRESA,TNP.ALMOX,TNP.PRODUTO";
             PreparedStatement pst;
             ResultSet rs;
             pst = conexao.con.prepareStatement(query);
@@ -32,8 +32,8 @@ public class ProdutoEmTransitoDAO {
                 produtoEmTransito.setAlmox(rs.getString("ALMOX"));
                 produtoEmTransito.setProduto(rs.getString("PRODUTO"));
                 produtoEmTransito.setQuantidade(rs.getString("QUANTIDADE"));
-                produtoEmTransito.setNumeronfe(rs.getString("NUMERONFE"));
-                produtoEmTransito.setFornecedor(rs.getString("FORNECEDOR"));
+                //produtoEmTransito.setNumeronfe(rs.getString("NUMERONFE"));
+                //produtoEmTransito.setFornecedor(rs.getString("FORNECEDOR"));
 
                 listaProdutos.add(produtoEmTransito);
             }
