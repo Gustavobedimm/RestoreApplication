@@ -328,64 +328,55 @@ public class Verifica extends javax.swing.JFrame {
 
         jLabel6.setText("06 - RETIRADA");
 
-        jLabelCont01.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont01.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont01.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont01.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont01.setText("0");
         jLabelCont01.setOpaque(true);
 
-        jLabelCont02.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont02.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont02.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont02.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont02.setText("0");
         jLabelCont02.setOpaque(true);
 
-        jLabelCont03.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont03.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont03.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont03.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont03.setText("0");
         jLabelCont03.setOpaque(true);
 
-        jLabelCont05.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont05.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont05.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont05.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont05.setText("0");
         jLabelCont05.setOpaque(true);
 
-        jLabelCont06.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont06.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont06.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont06.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont06.setText("0");
         jLabelCont06.setOpaque(true);
 
         jLabel22.setText("07 - DEVOLUÇÃO DE VENDA");
 
-        jLabelCont07.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont07.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont07.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont07.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont07.setText("0");
         jLabelCont07.setOpaque(true);
 
         jLabel24.setText("08 - TRANSFERENCIA ENTRE FILIAIS");
 
-        jLabelCont08.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont08.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont08.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont08.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont08.setText("0");
         jLabelCont08.setOpaque(true);
 
         jLabel26.setText("09 - DEVOLUÇÃO DE COMPRA");
 
-        jLabelCont09.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont09.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont09.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont09.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont09.setText("0");
         jLabelCont09.setOpaque(true);
 
         jLabel28.setText("10 - ORDEM DE PRODUÇÃO");
 
-        jLabelCont10.setBackground(new java.awt.Color(95, 105, 112));
-        jLabelCont10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCont10.setBackground(new java.awt.Color(221, 231, 244));
         jLabelCont10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelCont10.setText("0");
         jLabelCont10.setOpaque(true);
